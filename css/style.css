@@ -213,6 +213,12 @@ main ul {
 	color: #9C9C9C;
 }
 
+@media screen and (max-width: 791px) {
+	.site-footer {
+		display: none;
+	}
+}
+
 /* Home page */
 .home #spine #glue:before {
 	border-right: 1px solid #efefef;
