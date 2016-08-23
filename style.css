@@ -72,7 +72,7 @@ html {
 }
 
 .pad-bottom {
-	border-bottom: 7px solid #ECECEC;
+	border-bottom: 7px solid #eff0f1;
 }
 
 .depth-1 .side-right:first-child .column.two {
@@ -225,5 +225,220 @@ main ul {
 
 #binder .site-footer .two p {
 	color: #9C9C9C;
+}
+
+/* Home page */
+.home #spine #glue:before {
+	border-right: 1px solid #efefef;
+}
+
+.home .main-header {
+	display: none;
+}
+
+.home .column p:first-child {
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-bottom: 0;
+	text-transform: uppercase;
+}
+
+.home h2 {
+	font-size: 3.5em;
+	font-weight: 700;
+	padding-top: 0;
+	text-transform: uppercase;
+}
+
+.home .intro {
+	padding: 10rem 0;
+}
+
+.home .column.intro p {
+	color: #981e32;
+	font-size: 2.5em;
+	font-weight: 300;
+	padding-bottom: .25em;
+}
+
+.home h1 {
+	font-size: 4.5rem;
+	text-transform: uppercase;
+}
+
+.home .halves .column.one {
+	background: center;
+	background-size: cover;
+	min-height: 350px;
+}
+
+.home .halves .column.two {
+	padding: 6rem 2rem;
+}
+
+.home ol {
+	counter-reset: count-it;
+	list-style: none;
+	padding: 0 0 2.5rem;
+}
+
+.home ol li {
+	border-bottom: 1px solid #d7dadb;
+	font-size: 1.1em;
+	font-weight: 600;
+	margin-left: 4.5rem;
+	padding: .5em 0;
+	position: relative;
+}
+
+.home ol li:before {
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	background: #b5babe;
+	color: #fff;
+	content: counter(count-it);
+	counter-increment: count-it;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	height: calc(100% - .2em);
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	left: -4.5rem;
+	position: absolute;
+	text-align: center;
+	top: .2em;
+	width: 2.5rem;
+}
+
+.home ol li a {
+	border-bottom: 0;
+}
+
+/* Home page events */
+.home .wsuwp-content-syndicate-wrapper {
+	overflow: hidden;
+	padding-bottom: 2rem;
+}
+
+.home .wsuwp-content-syndicate-list {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 0;
+}
+
+.home .wsuwp-content-syndicate-list li {
+	box-sizing: border-box;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1 0 25%;
+	        flex: 1 0 25%;
+	list-style: none;
+	padding: 1em;
+	-webkit-transition: background .4s;
+	transition: background .4s;
+}
+
+.home .wsuwp-content-syndicate-list li:hover {
+	background-color: #ECECEC;
+}
+
+.home .content-item-event-date {
+	color: #fff;
+	float: left;
+	font-size: 2.25em;
+	font-weight: 600;
+	line-height: 1.5;
+	margin-right: .3em;
+	padding: 0 .2em;
+	position: relative;
+	text-align: center;
+	text-transform: uppercase;
+	width: 2.75rem;
+	word-spacing: 3rem;
+	z-index: 1;
+}
+
+.home .content-item-event-date:first-line {
+	font-size: .4em;
+	font-weight: 300;
+	line-height: 2;
+}
+
+.home .content-item-event-date:before,
+.home .content-item-event-date:after {
+	content: '';
+	left: 0;
+	position: absolute;
+	-webkit-transition: background .4s;
+	transition: background .4s;
+	width: 100%;
+	z-index: -1;
+}
+
+.home .content-item-event-date:before {
+	background: #717171;
+	height: .75em;
+	top: 0;
+}
+
+.home .content-item-event-date:after {
+	background: #b5babe;
+	bottom: 0;
+	height: 1.46em;
+}
+
+.home li:hover .content-item-event-date:before {
+	background: #b5babe;
+}
+
+.home li:hover .content-item-event-date:after {
+	background: #981e32;
+}
+
+.home .content-item-event-title {
+	display: block;
+}
+
+.home .content-item-event-title a {
+	border-bottom: 0;
+}
+
+.home .section-wrapper-has-background {
+	background-size: cover;
+	background-position: center center;
+}
+
+.home .section-wrapper-has-background .halves .column.one {
+	min-height: 0;
+}
+
+.home .section-wrapper-has-background .halves .column.two {
+	padding: 3rem 2rem;
+}
+
+.home .form {
+	background: rgba(141,149,154,0.75);
+	color: #fff;
+	padding: 2rem;
+}
+
+.home .form h2 {
+	color: #fff;
+}
+
+@media only screen and (min-width: 694px) {
+	.home .halves {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+	}
+
+	.home .section-wrapper-has-background {
+		background-position: right center;
+	}
 }
 /*# sourceMappingURL=style.css.map */
