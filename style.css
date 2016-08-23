@@ -123,7 +123,6 @@ h5 {
 }
 
 p {
-	color: #717171;
 	font-size: .9rem;
 	font-weight: 400;
 	line-height: 1.5em;
@@ -183,5 +182,48 @@ main ul {
 
 .center {
 	text-align: center;
+}
+
+/* Site Footer */
+.site-footer {
+	background: #eff0f1;
+}
+
+.site-footer .one {
+	border-right: 1px solid #fff;
+}
+
+.site-footer ul {
+	list-style: none;
+	padding: 0;
+}
+
+.site-footer-menu > li {
+	box-sizing: border-box;
+	float: left;
+	padding: 0 0.5rem;
+	width: 25%;
+}
+
+.site-footer-menu > li > a,
+#binder .site-footer .two p {
+	border: none;
+	color: #717171;
+	display: block;
+	font-size: 1.4em;
+	font-weight: 700;
+	letter-spacing: 1px;
+	line-height: 1;
+	padding-bottom: .5rem;
+	pointer-events: none;
+	text-transform: uppercase;
+}
+
+.site-footer-menu ul li {
+	padding: 0 0 0.6rem 0;
+}
+
+#binder .site-footer .two p {
+	color: #9C9C9C;
 }
 /*# sourceMappingURL=style.css.map */
