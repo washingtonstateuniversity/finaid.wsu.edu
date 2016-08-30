@@ -19,7 +19,8 @@ html {
 	background: linear-gradient(to right,#981e32 0%,#c60c30 100%);
 }
 
-.tagged-blue .main-header {
+.tagged-blue .main-header,
+.section-scholarships .main-header {
 	background: #4f868e;
 	background: linear-gradient(to right,#4f868e 0%,#00a5bd 100%);
 }
