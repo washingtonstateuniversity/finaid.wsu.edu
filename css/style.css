@@ -5,8 +5,12 @@ html {
 /* Header */
 .main-header {
 	box-sizing: border-box;
+	color: #fff;
+	font-size: .85em;
+	letter-spacing: 2px;
 	height: 200px;
 	position: relative;
+	text-transform: uppercase;
 	width: 100%;
 }
 
@@ -20,30 +24,78 @@ html {
 	background: linear-gradient(to right,#4f868e 0%,#00a5bd 100%);
 }
 
-.main-header .header-group {
-	padding-left: 2rem;
-}
-
-.main-header sup {
-	font-size: 1.5em;
-	font-weight: 300;
-	letter-spacing: .15em;
-	line-height: 1.2;
-	text-transform: uppercase;
-}
-
-.main-header sub {
-	font-size: 3em;
-	font-weight: 600;
-	letter-spacing: .05em;
-	line-height: normal;
-	text-transform: uppercase;
-}
-
 .has-featured-image .main-header {
 	background: none;
 	float: left;
 	height: 400px;
+}
+
+.main-header div,
+.main-header nav {
+	padding: 1rem 0;
+	margin: 0 2rem;
+}
+
+.main-header span,
+.main-header li {
+	float: left;
+	line-height: normal;
+	padding: 0;
+}
+
+.site-header-group {
+	float: left;
+	overflow: hidden;
+}
+
+.site-header-group span + span,
+.site-action-links li + li {
+	border-left: 1px solid #fff;
+	margin-left: 1em;
+	padding-left: 1em;
+}
+
+.site-header-group .sup-header {
+	font-weight: 600;
+}
+
+.site-action-links {
+	float: right;
+}
+
+.site-action-links ul {
+	padding: 0;
+}
+
+.page-header-group {
+	bottom: 0;
+	padding-bottom: 2rem;
+	position: absolute;
+}
+
+.page-header-group .sup-header {
+	font-size: 1.8em;
+	font-weight: 300;
+	letter-spacing: .15em;
+	text-transform: uppercase;
+}
+
+.page-header-group .sub-header {
+	clear: both;
+	font-size: 3.6em;
+	font-weight: 600;
+	letter-spacing: .05em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.main-header a {
+	border-bottom: none;
+	color: white;
+}
+
+.main-header a:hover {
+	background: none;
 }
 
 .featured-image {
@@ -408,6 +460,50 @@ main ul {
 
 .home .form h2 {
 	color: #fff;
+}
+
+@media screen and (max-width: 791px) {
+	.main-header {
+		height: auto;
+	}
+
+	.site-header-group {
+		border-bottom: 1px solid #fff;
+		float: none;
+	}
+
+	.main-header li {
+		float: none;
+		text-align: right;
+	}
+
+	.site-action-links li + li {
+		border-left: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	.page-header-group {
+		clear: both;
+		position: relative;
+	}
+
+	.page-header-group span {
+		float: none;
+	}
+}
+
+@media only screen and (max-width: 693px) {
+	.site-header-group span {
+		display: block;
+		float: none;
+	}
+
+	.site-header-group span + span {
+		border-left: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
 }
 
 @media only screen and (min-width: 694px) {
