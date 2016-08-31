@@ -71,6 +71,12 @@ class WSU_Student_Financial_Services_Theme {
 		if ( is_front_page() ) {
 			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/home.js', array( 'jquery' ), $this->script_version, true );
 		}
+
+		$post = get_post();
+
+		if ( isset( $post->post_content ) && strpos( $post->post_content, 'js-accordion' ) ) {
+			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/accordion.js', array( 'jquery' ), $this->script_version, true );
+		}
 	}
 }
 

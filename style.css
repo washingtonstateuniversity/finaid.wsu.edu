@@ -549,6 +549,32 @@ main ul {
 	color: #fff;
 }
 
+/* Accordion */
+.js-accordion h3 {
+	cursor: pointer;
+	padding-right: 3rem;
+	position: relative;
+}
+
+.js-accordion h3:after {
+	content: '+';
+	font-weight: normal;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	    -ms-transform: translateY(-50%);
+	        transform: translateY(-50%);
+}
+
+.js-accordion h3:hover {
+	color: #828282;
+}
+
+.js-accordion h3[aria-expanded="true"]:after {
+	content: '–';
+}
+
 @media screen and (max-width: 791px) {
 	.main-header {
 		height: auto;
