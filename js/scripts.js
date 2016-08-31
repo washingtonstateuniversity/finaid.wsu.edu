@@ -10,14 +10,14 @@
 		e.preventDefault();
 
 		var list = $('.wsuwp-content-syndicate-list'),
-			events = $('.wsuwp-content-syndicate-event'),
+			event = $('.wsuwp-content-syndicate-event'),
 			position = '',
-			right_max = -(events.length * events.outerWidth() - list.width());
+			right_max = -(event.length * event.outerWidth() - list.width());
 
 		if ($(this).hasClass('prev')){
-			$('.wsuwp-content-syndicate-list').css('left', '+=' + events.outerWidth() + 'px');
+			$('.wsuwp-content-syndicate-list').css('left', '+=' + event.outerWidth() + 'px');
 		} else if ($(this).hasClass('next')){
-			$('.wsuwp-content-syndicate-list').css('left', '-=' + events.outerWidth() + 'px');
+			$('.wsuwp-content-syndicate-list').css('left', '-=' + event.outerWidth() + 'px');
 		}
 
 		position = parseInt(list.css('left'));

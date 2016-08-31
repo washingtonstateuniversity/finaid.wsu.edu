@@ -2,6 +2,11 @@
 
 class WSU_Student_Financial_Services_Theme {
 	/**
+	 * @var string String used for busting cache on scripts.
+	 */
+	var $script_version = '0.0.1';
+
+	/**
 	 * @var WSU_Student_Financial_Services_Theme
 	 */
 	private static $instance;
@@ -34,6 +39,7 @@ class WSU_Student_Financial_Services_Theme {
 	public function setup_hooks() {
 		add_action( 'init', array( $this, 'register_menu' ), 10 );
 		add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -56,6 +62,13 @@ class WSU_Student_Financial_Services_Theme {
 		);
 
 		register_sidebar( $footer_args );
+	}
+
+	/**
+	 * Enqueue the scripts used in the theme.
+	 */
+	public function enqueue_scripts() {
+		wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/scripts.js', array( 'jquery' ), $this->script_version, true );
 	}
 }
 add_action( 'after_setup_theme', 'WSU_Student_Financial_Services_Theme' );
