@@ -1,27 +1,7 @@
 <?php
-
-/**
- * Retrieve an array of values to be used in the header.
- *
- * site_name
- * site_tagline
- * page_title
- * post_title
- * section_title
- * subsection_title
- * posts_page_title
- * sup_header_default
- * sub_header_default
- * sup_header_alternate
- * sub_header_alternate
- */
-$spine_main_header_values = spine_get_main_header();
-
 if ( true === spine_get_option( 'main_header_show' ) ) :
 
-	$page_sup_header = get_post_meta( get_the_ID(), 'sup-header', true );
-	$page_sub_header = get_post_meta( get_the_ID(), 'sub-header', true );
-	$page_sub_header = ( '' !== $page_sub_header ) ? $page_sub_header : get_the_title();
+	$header_elements = sfs_get_header_elements();
 
 ?>
 <header class="main-header">
@@ -31,10 +11,7 @@ if ( true === spine_get_option( 'main_header_show' ) ) :
 			<a href="<?php bloginfo( 'url' ); ?>" title="<?php bloginfo( 'name' ); ?>"><?php bloginfo( 'name' ); ?></a>
 		</span>
 		<span class="sub-header">
-			<?php
-				$ancestor = get_page( array_pop( get_post_ancestors( $post->ID ) ) );
-				echo esc_html( $ancestor->post_title );
-			?>
+			<?php echo esc_html( $header_elements['section_title'] ); ?>
 		</span>
 	</div>
 
@@ -45,11 +22,13 @@ if ( true === spine_get_option( 'main_header_show' ) ) :
 	</nav>
 
 	<div class="page-header-group">
+		<?php if ( array_key_exists( 'page_sup', $header_elements ) ) { ?>
 		<span class="sup-header">
-			<?php echo esc_html( $page_sup_header ); ?>
+			<?php echo esc_html( $header_elements['page_sup'] ); ?>
 		</span>
+		<?php } ?>
 		<span class="sub-header">
-			<?php echo esc_html( $page_sub_header ); ?>
+			<?php echo esc_html( $header_elements['page_sub'] ); ?>
 		</span>
 	</div>
 
