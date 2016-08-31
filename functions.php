@@ -68,7 +68,9 @@ class WSU_Student_Financial_Services_Theme {
 	 * Enqueue the scripts used in the theme.
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/scripts.js', array( 'jquery' ), $this->script_version, true );
+		if ( is_front_page() ) {
+			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/home.js', array( 'jquery' ), $this->script_version, true );
+		}
 	}
 }
 
