@@ -388,6 +388,7 @@ main ul {
 	display: -ms-flexbox;
 	display: flex;
 	padding: 0;
+	position: relative;
 }
 
 .home .wsuwp-content-syndicate-list li {
@@ -399,6 +400,7 @@ main ul {
 	padding: 1em;
 	-webkit-transition: background .4s;
 	transition: background .4s;
+	width: 25%;
 }
 
 .home .wsuwp-content-syndicate-list li:hover {
@@ -406,17 +408,16 @@ main ul {
 }
 
 .home .content-item-event-date {
+	box-sizing: border-box;
 	color: #fff;
 	float: left;
 	font-size: 2.25em;
 	font-weight: 600;
 	line-height: 1.5;
-	margin-right: .3em;
-	padding: 0 .2em;
 	position: relative;
 	text-align: center;
 	text-transform: uppercase;
-	width: 2.75rem;
+	width: 3.5rem;
 	word-spacing: 3rem;
 	z-index: 1;
 }
@@ -458,14 +459,73 @@ main ul {
 	background: #981e32;
 }
 
-.home .content-item-event-title {
+.home .content-item-event-title,
+.home .content-item-event-meta {
 	display: block;
+	margin-left: 4.25rem;
 }
 
 .home .content-item-event-title a {
 	border-bottom: 0;
 }
 
+/* Home page event navigation */
+.event-control {
+	border: none;
+	display: block;
+	height: 3rem;
+	overflow: hidden;
+	position: absolute;
+	text-indent: -5rem;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	    -ms-transform: translateY(-50%);
+	        transform: translateY(-50%);
+	width: 2rem;
+}
+
+.event-control:hover {
+	background: none;
+}
+
+.event-control:before,
+.event-control:after {
+	border: 1.5rem solid transparent;
+	box-sizing: border-box;
+	content: '';
+	position: absolute;
+	top: 0;
+}
+
+.event-control.prev {
+	margin-left: -2.5rem;
+}
+
+.event-control.prev:before {
+	border-right-color: #717171;
+	right: 0;
+}
+
+.event-control.prev:after {
+	border-right-color: #fff;
+	right: -.25rem;
+}
+
+.event-control.next {
+	right: -.5rem;
+}
+
+.event-control.next:before {
+	border-left-color: #717171;
+	left: 0;
+}
+
+.event-control.next:after {
+	border-left-color: #fff;
+	left: -.25rem;
+}
+
+/* Home page form section */
 .home .section-wrapper-has-background {
 	background-size: cover;
 	background-position: center center;
@@ -518,6 +578,13 @@ main ul {
 	.page-header-group span {
 		float: none;
 	}
+
+	.home .wsuwp-content-syndicate-list li {
+		-webkit-box-flex: 1;
+		    -ms-flex: 1 0 50%;
+		        flex: 1 0 50%;
+		width: 50%;
+	}
 }
 
 @media only screen and (max-width: 693px) {
@@ -530,6 +597,15 @@ main ul {
 		border-left: none;
 		margin-left: 0;
 		padding-left: 0;
+	}
+}
+
+@media only screen and (max-width: 530px) {
+	.home .wsuwp-content-syndicate-list li {
+		-webkit-box-flex: 1;
+		    -ms-flex: 1 0 100%;
+		        flex: 1 0 100%;
+		width: 100%;
 	}
 }
 
