@@ -312,32 +312,36 @@ main ul {
 	text-transform: uppercase;
 }
 
-.home .halves .column.one {
+.home .halves .column.one,
+.page-scholarships .side-left .column.one {
 	background: center;
 	background-size: cover;
 	min-height: 350px;
 }
 
-.home .halves .column.two {
-	padding: 6rem 2rem;
-}
-
-.home ol {
+.five-steps {
 	counter-reset: count-it;
 	list-style: none;
 	padding: 0 0 2.5rem;
 }
 
-.home ol li {
+.five-steps li  {
+	padding: 0;
+}
+
+.five-steps a {
 	border-bottom: 1px solid #d7dadb;
+	color: #717171;
+	display: block;
 	font-size: 1.1em;
 	font-weight: 600;
 	margin-left: 4.5rem;
 	padding: .5em 0;
 	position: relative;
+	transition: color .4s;
 }
 
-.home ol li:before {
+.five-steps a:before {
 	align-items: center;
 	background: #b5babe;
 	color: #fff;
@@ -350,11 +354,18 @@ main ul {
 	position: absolute;
 	text-align: center;
 	top: .2em;
+	transition: background .4s;
 	width: 2.5rem;
 }
 
-.home ol li a {
-	border-bottom: 0;
+.five-steps a:hover,
+.five-steps a:hover .crimson-text {
+	background-color: transparent;
+	color: #c60c30;
+}
+
+.five-steps a:hover:before {
+	background: #0b9b56;
 }
 
 /* Home page events */
@@ -521,6 +532,43 @@ main ul {
 	color: #fff;
 }
 
+/* Scholarships landing page */
+.section-scholarships .cta-button {
+	border: 2px solid #00a5bd;
+	color: #00a5bd;
+}
+
+.section-scholarships .hentry .cta-button:hover {
+	background: #00a5bd;
+	color :#fff;
+}
+
+.section-scholarships h1,
+.section-scholarships h2,
+.section-scholarships h4,
+.section-scholarships h5,
+.section-scholarships .hentry a {
+	color: #00a5bd;
+}
+
+.section-scholarships .hentry a:hover {
+	color: #4f868e;
+}
+
+.white-text h1,
+.white-text h2,
+.white-text h3,
+.white-text h4,
+.white-text h5,
+.white-text .body-cta,
+.section-scholarships .hentry .white-text a {
+	color: #fff;
+}
+
+.white-text .body-cta {
+	border: 2px solid #fff;
+}
+
 /* Accordion */
 .js-accordion h3 {
 	cursor: pointer;
@@ -652,8 +700,14 @@ main ul {
 }
 
 @media only screen and (min-width: 694px) {
-	.home .halves {
+	.home .halves,
+	.page-scholarships .side-left {
 		display: flex;
+	}
+
+	.home .halves .column.two,
+	.page-scholarships .side-left .column.two {
+		padding: 6rem 2rem;
 	}
 
 	.home .section-wrapper-has-background {
