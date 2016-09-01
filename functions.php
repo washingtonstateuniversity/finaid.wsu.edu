@@ -30,7 +30,7 @@ class WSU_Student_Financial_Services_Theme {
 	 * Load "plugins" included with the theme.
 	 */
 	public function load_plugins() {
-		require_once( dirname( __FILE__ ) . '/includes/site-actions-widget.php' );
+		require_once( __DIR__ . '/includes/site-actions-widget.php' );
 	}
 
 	/**
@@ -107,8 +107,11 @@ function sfs_get_header_elements() {
 		// Retrieve the title of the top-level ancestor for pages.
 		$ancestor = get_page( array_pop( get_post_ancestors( get_the_ID() ) ) );
 		$sfs_headers['section_title'] = $ancestor->post_title;
+	} else if ( is_singular( 'post' ) || is_post_type_archive( 'post' ) ) {
+		// For posts and post archive views, use "Latest".
+		$sfs_headers['section_title'] = 'Latest';
 	} else if ( is_single() && ! is_singular( 'tribe_events' ) ) {
-		// For post types other than attachments, events, or pages, retrieve:
+		// For post types other than attachments, pages, posts, or events, retrieve:
 		// 1) a category name; or
 		// 2) the post type name.
 		$category = get_the_category();
@@ -131,8 +134,44 @@ function sfs_get_header_elements() {
 	}
 
 	// Page sub header.
-	$page_sub = get_post_meta( get_the_ID(), 'sub-header', true );
-	$sfs_headers['page_sub'] = ( $page_sub ) ? $page_sub : get_the_title();
+	if ( is_singular( 'post' ) ) {
+		// For posts, retrieve:
+		// 1) a category name; or
+		// 2) the post type name.
+		$category = get_the_category();
+		if ( $category ) {
+			$sfs_headers['page_sub'] = $category[0]->cat_name;
+		} else {
+			$post_type = get_post_type_object( get_post_type() );
+			$sfs_headers['page_sub'] = $post_type->labels->name;
+		}
+	} else if ( is_singular( 'tribe_events' ) ) {
+		// For individual events, retrieve:
+		// 1) an event category name; or
+		// 2) "Events".
+		$event_category = get_the_terms( get_queried_object_id(), 'tribe_events_cat' );
+		if ( $event_category ) {
+			$sfs_headers['page_sub'] = $event_category[0]->name;
+		} else {
+			$sfs_headers['page_sub'] = 'Events';
+		}
+	} else if ( is_post_type_archive( 'tribe_events' ) ) {
+		if ( is_tax() ) {
+			// Retrieve the term title for Event taxonomy archives.
+			$sfs_headers['page_sub'] = single_term_title( '', false );
+		} else {
+			// Output "Full Calendar" for the main Events archive view.
+			$sfs_headers['page_sub'] = 'Full Calendar';
+		}
+	} else if ( is_archive() ) {
+		// Use the Spine parent theme's sub header value for anything else.
+		$spine_main_header_values = spine_get_main_header();
+		$sfs_headers['page_sub'] = $spine_main_header_values['sub_header_default'];
+	} else {
+		// For everything else, grab the Spine Main Header Bottom Header Text, or the post title
+		$page_sub = get_post_meta( get_the_ID(), 'sub-header', true );
+		$sfs_headers['page_sub'] = ( $page_sub ) ? $page_sub : get_the_title();
+	}
 
 	return apply_filters( 'sfs_theme_header_elements', $sfs_headers );
 }
