@@ -19,7 +19,5 @@ $footer_menu_args = array(
 		<?php wp_nav_menu( $footer_menu_args ); ?>
 	</div>
 	<div class="column two">
-		<p>Connect</p>
-
 	</div>
 </footer>
