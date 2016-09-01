@@ -19,8 +19,7 @@
 		$(this).find('.dropdown-content').hide();
 	});
 
-	$(document).ready(function () {
-		$('[href="#7"]').triggerHandler('click');
-		$('[href="#16"]').triggerHandler('click');
-	});
+
+	$('[href="#7"]').trigger('click');
+	$('[href="#16"]').trigger('click');
 }(jQuery));
