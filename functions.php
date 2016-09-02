@@ -37,9 +37,21 @@ class WSU_Student_Financial_Services_Theme {
 	 * Setup hooks to include.
 	 */
 	public function setup_hooks() {
+		add_filter( 'spine_child_theme_version', array( $this, 'theme_version' ) );
 		add_action( 'init', array( $this, 'register_menu' ), 10 );
 		add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+	}
+
+	/**
+	 * Provide a theme version for use in cache busting.
+	 *
+	 * @since 0.0.16
+	 *
+	 * @return string
+	 */
+	public function theme_version() {
+		return $this->script_version;
 	}
 
 	/**
