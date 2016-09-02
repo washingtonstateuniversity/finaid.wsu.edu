@@ -1,5 +1,5 @@
 /*
- Theme Name:     WSUWP Financial Aid
+ Theme Name:     WSU Student Financial Services
  Theme URI:      https://web.wsu.edu
  Description:    A Washington State University Spine child theme for Student Financial Services
  Author:         WSU University Communications
@@ -7,4 +7,764 @@
  Template:       spine
  Version:        0.0.1
 */
+
+html {
+	background-color: white;
+}
+
+/* Header */
+.main-header {
+	box-sizing: border-box;
+	color: #fff;
+	font-size: .85em;
+	letter-spacing: 2px;
+	height: 200px;
+	position: relative;
+	text-transform: uppercase;
+	width: 100%;
+}
+
+.main-header {
+	background: #981e32;
+	background: -webkit-linear-gradient(left,#981e32 0%,#c60c30 100%);
+	background: linear-gradient(to right,#981e32 0%,#c60c30 100%);
+}
+
+.tagged-blue .main-header,
+.section-scholarships .main-header {
+	background: #4f868e;
+	background: -webkit-linear-gradient(left,#4f868e 0%,#00a5bd 100%);
+	background: linear-gradient(to right,#4f868e 0%,#00a5bd 100%);
+}
+
+.has-featured-image .main-header {
+	background: none;
+	float: left;
+	height: 400px;
+}
+
+.main-header div,
+.main-header nav {
+	padding: 1rem 0;
+	margin: 0 2rem;
+}
+
+.main-header span,
+.main-header li {
+	float: left;
+	line-height: normal;
+	padding: 0;
+}
+
+.site-header-group {
+	float: left;
+	overflow: hidden;
+}
+
+.site-header-group span + span,
+.site-action-links li + li {
+	border-left: 1px solid #fff;
+	margin-left: 1em;
+	padding-left: 1em;
+}
+
+.site-header-group .sup-header {
+	font-weight: 600;
+}
+
+.site-action-links {
+	float: right;
+}
+
+.site-action-links ul {
+	padding: 0;
+}
+
+.page-header-group {
+	bottom: 0;
+	padding-bottom: 2rem;
+	position: absolute;
+}
+
+.page-header-group .sup-header {
+	font-size: 1.8em;
+	font-weight: 300;
+	letter-spacing: .15em;
+	text-transform: uppercase;
+}
+
+.page-header-group .sub-header {
+	clear: both;
+	font-size: 3.6em;
+	font-weight: 600;
+	letter-spacing: .05em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.main-header a {
+	border-bottom: none;
+	color: white;
+}
+
+.main-header a:hover {
+	background: none;
+}
+
+.featured-image {
+	z-index: -1;
+}
+
+/* Layout overrides */
+.side-right.gutter .column.one:not(.gutterless) {
+	padding-right: 1.4rem;
+}
+
+.side-right.gutter .column.two:not(.gutterless) {
+	padding-left: 1.75rem;
+}
+
+.pad-bottom {
+	border-bottom: 7px solid #eff0f1;
+}
+
+.depth-1 .side-right:first-child .column.two {
+	background: white;
+	margin-top: -50px;
+}
+
+/* Typography */
+h1 {
+	color: #981e32;
+	font-size: 3em;
+	font-weight: 800;
+	margin-bottom: 5px;
+	text-transform: uppercase;
+}
+
+h2 {
+	color: #981e32;
+	font-size: 2.5em;
+	font-weight: 300;
+	padding-bottom: 25px;
+}
+
+.landing-side-right h2 {
+	font-size: 1.5em;
+}
+
+h3 {
+	color: #4E4E4E;
+	font-size: 1.75em;
+	font-weight: 300;
+	padding-bottom: 20px;
+}
+
+h4 {
+	color: #5E5E5F;
+	font-size: 1.25em;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+h5 {
+	color: #981e32;
+	font-size: .7rem;
+	font-weight: 700;
+	line-height: 15px;
+	padding-bottom: 20px;
+}
+
+p {
+	font-size: .9rem;
+	font-weight: 400;
+	line-height: 1.5em;
+}
+
+main a {
+	border-bottom: 2px dotted #B7B7B7;
+	text-decoration: none;
+}
+
+main a:hover {
+	background-color: #dddddd;
+	text-decoration: none;
+}
+
+main ul {
+	list-style-type: square;
+}
+
+/* Buttons */
+.cta-button {
+	background: none;
+	border: 2px solid #981e32;
+	color: #981e32;
+	display: inline-block;
+	font-size: 1.2em;
+	font-weight: 400;
+	letter-spacing: 3px;
+	line-height: normal;
+	min-width: 150px;
+	margin: 0;
+	padding: 10px;
+	text-transform: uppercase;
+	-webkit-transition: background .4s, color .4s;
+	transition: background .4s, color .4s;
+}
+
+.cta-button:hover {
+	background: #981e32;
+	color: white;
+}
+
+.body-cta {
+	border: 2px solid #d7dadb;
+	display: inline-block;
+	font-size: .9em;
+	letter-spacing: 2px;
+	padding: 7px;
+	text-transform: uppercase;
+	-webkit-transition: background .4s;
+	transition: background .4s;
+}
+
+.body-cta:hover {
+	background-color: #d7dadb;
+}
+
+.center {
+	text-align: center;
+}
+
+/* Site Footer */
+.site-footer {
+	background: #eff0f1;
+}
+
+.site-footer .one {
+	border-right: 1px solid #fff;
+}
+
+.site-footer ul {
+	list-style: none;
+	padding: 0;
+}
+
+.site-footer-menu > li {
+	box-sizing: border-box;
+	float: left;
+	padding: 0 0.5rem;
+	width: 25%;
+}
+
+.site-footer-menu > li > a,
+#binder .site-footer .two p {
+	border: none;
+	color: #717171;
+	display: block;
+	font-size: 1.4em;
+	font-weight: 700;
+	letter-spacing: 1px;
+	line-height: 1;
+	padding-bottom: .5rem;
+	pointer-events: none;
+	text-transform: uppercase;
+}
+
+.site-footer-menu ul li {
+	padding: 0 0 0.6rem 0;
+}
+
+#binder .site-footer .two p {
+	color: #9C9C9C;
+}
+
+@media screen and (max-width: 791px) {
+	.site-footer {
+		display: none;
+	}
+}
+
+/* Home page */
+.home #spine #glue:before {
+	border-right: 1px solid #efefef;
+}
+
+.home .main-header {
+	display: none;
+}
+
+.home .column p:first-child {
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-bottom: 0;
+	text-transform: uppercase;
+}
+
+.home h2 {
+	font-size: 3.5em;
+	font-weight: 700;
+	padding-top: 0;
+	text-transform: uppercase;
+}
+
+.home .intro {
+	padding: 10rem 0;
+}
+
+.home .column.intro p {
+	color: #981e32;
+	font-size: 2.5em;
+	font-weight: 300;
+	padding-bottom: .25em;
+}
+
+.home h1 {
+	font-size: 4.5rem;
+	text-transform: uppercase;
+}
+
+.home .halves .column.one,
+.page-scholarships .side-left .column.one {
+	background: center;
+	background-size: cover;
+	min-height: 350px;
+}
+
+.five-steps {
+	counter-reset: count-it;
+	list-style: none;
+	padding: 0 0 2.5rem;
+}
+
+.five-steps li  {
+	padding: 0;
+}
+
+.five-steps a {
+	border-bottom: 1px solid #d7dadb;
+	color: #717171;
+	display: block;
+	font-size: 1.1em;
+	font-weight: 600;
+	margin-left: 4.5rem;
+	padding: .5em 0;
+	position: relative;
+	-webkit-transition: color .4s;
+	transition: color .4s;
+}
+
+.five-steps a:before {
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	background: #b5babe;
+	color: #fff;
+	content: counter(count-it);
+	counter-increment: count-it;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	height: calc(100% - .2em);
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	left: -4.5rem;
+	position: absolute;
+	text-align: center;
+	top: .2em;
+	-webkit-transition: background .4s;
+	transition: background .4s;
+	width: 2.5rem;
+}
+
+.five-steps a:hover,
+.five-steps a:hover .crimson-text {
+	background-color: transparent;
+	color: #c60c30;
+}
+
+.five-steps a:hover:before {
+	background: #0b9b56;
+}
+
+/* Home page events */
+.home .wsuwp-content-syndicate-wrapper {
+	overflow: hidden;
+	padding-bottom: 2rem;
+}
+
+.home .wsuwp-content-syndicate-list {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	padding: 0;
+	position: relative;
+}
+
+.home .wsuwp-content-syndicate-list li {
+	box-sizing: border-box;
+	-webkit-box-flex: 1;
+	    -ms-flex: 1 0 25%;
+	        flex: 1 0 25%;
+	list-style: none;
+	padding: 1em;
+	-webkit-transition: background .4s;
+	transition: background .4s;
+	width: 25%;
+}
+
+.home .wsuwp-content-syndicate-list li:hover {
+	background-color: #ECECEC;
+}
+
+.home .content-item-event-date {
+	box-sizing: border-box;
+	color: #fff;
+	float: left;
+	font-size: 2.25em;
+	font-weight: 600;
+	line-height: 1.5;
+	position: relative;
+	text-align: center;
+	text-transform: uppercase;
+	width: 3.5rem;
+	word-spacing: 3rem;
+	z-index: 1;
+}
+
+.home .content-item-event-date:first-line {
+	font-size: .4em;
+	font-weight: 300;
+	line-height: 2;
+}
+
+.home .content-item-event-date:before,
+.home .content-item-event-date:after {
+	content: '';
+	left: 0;
+	position: absolute;
+	-webkit-transition: background .4s;
+	transition: background .4s;
+	width: 100%;
+	z-index: -1;
+}
+
+.home .content-item-event-date:before {
+	background: #717171;
+	height: .75em;
+	top: 0;
+}
+
+.home .content-item-event-date:after {
+	background: #b5babe;
+	bottom: 0;
+	height: 1.46em;
+}
+
+.home li:hover .content-item-event-date:before {
+	background: #b5babe;
+}
+
+.home li:hover .content-item-event-date:after {
+	background: #981e32;
+}
+
+.home .content-item-event-title,
+.home .content-item-event-meta {
+	display: block;
+	margin-left: 4.25rem;
+}
+
+.home .content-item-event-title a {
+	border-bottom: 0;
+}
+
+/* Home page event navigation */
+.event-control {
+	border: none;
+	display: block;
+	height: 3rem;
+	overflow: hidden;
+	position: absolute;
+	text-indent: -5rem;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	    -ms-transform: translateY(-50%);
+	        transform: translateY(-50%);
+	width: 2rem;
+}
+
+.event-control:hover {
+	background: none;
+}
+
+.event-control:before,
+.event-control:after {
+	border: 1.5rem solid transparent;
+	box-sizing: border-box;
+	content: '';
+	position: absolute;
+	top: 0;
+}
+
+.event-control.prev {
+	margin-left: -2.5rem;
+}
+
+.event-control.prev:before {
+	border-right-color: #717171;
+	right: 0;
+}
+
+.event-control.prev:after {
+	border-right-color: #fff;
+	right: -.25rem;
+}
+
+.event-control.next {
+	right: -.5rem;
+}
+
+.event-control.next:before {
+	border-left-color: #717171;
+	left: 0;
+}
+
+.event-control.next:after {
+	border-left-color: #fff;
+	left: -.25rem;
+}
+
+/* Home page form section */
+.home .section-wrapper-has-background {
+	background-size: cover;
+	background-position: center center;
+}
+
+.home .section-wrapper-has-background .halves .column.one {
+	min-height: 0;
+}
+
+.home .section-wrapper-has-background .halves .column.two {
+	padding: 3rem 2rem;
+}
+
+.home .gform_wrapper {
+	background: rgba(141,149,154,0.75);
+	color: #fff;
+	margin: 0;
+	padding: 2rem;
+}
+
+.home .gform_wrapper .gform_heading {
+	margin: 0;
+}
+
+.home .gform_wrapper h3.gform_title {
+	color: #fff;
+	font-size: 3.5em;
+	font-weight: 700;
+	margin: 0;
+	padding-top: 0;
+	text-transform: uppercase;
+}
+
+.home .gform_wrapper form {
+	margin: 0;
+	padding: 0;
+}
+
+/* Scholarships landing page */
+.section-scholarships .cta-button {
+	border: 2px solid #00a5bd;
+	color: #00a5bd;
+}
+
+.section-scholarships .hentry .cta-button:hover {
+	background: #00a5bd;
+	color :#fff;
+}
+
+.section-scholarships h1,
+.section-scholarships h2,
+.section-scholarships h4,
+.section-scholarships h5,
+.section-scholarships .hentry a {
+	color: #00a5bd;
+}
+
+.section-scholarships .hentry a:hover {
+	color: #4f868e;
+}
+
+.white-text h1,
+.white-text h2,
+.white-text h3,
+.white-text h4,
+.white-text h5,
+.white-text .body-cta,
+.section-scholarships .hentry .white-text a {
+	color: #fff;
+}
+
+.white-text .body-cta {
+	border: 2px solid #fff;
+}
+
+/* Accordion */
+.js-accordion h3 {
+	cursor: pointer;
+	padding-right: 3rem;
+	position: relative;
+}
+
+.js-accordion h3:after {
+	content: '+';
+	font-weight: normal;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	    -ms-transform: translateY(-50%);
+	        transform: translateY(-50%);
+}
+
+.js-accordion h3:hover {
+	color: #828282;
+}
+
+.js-accordion h3[aria-expanded="true"]:after {
+	content: '–';
+}
+
+/* Dropdown Menus */
+.dropbtn {
+	background-color: #4f868e;
+	border-radius: 8px;
+	color: white;
+	cursor: pointer;
+	font-size: 1rem;
+	margin-bottom: 1rem;
+	padding: 1rem;
+}
+
+.dropdown {
+	display: inline-block;
+	position: relative;
+}
+
+.dropdown-content {
+	background-color: #f9f9f9;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	display: none;
+	margin-top: -1rem;
+	min-width: 160px;
+	position: absolute;
+	z-index: 1;
+}
+
+.dropdown-content:active {
+	display: none;
+}
+
+.dropdown-content a {
+	box-sizing: border-box;
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	width: 100%;
+}
+
+.dropdown-content a:hover {
+	background-color: #ffffff;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #00a5bd;
+	color: #eff0f1;
+}
+
+@media screen and (max-width: 791px) {
+	.main-header {
+		height: auto;
+	}
+
+	.site-header-group {
+		border-bottom: 1px solid #fff;
+		float: none;
+	}
+
+	.main-header li {
+		float: none;
+		text-align: right;
+	}
+
+	.site-action-links li + li {
+		border-left: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	.page-header-group {
+		clear: both;
+		position: relative;
+	}
+
+	.page-header-group span {
+		float: none;
+	}
+
+	.home .wsuwp-content-syndicate-list li {
+		-webkit-box-flex: 1;
+		    -ms-flex: 1 0 50%;
+		        flex: 1 0 50%;
+		width: 50%;
+	}
+}
+
+@media only screen and (max-width: 693px) {
+	.site-header-group span {
+		display: block;
+		float: none;
+	}
+
+	.site-header-group span + span {
+		border-left: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+}
+
+@media only screen and (max-width: 530px) {
+	.home .wsuwp-content-syndicate-list li {
+		-webkit-box-flex: 1;
+		    -ms-flex: 1 0 100%;
+		        flex: 1 0 100%;
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width: 694px) {
+	.home .halves,
+	.page-scholarships .side-left {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+	}
+
+	.home .halves .column.two,
+	.page-scholarships .side-left .column.two {
+		padding: 6rem 2rem;
+	}
+
+	.home .section-wrapper-has-background {
+		background-position: right center;
+	}
+}
 /*# sourceMappingURL=style.css.map */
