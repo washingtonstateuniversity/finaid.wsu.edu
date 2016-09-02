@@ -552,14 +552,29 @@ main ul {
 	padding: 3rem 2rem;
 }
 
-.home .form {
+.home .gform_wrapper {
 	background: rgba(141,149,154,0.75);
 	color: #fff;
+	margin: 0;
 	padding: 2rem;
 }
 
-.home .form h2 {
+.home .gform_wrapper .gform_heading {
+	margin: 0;
+}
+
+.home .gform_wrapper h3.gform_title {
 	color: #fff;
+	font-size: 3.5em;
+	font-weight: 700;
+	margin: 0;
+	padding-top: 0;
+	text-transform: uppercase;
+}
+
+.home .gform_wrapper form {
+	margin: 0;
+	padding: 0;
 }
 
 /* Scholarships landing page */
