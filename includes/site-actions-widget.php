@@ -63,7 +63,7 @@ class Site_Actions_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-		$instance['action_link'] = ( ! empty( $new_instance['action_link'] ) ) ? esc_url( $new_instance['action_link'] ) : '';
+		$instance['action_link'] = ( ! empty( $new_instance['action_link'] ) ) ? esc_url_raw( $new_instance['action_link'] ) : '';
 		$instance['action_text'] = ( ! empty( $new_instance['action_text'] ) ) ? sanitize_text_field( $new_instance['action_text'] ) : '';
 
 		return $instance;
