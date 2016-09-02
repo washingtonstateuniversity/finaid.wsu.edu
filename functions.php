@@ -46,7 +46,7 @@ class WSU_Student_Financial_Services_Theme {
 	/**
 	 * Provide a theme version for use in cache busting.
 	 *
-	 * @since 0.0.16
+	 * @since 0.0.1
 	 *
 	 * @return string
 	 */
