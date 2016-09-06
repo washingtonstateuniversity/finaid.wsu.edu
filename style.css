@@ -291,10 +291,6 @@ main ul {
 	border-right: 1px solid #efefef;
 }
 
-.home .main-header {
-	display: none;
-}
-
 .home .column p:first-child {
 	font-size: 1.4em;
 	font-weight: 300;
