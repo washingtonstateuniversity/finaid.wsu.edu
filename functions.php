@@ -116,14 +116,24 @@ function sfs_get_header_elements() {
 
 	// Section title.
 	if ( is_page() ) {
-		// Retrieve the title of the top-level ancestor for pages.
-		$ancestor = get_post( array_pop( get_post_ancestors( get_the_ID() ) ) );
-		$sfs_headers['section_title'] = $ancestor->post_title;
+		// Retrieve the title of the top-level category for pages.
+		$category = get_the_category();
+		if ( $category ) {
+			$category_parents = get_category_parents( $category[0]->term_id );
+			$top_category = explode( '/', $category_parents );
+			$section = rtrim( $top_category[0], '/' );
+			if ( $section ) {
+				$sfs_headers['section_title'] = $section;
+			}
+		} else {
+			// Fall back to the page title if the page has no categories.
+			$sfs_headers['section_title'] = get_the_title();
+		}
 	} else if ( is_singular( 'post' ) || ( is_archive() && ! is_post_type_archive( 'tribe_events' ) ) ) {
 		// For posts and archive views (excluding events archives), use "Latest".
 		$sfs_headers['section_title'] = 'Latest';
 	} else if ( is_single() && ! is_singular( 'tribe_events' ) ) {
-		// For all other post types eexcept events, retrieve:
+		// For all other post types except events, retrieve:
 		// 1) a category name; or
 		// 2) the post type name.
 		$category = get_the_category();
