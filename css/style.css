@@ -576,6 +576,11 @@ main ul {
 	border: 2px solid #fff;
 }
 
+.topics-audiences ul {
+	list-style: none;
+	padding: 0;
+}
+
 /* Accordion */
 .js-accordion h3 {
 	cursor: pointer;
@@ -734,5 +739,28 @@ main ul {
 	.section-landing .side-right:first-child .column.two {
 		background: white;
 		margin-top: -50px;
+	}
+
+	.topics-audiences ul {
+		display: flex;
+		flex-wrap: wrap;
+		list-style: none;
+		padding: 0;
+	}
+
+	.topics-audiences li {
+		box-sizing: border-box;
+		padding: 1rem;
+		width: 33.333%;
+	}
+
+	.topics-audiences li:nth-of-type(-n+2),
+	.topics-audiences li:nth-of-type(4),
+	.topics-audiences li:nth-of-type(5) {
+		border-right: 2px solid #eff0f1;
+	}
+
+	.topics-audiences li:nth-of-type(-n+2) {
+		border-bottom: 2px solid #eff0f1;
 	}
 }
