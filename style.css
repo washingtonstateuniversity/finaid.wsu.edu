@@ -43,12 +43,6 @@ html {
 	height: 400px;
 }
 
-.main-header div,
-.main-header nav {
-	padding: 1rem 0;
-	margin: 0 2rem;
-}
-
 .main-header span,
 .main-header li {
 	float: left;
@@ -58,7 +52,9 @@ html {
 
 .site-header-group {
 	float: left;
+	margin: 0 2rem;
 	overflow: hidden;
+	padding: 1rem 0;
 }
 
 .site-header-group span + span,
@@ -74,6 +70,7 @@ html {
 
 .site-action-links {
 	float: right;
+	padding: 1rem 2rem;
 }
 
 .site-action-links ul {
@@ -82,8 +79,10 @@ html {
 
 .page-header-group {
 	bottom: 0;
-	padding-bottom: 2rem;
+	box-sizing: border-box;
+	padding: 1rem 2rem 2rem;
 	position: absolute;
+	width: 100%;
 }
 
 .page-header-group .sup-header {
@@ -127,11 +126,6 @@ html {
 
 .pad-bottom {
 	border-bottom: 7px solid #eff0f1;
-}
-
-.depth-1 .side-right:first-child .column.two {
-	background: white;
-	margin-top: -50px;
 }
 
 /* Typography */
@@ -766,6 +760,17 @@ main ul {
 
 	.home .section-wrapper-has-background {
 		background-position: right center;
+	}
+
+	.section-landing .page-header-group .sub-header {
+		box-sizing: border-box;
+		padding-right: 1.4rem;
+		width: 67%;
+	}
+
+	.section-landing .side-right:first-child .column.two {
+		background: white;
+		margin-top: -50px;
 	}
 }
 /*# sourceMappingURL=style.css.map */
