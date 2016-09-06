@@ -20,6 +20,7 @@ html {
 }
 
 .tagged-blue .main-header,
+.categorized-scholarships .main-header,
 .section-scholarships .main-header {
 	background: #4f868e;
 	background: linear-gradient(to right,#4f868e 0%,#00a5bd 100%);
