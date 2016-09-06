@@ -759,8 +759,7 @@ main ul {
 		display: flex;
 	}
 
-	.home .halves .column.two,
-	.page-scholarships .side-left .column.two {
+	.home .halves .column.two {
 		padding: 6rem 2rem;
 	}
 
