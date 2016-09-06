@@ -112,7 +112,11 @@ function WSU_Student_Financial_Services_Theme() {
  * @return array List of elements for output in main header.
  */
 function sfs_get_header_elements() {
-	$sfs_headers = array();
+	$sfs_headers = array(
+		'section_title' => '',
+		'page_sup' => '',
+		'page_sub' => '',
+	);
 
 	// Section title.
 	if ( is_page() ) {
@@ -143,7 +147,9 @@ function sfs_get_header_elements() {
 			$post_type = get_post_type_object( get_post_type() );
 			$sfs_headers['section_title'] = $post_type->labels->name;
 		}
-	} else {
+	}
+
+	if ( '' === $sfs_headers['section_title'] ) {
 		// Use the Spine parent theme's sub header value for anything else.
 		$spine_main_header_values = spine_get_main_header();
 		$sfs_headers['section_title'] = $spine_main_header_values['sub_header_default'];
