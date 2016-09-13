@@ -41,6 +41,7 @@ class WSU_Student_Financial_Services_Theme {
 		add_action( 'init', array( $this, 'register_menu' ), 10 );
 		add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_filter( 'body_class', array( $this, 'browser_body_class' ) );
 	}
 
 	/**
@@ -93,6 +94,21 @@ class WSU_Student_Financial_Services_Theme {
 		if ( isset( $post->post_content ) && strpos( $post->post_content, 'dropdown' ) ) {
 			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/table-toggle.js', array( 'jquery' ), $this->script_version, true );
 		}
+	}
+
+	/**
+	 * Apply 'gecko' as a body class on the home page for Firefox users.
+	 *
+	 * Pretty hacky, but perhaps less so than most other methods.
+	 */
+	public function browser_body_class( $classes ) {
+		global $is_gecko;
+
+		if ( is_front_page() && $is_gecko ) {
+			$classes[] = 'gecko';
+		}
+
+		return $classes;
 	}
 }
 

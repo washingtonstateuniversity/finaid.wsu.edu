@@ -416,9 +416,9 @@ main ul {
 	box-sizing: border-box;
 	color: #fff;
 	float: left;
-	font-size: 2.25em;
+	font-size: 32px;
 	font-weight: 600;
-	line-height: 1.5;
+	line-height: 50px;
 	position: relative;
 	text-align: center;
 	text-transform: uppercase;
@@ -428,9 +428,18 @@ main ul {
 }
 
 .home .content-item-event-date:first-line {
-	font-size: .4em;
+	font-size: 12px;
 	font-weight: 300;
-	line-height: 2;
+	line-height: 24px;
+}
+
+.gecko.home .content-item-event-date {
+	line-height: 33px;
+	height: 74px;
+}
+
+.gecko.home .content-item-event-date:first-line {
+	vertical-align: top;
 }
 
 .home .content-item-event-date:before,
@@ -446,14 +455,14 @@ main ul {
 
 .home .content-item-event-date:before {
 	background: #717171;
-	height: .75em;
+	height: 24px;
 	top: 0;
 }
 
 .home .content-item-event-date:after {
 	background: #b5babe;
 	bottom: 0;
-	height: 1.46em;
+	height: 48px;
 }
 
 .home li:hover .content-item-event-date:before {
