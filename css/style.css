@@ -584,7 +584,7 @@ main ul {
 /* Accordion */
 .js-accordion h3 {
 	cursor: pointer;
-	padding-right: 3rem;
+	padding-right: 1.5em;
 	position: relative;
 }
 
@@ -593,8 +593,7 @@ main ul {
 	font-weight: normal;
 	position: absolute;
 	right: 0;
-	top: 50%;
-	transform: translateY(-50%);
+	top: 0.5em;
 }
 
 .js-accordion h3:hover {
