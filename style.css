@@ -81,7 +81,7 @@ html {
 .page-header-group {
 	bottom: 0;
 	box-sizing: border-box;
-	padding: 1rem 2rem 2rem;
+	padding: 1rem 2rem 1.5rem;
 	position: absolute;
 	width: 100%;
 }
@@ -117,16 +117,58 @@ html {
 }
 
 /* Layout overrides */
-.side-right.gutter .column.one:not(.gutterless) {
-	padding-right: 1.4rem;
+.pad-top .column,
+.padded-top {
+	padding-top: 3rem;
 }
 
-.side-right.gutter .column.two:not(.gutterless) {
-	padding-left: 1.75rem;
+.pad-bottom .column,
+.padded-bottom {
+	padding-bottom: 3rem;
+}
+
+.pad-ends .column,
+.padded-ends {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+
+.row > header ~ .column {
+	padding-top: 2rem;
+}
+
+.fluid .row.side-right .column.one {
+	padding-right: 1.3125rem;
+	width: 66.66666%;
+}
+
+.fluid .row.side-right .column.two {
+	padding-left: .625rem;
+	padding-top: 3.5rem;
+	width: 33.33333%;
 }
 
 .pad-bottom {
 	border-bottom: 7px solid #eff0f1;
+}
+
+.pad-bottom:last-child {
+	border-bottom: none;
+}
+
+section.pad-top > header {
+	padding-top: 3rem;
+}
+
+section.pad-bottom > header {
+	padding-bottom: 0;
+}
+
+section > header > h1,
+section > header > h2,
+section > header > h3,
+section > header > h4 {
+	padding: 0;
 }
 
 /* Typography */
@@ -171,10 +213,11 @@ h5 {
 	padding-bottom: 20px;
 }
 
-p {
-	font-size: .9rem;
-	font-weight: 400;
-	line-height: 1.5em;
+p,
+main section li {
+	font-size: 1rem;
+	font-weight: 300;
+	line-height: 1.5;
 }
 
 main a {
@@ -201,12 +244,16 @@ main ul {
 	font-weight: 400;
 	letter-spacing: 3px;
 	line-height: normal;
-	min-width: 150px;
 	margin: 0;
 	padding: 10px;
 	text-transform: uppercase;
 	-webkit-transition: background .4s, color .4s;
 	transition: background .4s, color .4s;
+}
+
+.side-right .two .cta-button {
+	box-sizing: border-box;
+	min-width: 100%;
 }
 
 .cta-button:hover {
@@ -219,10 +266,15 @@ main ul {
 	display: inline-block;
 	font-size: .9em;
 	letter-spacing: 2px;
+	margin: .5rem 0 2rem;
 	padding: 7px;
 	text-transform: uppercase;
 	-webkit-transition: background .4s;
 	transition: background .4s;
+}
+
+.body-cta + br + .body-cta {
+	margin-top: -1rem;
 }
 
 .body-cta:hover {
@@ -236,6 +288,7 @@ main ul {
 /* Site Footer */
 .site-footer {
 	background: #eff0f1;
+	margin-top: 2rem;
 }
 
 .site-footer .one {
@@ -771,17 +824,6 @@ main ul {
 
 	.home .section-wrapper-has-background {
 		background-position: right center;
-	}
-
-	.section-landing .page-header-group .sub-header {
-		box-sizing: border-box;
-		padding-right: 1.4rem;
-		width: 67%;
-	}
-
-	.section-landing .side-right:first-child .column.two {
-		background: white;
-		margin-top: -50px;
 	}
 
 	.topics-audiences ul {
