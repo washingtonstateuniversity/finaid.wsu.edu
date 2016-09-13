@@ -31,76 +31,80 @@ $org_phone = get_post_meta( get_the_ID(), 'scholarship_org_phone', true );
 		<?php the_content(); ?>
 
 		<?php
-			if ( $deadline ) {
-				$date = DateTime::createFromFormat( 'Y-m-d', $deadline );
-				$deadline_display = ( $date instanceof DateTime ) ? $date->format( 'm/d/Y' ) : $deadline;
-				?><p><strong>Deadline:</strong> <?php echo esc_html( $deadline_display ); ?></p><?php
+		if ( $deadline ) {
+			$date = DateTime::createFromFormat( 'Y-m-d', $deadline );
+			$deadline_display = ( $date instanceof DateTime ) ? $date->format( 'm/d/Y' ) : $deadline;
+			?><p><strong>Deadline:</strong> <?php echo esc_html( $deadline_display ); ?></p><?php
+		}
+
+		if ( $amount ) {
+			$amount_pieces = explode( '-', $amount );
+			$numeric_amount = str_replace( ',', '', $amount_pieces[0] );
+			$prepend = ( is_numeric( $numeric_amount ) ) ? '$' : '';
+			?><p><strong>Amount:</strong> <?php echo esc_html( $prepend . $amount ); ?></p><?php
+		}
+
+		if ( $paper ) {
+			?><p><strong>Paper Application Available</strong></p><?php
+		}
+
+		if ( $online ) {
+			?><p><strong>Online Application Available</strong></p><?php
+		}
+
+		if ( $site || $email || $phone || $address ) {
+			?>
+			<p><strong>Contact information:</strong></p>
+			<ul>
+			<?php
+
+			if ( $site ) {
+				?><li><a href="<?php echo esc_url( $site ); ?>"><?php echo esc_html( $site ); ?></a></li><?php
 			}
 
-			if ( $amount ) {
-				$amount_pieces = explode( '-', $amount );
-				$numeric_amount = str_replace( ',', '', $amount_pieces[0] );
-				$prepend = ( is_numeric( $numeric_amount ) ) ? '$' : '';
-				?><p><strong>Amount:</strong> <?php echo esc_html( $prepend . $amount ); ?></p><?php
+			if ( $email ) {
+				?><li><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></li><?php
 			}
 
-			if ( $paper ) {
-				?><p><strong>Paper Application Available</strong></p><?php
+			if ( $phone ) {
+				?><li><?php echo esc_html( $phone ); ?></li><?php
 			}
 
-			if ( $online ) {
-				?><p><strong>Online Application Available</strong></p><?php
+			if ( $address ) {
+				?><li><?php echo esc_html( $address ); ?></li><?php
 			}
 
-			if ( $site || $email || $phone || $address ) {
-				?>
-				<p><strong>Contact information:</strong></p>
-				<ul>
-				<?php
+			?></ul><?php
+		}
 
-				if ( $site ) {
-					?><li><a href="<?php echo esc_url( $site ); ?>"><?php echo esc_html( $site ); ?></a></li><?php
-				}
+		if ( $org_name || $org || $org_site || $org_email || $org_phone ) {
+			$granter = ( $org_name ) ? $org_name : 'the granter';
+			?>
+			<p><strong>About <?php echo esc_html( $granter ); ?></strong></p>
+			<?php
 
-				if ( $email ) {
-					?><li><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></li><?php
-				}
-
-				if ( $phone ) {
-					?><li><?php echo esc_html( $phone ); ?></li><?php
-				}
-
-				if ( $address ) {
-					?><li><?php echo esc_html( $address ); ?></li><?php
-				}
-
-				?></ul><?php
+			if ( $org ) {
+				echo wpautop( wp_kses_post( $org ) );
 			}
 
-			if ( $org_name || $org || $org_site || $org_email || $org_phone ) {
-				$granter = ( $org_name ) ? $org_name : 'the granter';
-				?><p><strong>About <?php echo esc_html( $granter ); ?></strong></p><?php
+			?>
+			<ul>
+			<?php
 
-				if ( $org ) {
-					echo wpautop( wp_kses_post( $org ) );
-				}
-
-				?><ul><?php
-
-				if ( $org_site ) {
-					?><li><strong>Web:</strong> <a href="<?php echo esc_url( $org_site ); ?>"><?php echo esc_html( $org_site ); ?></a></li><?php
-				}
-
-				if ( $org_email ) {
-					?><li><strong>Email:</strong> <a href="mailto:<?php echo esc_attr( $org_email ); ?>"><?php echo esc_html( $org_email ); ?></a></li><?php
-				}
-
-				if ( $org_phone ) {
-					?><li><strong>Phone:</strong> <?php echo esc_html( $org_phone ); ?></li><?php
-				}
-
-				?></ul><?php
+			if ( $org_site ) {
+				?><li><strong>Web:</strong> <a href="<?php echo esc_url( $org_site ); ?>"><?php echo esc_html( $org_site ); ?></a></li><?php
 			}
+
+			if ( $org_email ) {
+				?><li><strong>Email:</strong> <a href="mailto:<?php echo esc_attr( $org_email ); ?>"><?php echo esc_html( $org_email ); ?></a></li><?php
+			}
+
+			if ( $org_phone ) {
+				?><li><strong>Phone:</strong> <?php echo esc_html( $org_phone ); ?></li><?php
+			}
+
+			?></ul><?php
+		}
 		?>
 	</div>
 
