@@ -20,6 +20,7 @@ html {
 }
 
 .tagged-blue .main-header,
+.categorized-scholarships .main-header,
 .section-scholarships .main-header {
 	background: #4f868e;
 	background: linear-gradient(to right,#4f868e 0%,#00a5bd 100%);
@@ -29,12 +30,7 @@ html {
 	background: none;
 	float: left;
 	height: 400px;
-}
-
-.main-header div,
-.main-header nav {
-	padding: 1rem 0;
-	margin: 0 2rem;
+	text-shadow: 1px 1px 5px rgba(0,0,0,0.35);
 }
 
 .main-header span,
@@ -46,7 +42,9 @@ html {
 
 .site-header-group {
 	float: left;
+	margin: 0 2rem;
 	overflow: hidden;
+	padding: 1rem 0;
 }
 
 .site-header-group span + span,
@@ -62,6 +60,7 @@ html {
 
 .site-action-links {
 	float: right;
+	padding: 1rem 2rem;
 }
 
 .site-action-links ul {
@@ -70,8 +69,10 @@ html {
 
 .page-header-group {
 	bottom: 0;
-	padding-bottom: 2rem;
+	box-sizing: border-box;
+	padding: 1rem 2rem 1.5rem;
 	position: absolute;
+	width: 100%;
 }
 
 .page-header-group .sup-header {
@@ -105,21 +106,47 @@ html {
 }
 
 /* Layout overrides */
-.side-right.gutter .column.one:not(.gutterless) {
-	padding-right: 1.4rem;
+.pad-top .column,
+.padded-top {
+	padding-top: 3rem;
 }
 
-.side-right.gutter .column.two:not(.gutterless) {
-	padding-left: 1.75rem;
+.pad-bottom .column,
+.padded-bottom {
+	padding-bottom: 3rem;
+}
+
+.pad-ends .column,
+.padded-ends {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+
+.row > header ~ .column {
+	padding-top: 2rem;
 }
 
 .pad-bottom {
 	border-bottom: 7px solid #eff0f1;
 }
 
-.depth-1 .side-right:first-child .column.two {
-	background: white;
-	margin-top: -50px;
+.pad-bottom:last-child {
+	border-bottom: none;
+}
+
+section.pad-top > header {
+	padding-top: 3rem;
+}
+
+section.pad-bottom > header {
+	padding-bottom: 0;
+}
+
+section > header > h1,
+section > header > h2,
+section > header > h3,
+section > header > h4 {
+	padding: 0;
 }
 
 /* Typography */
@@ -164,10 +191,11 @@ h5 {
 	padding-bottom: 20px;
 }
 
-p {
-	font-size: .9rem;
-	font-weight: 400;
-	line-height: 1.5em;
+p,
+main section li {
+	font-size: 1rem;
+	font-weight: 300;
+	line-height: 1.5;
 }
 
 main a {
@@ -194,11 +222,15 @@ main ul {
 	font-weight: 400;
 	letter-spacing: 3px;
 	line-height: normal;
-	min-width: 150px;
 	margin: 0;
 	padding: 10px;
 	text-transform: uppercase;
 	transition: background .4s, color .4s;
+}
+
+.side-right .two .cta-button {
+	box-sizing: border-box;
+	min-width: 100%;
 }
 
 .cta-button:hover {
@@ -211,9 +243,14 @@ main ul {
 	display: inline-block;
 	font-size: .9em;
 	letter-spacing: 2px;
+	margin: .5rem 0 2rem;
 	padding: 7px;
 	text-transform: uppercase;
 	transition: background .4s;
+}
+
+.body-cta + br + .body-cta {
+	margin-top: -1rem;
 }
 
 .body-cta:hover {
@@ -227,6 +264,7 @@ main ul {
 /* Site Footer */
 .site-footer {
 	background: #eff0f1;
+	margin-top: 2rem;
 }
 
 .site-footer .one {
@@ -309,6 +347,23 @@ main ul {
 	text-transform: uppercase;
 }
 
+.home .intro p {
+	opacity: 0;
+	transition: opacity 1.5s ease;
+}
+
+.home .intro h1 {
+	opacity: 0;
+	transform: translateY(1.5em);
+	transition: transform 1.75s ease-in-out, opacity 1.25s ease .75s;
+}
+
+.home .intro.ready p,
+.home .intro.ready h1 {
+	opacity: 1;
+	transform: translateY(0);
+}
+
 .home .halves .column.one,
 .page-scholarships .side-left .column.one {
 	background: center;
@@ -365,6 +420,25 @@ main ul {
 	background: #0b9b56;
 }
 
+.application-forms {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	padding: 0;
+}
+
+.application-forms li {
+	box-sizing: border-box;
+	padding: 1rem;
+	width: 25%;
+}
+
+.application-forms li a {
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+}
+
 /* Home page events */
 .home .wsuwp-content-syndicate-wrapper {
 	overflow: hidden;
@@ -394,9 +468,9 @@ main ul {
 	box-sizing: border-box;
 	color: #fff;
 	float: left;
-	font-size: 2.25em;
+	font-size: 32px;
 	font-weight: 600;
-	line-height: 1.5;
+	line-height: 50px;
 	position: relative;
 	text-align: center;
 	text-transform: uppercase;
@@ -406,9 +480,18 @@ main ul {
 }
 
 .home .content-item-event-date:first-line {
-	font-size: .4em;
+	font-size: 12px;
 	font-weight: 300;
-	line-height: 2;
+	line-height: 24px;
+}
+
+.gecko.home .content-item-event-date {
+	line-height: 33px;
+	height: 74px;
+}
+
+.gecko.home .content-item-event-date:first-line {
+	vertical-align: top;
 }
 
 .home .content-item-event-date:before,
@@ -423,14 +506,14 @@ main ul {
 
 .home .content-item-event-date:before {
 	background: #717171;
-	height: .75em;
+	height: 24px;
 	top: 0;
 }
 
 .home .content-item-event-date:after {
 	background: #b5babe;
 	bottom: 0;
-	height: 1.46em;
+	height: 48px;
 }
 
 .home li:hover .content-item-event-date:before {
@@ -581,10 +664,15 @@ main ul {
 	border: 2px solid #fff;
 }
 
+.topics-audiences ul {
+	list-style: none;
+	padding: 0;
+}
+
 /* Accordion */
 .js-accordion h3 {
 	cursor: pointer;
-	padding-right: 3rem;
+	padding-right: 1.5em;
 	position: relative;
 }
 
@@ -593,8 +681,7 @@ main ul {
 	font-weight: normal;
 	position: absolute;
 	right: 0;
-	top: 50%;
-	transform: translateY(-50%);
+	top: 0.5em;
 }
 
 .js-accordion h3:hover {
@@ -681,8 +768,16 @@ main ul {
 		position: relative;
 	}
 
+	.has-featured-image .page-header-group {
+		position: absolute;
+	}
+
 	.page-header-group span {
 		float: none;
+	}
+
+	.application-forms li {
+		width: 50%;
 	}
 
 	.home .wsuwp-content-syndicate-list li {
@@ -713,20 +808,67 @@ main ul {
 		flex: 1 0 100%;
 		width: 100%;
 	}
+
+	.home .column.intro p {
+		font-size: 1.5em;
+	}
+
+	.home h1 {
+		font-size: 3em;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.application-forms li {
+		width: 100%;
+	}
 }
 
 @media only screen and (min-width: 694px) {
+	.fluid .row.side-right .column.one {
+		padding-right: 1.3125rem;
+		width: 66.66666%;
+	}
+
+	.fluid .row.side-right .column.two {
+		padding-left: .625rem;
+		padding-top: 3.5rem;
+		width: 33.33333%;
+	}
+
 	.home .halves,
 	.page-scholarships .side-left {
 		display: flex;
 	}
 
-	.home .halves .column.two,
-	.page-scholarships .side-left .column.two {
+	.home .halves .column.two {
 		padding: 6rem 2rem;
 	}
 
 	.home .section-wrapper-has-background {
 		background-position: right center;
+	}
+
+	.topics-audiences ul {
+		display: flex;
+		flex-wrap: wrap;
+		list-style: none;
+		padding: 0;
+	}
+
+	.topics-audiences li {
+		box-sizing: border-box;
+		padding: 1rem;
+		width: 33.333%;
+	}
+
+	.topics-audiences li:nth-of-type(-n+2),
+	.topics-audiences li:nth-of-type(4),
+	.topics-audiences li:nth-of-type(5) {
+		border-right: 2px solid #eff0f1;
+	}
+
+	.topics-audiences li:nth-of-type(-n+2) {
+		border-bottom: 2px solid #eff0f1;
 	}
 }
