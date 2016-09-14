@@ -30,6 +30,7 @@ html {
 	background: none;
 	float: left;
 	height: 400px;
+	text-shadow: 1px 1px 5px rgba(0,0,0,0.35);
 }
 
 .main-header span,
@@ -748,6 +749,10 @@ main ul {
 	.page-header-group {
 		clear: both;
 		position: relative;
+	}
+
+	.has-featured-image .page-header-group {
+		position: absolute;
 	}
 
 	.page-header-group span {
