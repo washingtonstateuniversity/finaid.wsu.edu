@@ -361,21 +361,21 @@ main ul {
 	text-transform: uppercase;
 }
 
-.home .intro p,
-.home .intro h1 {
+.home .intro p {
 	opacity: 0;
-	-webkit-transition: opacity 1.5s ease, -webkit-transform 1.5s ease-in-out;
-	transition: opacity 1.5s ease, -webkit-transform 1.5s ease-in-out;
-	transition: transform 1.5s ease-in-out, opacity 1.5s ease;
-	transition: transform 1.5s ease-in-out, opacity 1.5s ease, -webkit-transform 1.5s ease-in-out;
+	-webkit-transition: opacity 1.5s ease;
+	transition: opacity 1.5s ease;
 }
 
 .home .intro h1 {
-	-webkit-transform: translateY(10rem);
-	    -ms-transform: translateY(10rem);
-	        transform: translateY(10rem);
-	-webkit-transition-delay: .75s;
-	        transition-delay: .75s;
+	opacity: 0;
+	-webkit-transform: translateY(1.5em);
+	    -ms-transform: translateY(1.5em);
+	        transform: translateY(1.5em);
+	-webkit-transition: opacity 1.25s ease .75s, -webkit-transform 1.75s ease-in-out;
+	transition: opacity 1.25s ease .75s, -webkit-transform 1.75s ease-in-out;
+	transition: transform 1.75s ease-in-out, opacity 1.25s ease .75s;
+	transition: transform 1.75s ease-in-out, opacity 1.25s ease .75s, -webkit-transform 1.75s ease-in-out;
 }
 
 .home .intro.ready p,

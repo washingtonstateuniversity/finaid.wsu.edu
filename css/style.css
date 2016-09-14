@@ -347,15 +347,15 @@ main ul {
 	text-transform: uppercase;
 }
 
-.home .intro p,
-.home .intro h1 {
+.home .intro p {
 	opacity: 0;
-	transition: transform 1.5s ease-in-out, opacity 1.5s ease;
+	transition: opacity 1.5s ease;
 }
 
 .home .intro h1 {
-	transform: translateY(10rem);
-	transition-delay: .75s;
+	opacity: 0;
+	transform: translateY(1.5em);
+	transition: transform 1.75s ease-in-out, opacity 1.25s ease .75s;
 }
 
 .home .intro.ready p,
