@@ -361,6 +361,31 @@ main ul {
 	text-transform: uppercase;
 }
 
+.home .intro p,
+.home .intro h1 {
+	opacity: 0;
+	-webkit-transition: opacity 1.5s ease, -webkit-transform 1.5s ease-in-out;
+	transition: opacity 1.5s ease, -webkit-transform 1.5s ease-in-out;
+	transition: transform 1.5s ease-in-out, opacity 1.5s ease;
+	transition: transform 1.5s ease-in-out, opacity 1.5s ease, -webkit-transform 1.5s ease-in-out;
+}
+
+.home .intro h1 {
+	-webkit-transform: translateY(10rem);
+	    -ms-transform: translateY(10rem);
+	        transform: translateY(10rem);
+	-webkit-transition-delay: .75s;
+	        transition-delay: .75s;
+}
+
+.home .intro.ready p,
+.home .intro.ready h1 {
+	opacity: 1;
+	-webkit-transform: translateY(0);
+	    -ms-transform: translateY(0);
+	        transform: translateY(0);
+}
+
 .home .halves .column.one,
 .page-scholarships .side-left .column.one {
 	background: center;
@@ -827,6 +852,14 @@ main ul {
 		    -ms-flex: 1 0 100%;
 		        flex: 1 0 100%;
 		width: 100%;
+	}
+
+	.home .column.intro p {
+		font-size: 1.5em;
+	}
+
+	.home h1 {
+		font-size: 3em;
 	}
 }
 

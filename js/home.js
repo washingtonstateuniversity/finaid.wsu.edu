@@ -2,6 +2,11 @@
 
 	'use strict';
 
+	// Apply 'ready' class to intro column after page is loaded to trigger animations.
+	$(document).on('ready', function () {
+		$('.intro').addClass('ready');
+	});
+
 	// Add Previous and Next controls for navigating the output of the Content Syndicate shortcode.
 	$('.home .wsuwp-content-syndicate-list').before('<a href="#" class="event-control prev">Previous</a>').after('<a href="#" class="event-control next">Next</a>');
 

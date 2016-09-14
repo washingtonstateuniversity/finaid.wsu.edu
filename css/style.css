@@ -347,6 +347,23 @@ main ul {
 	text-transform: uppercase;
 }
 
+.home .intro p,
+.home .intro h1 {
+	opacity: 0;
+	transition: transform 1.5s ease-in-out, opacity 1.5s ease;
+}
+
+.home .intro h1 {
+	transform: translateY(10rem);
+	transition-delay: .75s;
+}
+
+.home .intro.ready p,
+.home .intro.ready h1 {
+	opacity: 1;
+	transform: translateY(0);
+}
+
 .home .halves .column.one,
 .page-scholarships .side-left .column.one {
 	background: center;
@@ -790,6 +807,14 @@ main ul {
 	.home .wsuwp-content-syndicate-list li {
 		flex: 1 0 100%;
 		width: 100%;
+	}
+
+	.home .column.intro p {
+		font-size: 1.5em;
+	}
+
+	.home h1 {
+		font-size: 3em;
 	}
 }
 
