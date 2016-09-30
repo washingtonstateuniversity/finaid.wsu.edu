@@ -1,7 +1,7 @@
 <?php
-$settings = get_option( 'scholarships_settings' );
-if ( $settings['search_page_url'] ) {
-	$search_page_url = get_permalink( $settings['search_page_url'] );
+$options = get_option( 'scholarships_settings' );
+if ( $options && isset( $options['search_page'] ) ) {
+	$search_page_url = get_permalink( $options['search_page'] );
 }
 ?>
 <section class="row single gutter pad-ends">
