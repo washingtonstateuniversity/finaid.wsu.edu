@@ -172,7 +172,7 @@ h2 {
 h3 {
 	color: #4E4E4E;
 	font-size: 1.75em;
-	font-weight: 300;
+	font-weight: 600;
 	padding-bottom: 20px;
 }
 
@@ -588,32 +588,32 @@ main ul {
 	left: -.25rem;
 }
 
-/* Home page form section */
-.home .section-wrapper-has-background {
+/* Contact Us page form section */
+.form.section-wrapper-has-background {
 	background-size: cover;
 	background-position: center center;
 }
 
-.home .section-wrapper-has-background .halves .column.one {
+.form.section-wrapper-has-background .halves .column.one {
 	min-height: 0;
 }
 
-.home .section-wrapper-has-background .halves .column.two {
+.form.section-wrapper-has-background .halves .column.two {
 	padding: 3rem 2rem;
 }
 
-.home .gform_wrapper {
+.form.section-wrapper-has-background .gform_wrapper {
 	background: rgba(141,149,154,0.75);
 	color: #fff;
 	margin: 0;
 	padding: 2rem;
 }
 
-.home .gform_wrapper .gform_heading {
+.form.section-wrapper-has-background .gform_wrapper .gform_heading {
 	margin: 0;
 }
 
-.home .gform_wrapper h3.gform_title {
+.form.section-wrapper-has-background .gform_wrapper h3.gform_title {
 	color: #fff;
 	font-size: 3.5em;
 	font-weight: 700;
@@ -622,9 +622,13 @@ main ul {
 	text-transform: uppercase;
 }
 
-.home .gform_wrapper form {
+.form.section-wrapper-has-background .gform_wrapper form {
 	margin: 0;
 	padding: 0;
+}
+
+.form.section-wrapper-has-background .chosen-drop {
+	color: #717171;
 }
 
 /* Scholarships landing page */
