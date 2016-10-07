@@ -332,11 +332,18 @@ main ul {
 }
 
 .home .intro {
-	padding: 10rem 0;
+	background-image: linear-gradient(to right,#981e32 0%,#c60c30 100%);
+	background-size: 100% 10px;
+	background-repeat: no-repeat;
+	padding-top: 10px;
 }
 
-.home .column.intro p {
-	color: #981e32;
+.home .intro .column {
+	padding: 5rem 0;
+}
+
+.home .intro .column p {
+	color: #717171;
 	font-size: 2.5em;
 	font-weight: 300;
 	padding-bottom: .25em;
