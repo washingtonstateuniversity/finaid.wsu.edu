@@ -316,7 +316,7 @@ main ul {
 	border-right: 1px solid #efefef;
 }
 
-.home .column p:first-child {
+.home .false-header {
 	font-size: 1.4em;
 	font-weight: 300;
 	letter-spacing: 1px;
@@ -427,21 +427,26 @@ main ul {
 	background: #0b9b56;
 }
 
-.home .quicklinks {
+.home .content-item-byline-author,
+.home .content-item-read-story {
+	display: none;
+}
+
+.home main .quicklinks {
 	display: flex;
 }
 
-.home .quicklinks ul {
+.home main .quicklinks ul {
 	list-style: none;
 	margin: auto;
 	padding: 0;
 }
 
-.home .quicklinks li + li {
+.home main .quicklinks li + li {
 	margin-top: 1rem;
 }
 
-.home .quicklinks a {
+.home main .quicklinks a {
 	border: 2px solid #fff;
 	box-sizing: border-box;
 	color: #fff;
@@ -456,7 +461,7 @@ main ul {
 	width: 100%;
 }
 
-.home .quicklinks a:hover {
+.home main .quicklinks a:hover {
 	background: #fff;
 	color: #c60c30;
 }
