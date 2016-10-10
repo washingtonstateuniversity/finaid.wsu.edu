@@ -316,7 +316,7 @@ main ul {
 	border-right: 1px solid #efefef;
 }
 
-.home .column p:first-child {
+.home .false-header {
 	font-size: 1.4em;
 	font-weight: 300;
 	letter-spacing: 1px;
