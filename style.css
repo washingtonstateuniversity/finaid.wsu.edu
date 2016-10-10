@@ -458,6 +458,11 @@ main ul {
 	background: #0b9b56;
 }
 
+.home .content-item-byline-author,
+.home .content-item-read-story {
+	display: none;
+}
+
 .home main .quicklinks {
 	display: -webkit-box;
 	display: -ms-flexbox;
