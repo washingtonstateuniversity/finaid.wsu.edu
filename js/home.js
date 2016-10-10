@@ -8,7 +8,7 @@
 	});
 
 	// Add Previous and Next controls for navigating the output of the Content Syndicate shortcode.
-	$('.home .wsuwp-content-syndicate-list').before('<a href="#" class="event-control prev">Previous</a>').after('<a href="#" class="event-control next">Next</a>');
+	$('.home-calendar .wsuwp-content-syndicate-list').before('<a href="#" class="event-control prev">Previous</a>').after('<a href="#" class="event-control next">Next</a>');
 
 	// Hide the Previous control - we only want to show it when it's needed.
 	$('.event-control.prev').hide();
