@@ -14,10 +14,8 @@ $footer_menu_args = array(
 	'depth' => 2,
 );
 ?>
-<footer class="side-right row gutter padded-ends pad-ends site-footer">
+<footer class="single row gutter padded-ends pad-ends site-footer">
 	<div class="column one">
 		<?php wp_nav_menu( $footer_menu_args ); ?>
-	</div>
-	<div class="column two">
 	</div>
 </footer>
