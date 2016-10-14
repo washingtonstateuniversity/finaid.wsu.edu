@@ -447,9 +447,9 @@ main ul {
 }
 
 .home main .quicklinks a {
-	border: 2px solid #fff;
+	border: 2px solid #981e32;
 	box-sizing: border-box;
-	color: #fff;
+	color: #981e32;
 	display: inline-block;
 	font-size: .9em;
 	font-weight: 600;
@@ -462,8 +462,8 @@ main ul {
 }
 
 .home main .quicklinks a:hover {
-	background: #fff;
-	color: #c60c30;
+	background: #981e32;
+	color: #fff;
 }
 
 .application-forms {
