@@ -527,12 +527,12 @@ main ul {
 	line-height: 24px;
 }
 
-.gecko.home-calendar .content-item-event-date {
+.gecko .home-calendar .content-item-event-date {
 	line-height: 33px;
 	height: 74px;
 }
 
-.gecko.home-calendar .content-item-event-date:first-line {
+.gecko .home-calendar .content-item-event-date:first-line {
 	vertical-align: top;
 }
 
