@@ -648,6 +648,7 @@ main ul {
 	background: rgba(141,149,154,0.75);
 	color: #fff;
 	margin: 0;
+	overflow-x: visible;
 	padding: 2rem;
 }
 
