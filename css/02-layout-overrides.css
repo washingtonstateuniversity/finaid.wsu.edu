@@ -1,3 +1,25 @@
+#spine #glue:before {
+	border-right: solid 5px #f3f3f3;
+}
+
+body {
+	background-color: #f3f3f3;
+	color: #4e4e4e;
+}
+
+main {
+	background-color: #fff;
+}
+
+.gray-lightly-back,
+.lightly-back {
+	background-color: #f3f3f3;
+}
+
+hgroup.source {
+	display: none;
+}
+
 .pad-top .column,
 .padded-top {
 	padding-top: 3rem;
@@ -19,7 +41,7 @@
 }
 
 .pad-bottom {
-	border-bottom: 7px solid #eff0f1;
+	border-bottom: 5px solid #f3f3f3;
 }
 
 .pad-bottom:last-child {

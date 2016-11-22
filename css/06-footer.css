@@ -1,10 +1,6 @@
 .site-footer {
-	background: #eff0f1;
+	background: linear-gradient(to right, #f3f3f3 0%, #efefef 100%);
 	margin-top: 2rem;
-}
-
-.site-footer .one {
-	border-right: 1px solid #fff;
 }
 
 .site-footer ul {
@@ -19,14 +15,13 @@
 	width: 25%;
 }
 
-.site-footer-menu > li > a,
-#binder .site-footer .two p {
-	border: none;
-	color: #717171;
+.site-footer-menu > li > a {
+	border-bottom: none;
+	color: #393939;
 	display: block;
-	font-size: 1.4em;
+	font-size: 1em;
 	font-weight: 700;
-	letter-spacing: 1px;
+	letter-spacing: .5px;
 	line-height: 1;
 	padding-bottom: .5rem;
 	pointer-events: none;

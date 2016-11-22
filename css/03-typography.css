@@ -10,24 +10,25 @@ h2 {
 	color: #981e32;
 	font-size: 2.5em;
 	font-weight: 300;
+	margin-top: 1.5rem;
 	padding-bottom: 25px;
 }
 
-.landing-side-right h2 {
-	font-size: 1.5em;
+h3,
+h4 {
+	color: #393939;
+	margin-top: 1.25rem;
 }
 
 h3 {
-	color: #4E4E4E;
 	font-size: 1.75em;
-	font-weight: 600;
+	font-weight: 400;
 	padding-bottom: 20px;
 }
 
 h4 {
-	color: #5E5E5F;
 	font-size: 1.25em;
-	font-weight: 600;
+	font-weight: 700;
 	text-transform: uppercase;
 }
 
@@ -53,13 +54,31 @@ main section li {
 	line-height: 1.5;
 }
 
+p {
+	line-height: 1.65rem;
+	padding-bottom: 1.75rem;
+}
+
+p.false-header + h2 {
+	margin-top: 0;
+}
+
+.intro {
+	font-size: 1.25rem;
+	line-height: 1.5em;
+	color: #4e4e4e;
+}
+
 main a {
-	border-bottom: 2px dotted #B7B7B7;
+	border-bottom: 1px solid #B7B7B7;
 	text-decoration: none;
+	transition: all .4s ease;
 }
 
 main a:hover {
-	background-color: #dddddd;
+	background-color: #efefef;
+	border-bottom: 1px solid #981e32;
+	color: #981e32;
 	text-decoration: none;
 }
 
