@@ -1,0 +1,61 @@
+/* Scholarships landing page */
+.section-scholarships .cta-button {
+	border: 2px solid #00a5bd;
+	color: #00a5bd;
+}
+
+.section-scholarships .hentry .cta-button:hover {
+	background: #00a5bd;
+	color :#fff;
+}
+
+.section-scholarships h1,
+.section-scholarships h2,
+.section-scholarships h4,
+.section-scholarships h5,
+.section-scholarships .hentry a {
+	color: #00a5bd;
+}
+
+.section-scholarships .hentry a:hover {
+	color: #4f868e;
+}
+
+.white-text .body-cta,
+.section-scholarships .hentry .white-text a {
+	color: #fff;
+}
+
+.white-text .body-cta {
+	border: 2px solid #fff;
+}
+
+.topics-audiences ul {
+	list-style: none;
+	padding: 0;
+}
+
+@media only screen and (min-width: 694px) {
+	.topics-audiences ul {
+		display: flex;
+		flex-wrap: wrap;
+		list-style: none;
+		padding: 0;
+	}
+
+	.topics-audiences li {
+		box-sizing: border-box;
+		padding: 1rem;
+		width: 33.333%;
+	}
+
+	.topics-audiences li:nth-of-type(-n+2),
+	.topics-audiences li:nth-of-type(4),
+	.topics-audiences li:nth-of-type(5) {
+		border-right: 2px solid #eff0f1;
+	}
+
+	.topics-audiences li:nth-of-type(-n+2) {
+		border-bottom: 2px solid #eff0f1;
+	}
+}

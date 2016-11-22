@@ -1,0 +1,402 @@
+.home #spine #glue:before {
+	border-right: 1px solid #efefef;
+}
+
+.home .false-header {
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-bottom: 0;
+	text-transform: uppercase;
+}
+
+.home h2 {
+	font-size: 3.5em;
+	font-weight: 700;
+	padding-top: 0;
+	text-transform: uppercase;
+}
+
+.home .intro {
+	background-image: linear-gradient(to right,#981e32 0%,#c60c30 100%);
+	background-size: 100% 10px;
+	background-repeat: no-repeat;
+	padding-top: 10px;
+}
+
+.home .intro .column {
+	padding: 5rem 0;
+}
+
+.home .intro .column p {
+	color: #717171;
+	font-size: 2.5em;
+	font-weight: 300;
+	padding-bottom: .25em;
+}
+
+.home h1 {
+	font-size: 4.5rem;
+	text-transform: uppercase;
+}
+
+.home .intro p {
+	opacity: 0;
+	transition: opacity 1.5s ease;
+}
+
+.home .intro h1 {
+	opacity: 0;
+	transform: translateY(1.5em);
+	transition: transform 1.75s ease-in-out, opacity 1.25s ease .75s;
+}
+
+.home .intro.ready p,
+.home .intro.ready h1 {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.home .halves .column.one,
+.page-scholarships .side-left .column.one {
+	background: center;
+	background-size: cover;
+	min-height: 350px;
+}
+
+.five-steps {
+	counter-reset: count-it;
+	list-style: none;
+	padding: 0 0 2.5rem;
+}
+
+.five-steps li  {
+	padding: 0;
+}
+
+.five-steps a {
+	border-bottom: 1px solid #d7dadb;
+	color: #717171;
+	display: block;
+	font-size: 1.1em;
+	font-weight: 600;
+	margin-left: 4.5rem;
+	padding: .5em 0;
+	position: relative;
+	transition: color .4s;
+}
+
+.five-steps a:before {
+	align-items: center;
+	background: #b5babe;
+	color: #fff;
+	content: counter(count-it);
+	counter-increment: count-it;
+	display: flex;
+	height: calc(100% - .2em);
+	justify-content: center;
+	left: -4.5rem;
+	position: absolute;
+	text-align: center;
+	top: .2em;
+	transition: background .4s;
+	width: 2.5rem;
+}
+
+.five-steps a:hover,
+.five-steps a:hover .crimson-text {
+	background-color: transparent;
+	color: #c60c30;
+}
+
+.five-steps a:hover:before {
+	background: #0b9b56;
+}
+
+.home .content-item-byline-author,
+.home .content-item-read-story {
+	display: none;
+}
+
+.home main .quicklinks {
+	display: flex;
+}
+
+.home main .quicklinks ul {
+	list-style: none;
+	margin: auto;
+	padding: 0;
+}
+
+.home main .quicklinks li + li {
+	margin-top: 1rem;
+}
+
+.home main .quicklinks a {
+	border: 2px solid #981e32;
+	box-sizing: border-box;
+	color: #981e32;
+	display: inline-block;
+	font-size: .9em;
+	font-weight: 600;
+	letter-spacing: 2px;
+	padding: 14px;
+	text-align: center;
+	text-transform: uppercase;
+	transition: background .4s, color .4s;
+	width: 100%;
+}
+
+.home main .quicklinks a:hover {
+	background: #981e32;
+	color: #fff;
+}
+
+.application-forms {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	padding: 0;
+}
+
+.application-forms li {
+	box-sizing: border-box;
+	padding: 1rem;
+	width: 25%;
+}
+
+.application-forms li a {
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+}
+
+/* Home page events */
+.home-calendar .wsuwp-content-syndicate-wrapper {
+	overflow: hidden;
+	padding-bottom: 2rem;
+}
+
+.home-calendar .wsuwp-content-syndicate-list {
+	display: flex;
+	padding: 0;
+	position: relative;
+}
+
+.home-calendar .wsuwp-content-syndicate-event {
+	box-sizing: border-box;
+	flex: 1 0 25%;
+	list-style: none;
+	padding: 1em;
+	transition: background .4s;
+	width: 25%;
+}
+
+.home-calendar .content-item-event-date {
+	box-sizing: border-box;
+	color: #fff;
+	float: left;
+	font-size: 32px;
+	font-weight: 600;
+	line-height: 50px;
+	position: relative;
+	text-align: center;
+	text-transform: uppercase;
+	width: 3.5rem;
+	word-spacing: 3rem;
+	z-index: 1;
+}
+
+.home-calendar .content-item-event-date:first-line {
+	font-size: 12px;
+	font-weight: 300;
+	line-height: 24px;
+}
+
+.gecko .home-calendar .content-item-event-date {
+	line-height: 33px;
+	height: 74px;
+}
+
+.gecko .home-calendar .content-item-event-date:first-line {
+	vertical-align: top;
+}
+
+.home-calendar .content-item-event-date:before,
+.home-calendar .content-item-event-date:after {
+	content: '';
+	left: 0;
+	position: absolute;
+	transition: background .4s;
+	width: 100%;
+	z-index: -1;
+}
+
+.home-calendar .content-item-event-date:before {
+	background: #717171;
+	height: 24px;
+	top: 0;
+}
+
+.home-calendar .content-item-event-date:after {
+	background: #b5babe;
+	bottom: 0;
+	height: 48px;
+}
+
+.home-calendar li:hover .content-item-event-date:before {
+	background: #b5babe;
+}
+
+.home-calendar li:hover .content-item-event-date:after {
+	background: #981e32;
+}
+
+.home-calendar .content-item-event-title,
+.home-calendar .content-item-event-meta {
+	display: block;
+	margin-left: 4.25rem;
+}
+
+.home-calendar .content-item-event-title a {
+	border-bottom: 0;
+}
+
+/* Home page event navigation */
+.event-control {
+	border: none;
+	display: block;
+	height: 3rem;
+	overflow: hidden;
+	position: absolute;
+	text-indent: -5rem;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 2rem;
+}
+
+.event-control:hover {
+	background: none;
+}
+
+.event-control:before,
+.event-control:after {
+	border: 1.5rem solid transparent;
+	box-sizing: border-box;
+	content: '';
+	position: absolute;
+	top: 0;
+}
+
+.event-control.prev {
+	margin-left: -2.5rem;
+}
+
+.event-control.prev:before {
+	border-right-color: #717171;
+	right: 0;
+}
+
+.event-control.prev:after {
+	border-right-color: #fff;
+	right: -.25rem;
+}
+
+.event-control.next {
+	right: -.5rem;
+}
+
+.event-control.next:before {
+	border-left-color: #717171;
+	left: 0;
+}
+
+.event-control.next:after {
+	border-left-color: #fff;
+	left: -.25rem;
+}
+
+/* Contact Us page form section */
+.form.section-wrapper-has-background {
+	background-size: cover;
+	background-position: center center;
+}
+
+.form.section-wrapper-has-background .halves .column.one {
+	min-height: 0;
+}
+
+.form.section-wrapper-has-background .halves .column.two {
+	padding: 3rem 2rem;
+}
+
+.form.section-wrapper-has-background .gform_wrapper {
+	background: rgba(141,149,154,0.75);
+	color: #fff;
+	margin: 0;
+	overflow-x: visible;
+	padding: 2rem;
+}
+
+.form.section-wrapper-has-background .gform_wrapper .gform_heading {
+	margin: 0;
+}
+
+.form.section-wrapper-has-background .gform_wrapper h3.gform_title {
+	color: #fff;
+	font-size: 3.5em;
+	font-weight: 700;
+	margin: 0;
+	padding-top: 0;
+	text-transform: uppercase;
+}
+
+.form.section-wrapper-has-background .gform_wrapper form {
+	margin: 0;
+	padding: 0;
+}
+
+.form.section-wrapper-has-background .chosen-drop {
+	color: #717171;
+}
+
+@media screen and (max-width: 791px) {
+	.application-forms li {
+		width: 50%;
+	}
+
+	.home .wsuwp-content-syndicate-list li {
+		flex: 1 0 50%;
+		width: 50%;
+	}
+}
+
+@media only screen and (max-width: 530px) {
+	.home .wsuwp-content-syndicate-list li {
+		flex: 1 0 100%;
+		width: 100%;
+	}
+
+	.home .column.intro p {
+		font-size: 1.5em;
+	}
+
+	.home h1 {
+		font-size: 3em;
+	}
+}
+
+@media only screen and (min-width: 694px) {
+	.home .halves,
+	.page-scholarships .side-left {
+		display: flex;
+	}
+
+	.home .halves .column.two {
+		padding: 6rem 2rem;
+	}
+
+	.home .section-wrapper-has-background {
+		background-position: right center;
+	}
+}

@@ -8,11 +8,6 @@
  Version:        0.0.6
 */
 
-html {
-	background-color: white;
-}
-
-/* Header */
 .main-header {
 	box-sizing: border-box;
 	color: #fff;
@@ -117,7 +112,60 @@ html {
 	z-index: -1;
 }
 
-/* Layout overrides */
+@media screen and (max-width: 791px) {
+	.main-header {
+		height: auto;
+	}
+
+	.site-header-group {
+		border-bottom: 1px solid #fff;
+		float: none;
+	}
+
+	.main-header li {
+		float: none;
+		text-align: right;
+	}
+
+	.site-action-links li + li {
+		border-left: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	.page-header-group {
+		clear: both;
+		position: relative;
+	}
+
+	.has-featured-image .page-header-group {
+		position: absolute;
+	}
+
+	.page-header-group span {
+		float: none;
+	}
+}
+
+@media only screen and (max-width: 693px) {
+	.site-header-group span {
+		display: block;
+		float: none;
+	}
+
+	.site-header-group span + span {
+		border-left: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+}
+
+@media only screen and (max-width: 530px) {
+	.page-header-group .sub-header {
+		font-size: 8.5vw;
+	}
+}
+
 .pad-top .column,
 .padded-top {
 	padding-top: 3rem;
@@ -154,14 +202,19 @@ section.pad-bottom > header {
 	padding-bottom: 0;
 }
 
-section > header > h1,
-section > header > h2,
-section > header > h3,
-section > header > h4 {
-	padding: 0;
+@media only screen and (min-width: 694px) {
+	.fluid .row.side-right .column.one {
+		padding-right: 1.3125rem;
+		width: 66.66666%;
+	}
+
+	.fluid .row.side-right .column.two {
+		padding-left: .625rem;
+		padding-top: 3.5rem;
+		width: 33.33333%;
+	}
 }
 
-/* Typography */
 h1 {
 	color: #981e32;
 	font-size: 3em;
@@ -201,6 +254,13 @@ h5 {
 	font-weight: 700;
 	line-height: 15px;
 	padding-bottom: 20px;
+}
+
+section > header > h1,
+section > header > h2,
+section > header > h3,
+section > header > h4 {
+	padding: 0;
 }
 
 p,
@@ -275,7 +335,80 @@ main ul {
 	text-align: center;
 }
 
-/* Site Footer */
+/* Accordion */
+.js-accordion h3 {
+	cursor: pointer;
+	padding-right: 1.5em;
+	position: relative;
+}
+
+.js-accordion h3:after {
+	content: '+';
+	font-weight: normal;
+	position: absolute;
+	right: 0;
+	top: 0.5em;
+}
+
+.js-accordion h3:hover {
+	color: #828282;
+}
+
+.js-accordion h3[aria-expanded="true"]:after {
+	content: '–';
+}
+
+/* Dropdown Menus */
+.dropbtn {
+	background-color: #4f868e;
+	border-radius: 8px;
+	color: white;
+	cursor: pointer;
+	font-size: 1rem;
+	margin-bottom: 1rem;
+	padding: 1rem;
+}
+
+.dropdown {
+	display: inline-block;
+	position: relative;
+}
+
+.dropdown-content {
+	background-color: #f9f9f9;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	display: none;
+	margin-top: -1rem;
+	min-width: 160px;
+	position: absolute;
+	z-index: 1;
+}
+
+.dropdown-content:active {
+	display: none;
+}
+
+.dropdown-content a {
+	box-sizing: border-box;
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	width: 100%;
+}
+
+.dropdown-content a:hover {
+	background-color: #ffffff;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #00a5bd;
+	color: #eff0f1;
+}
+
+
 .site-footer {
 	background: #eff0f1;
 	margin-top: 2rem;
@@ -325,7 +458,6 @@ main ul {
 	}
 }
 
-/* Home page */
 .home #spine #glue:before {
 	border-right: 1px solid #efefef;
 }
@@ -719,6 +851,53 @@ main ul {
 	color: #717171;
 }
 
+@media screen and (max-width: 791px) {
+	.application-forms li {
+		width: 50%;
+	}
+
+	.home .wsuwp-content-syndicate-list li {
+		-webkit-box-flex: 1;
+		    -ms-flex: 1 0 50%;
+		        flex: 1 0 50%;
+		width: 50%;
+	}
+}
+
+@media only screen and (max-width: 530px) {
+	.home .wsuwp-content-syndicate-list li {
+		-webkit-box-flex: 1;
+		    -ms-flex: 1 0 100%;
+		        flex: 1 0 100%;
+		width: 100%;
+	}
+
+	.home .column.intro p {
+		font-size: 1.5em;
+	}
+
+	.home h1 {
+		font-size: 3em;
+	}
+}
+
+@media only screen and (min-width: 694px) {
+	.home .halves,
+	.page-scholarships .side-left {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+	}
+
+	.home .halves .column.two {
+		padding: 6rem 2rem;
+	}
+
+	.home .section-wrapper-has-background {
+		background-position: right center;
+	}
+}
+
 /* Scholarships landing page */
 .section-scholarships .cta-button {
 	border: 2px solid #00a5bd;
@@ -742,11 +921,6 @@ main ul {
 	color: #4f868e;
 }
 
-.white-text h1,
-.white-text h2,
-.white-text h3,
-.white-text h4,
-.white-text h5,
 .white-text .body-cta,
 .section-scholarships .hentry .white-text a {
 	color: #fff;
@@ -761,192 +935,7 @@ main ul {
 	padding: 0;
 }
 
-/* Accordion */
-.js-accordion h3 {
-	cursor: pointer;
-	padding-right: 1.5em;
-	position: relative;
-}
-
-.js-accordion h3:after {
-	content: '+';
-	font-weight: normal;
-	position: absolute;
-	right: 0;
-	top: 0.5em;
-}
-
-.js-accordion h3:hover {
-	color: #828282;
-}
-
-.js-accordion h3[aria-expanded="true"]:after {
-	content: '–';
-}
-
-/* Dropdown Menus */
-.dropbtn {
-	background-color: #4f868e;
-	border-radius: 8px;
-	color: white;
-	cursor: pointer;
-	font-size: 1rem;
-	margin-bottom: 1rem;
-	padding: 1rem;
-}
-
-.dropdown {
-	display: inline-block;
-	position: relative;
-}
-
-.dropdown-content {
-	background-color: #f9f9f9;
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-	display: none;
-	margin-top: -1rem;
-	min-width: 160px;
-	position: absolute;
-	z-index: 1;
-}
-
-.dropdown-content:active {
-	display: none;
-}
-
-.dropdown-content a {
-	box-sizing: border-box;
-	display: inline-block;
-	padding: 0.5rem 1rem;
-	width: 100%;
-}
-
-.dropdown-content a:hover {
-	background-color: #ffffff;
-}
-
-.dropdown:hover .dropdown-content {
-	display: block;
-}
-
-.dropdown:hover .dropbtn {
-	background-color: #00a5bd;
-	color: #eff0f1;
-}
-
-@media screen and (max-width: 791px) {
-	.main-header {
-		height: auto;
-	}
-
-	.site-header-group {
-		border-bottom: 1px solid #fff;
-		float: none;
-	}
-
-	.main-header li {
-		float: none;
-		text-align: right;
-	}
-
-	.site-action-links li + li {
-		border-left: none;
-		margin-left: 0;
-		padding-left: 0;
-	}
-
-	.page-header-group {
-		clear: both;
-		position: relative;
-	}
-
-	.has-featured-image .page-header-group {
-		position: absolute;
-	}
-
-	.page-header-group span {
-		float: none;
-	}
-
-	.application-forms li {
-		width: 50%;
-	}
-
-	.home .wsuwp-content-syndicate-list li {
-		-webkit-box-flex: 1;
-		    -ms-flex: 1 0 50%;
-		        flex: 1 0 50%;
-		width: 50%;
-	}
-}
-
-@media only screen and (max-width: 693px) {
-	.site-header-group span {
-		display: block;
-		float: none;
-	}
-
-	.site-header-group span + span {
-		border-left: none;
-		margin-left: 0;
-		padding-left: 0;
-	}
-}
-
-@media only screen and (max-width: 530px) {
-	.page-header-group .sub-header {
-		font-size: 8.5vw;
-	}
-
-	.home .wsuwp-content-syndicate-list li {
-		-webkit-box-flex: 1;
-		    -ms-flex: 1 0 100%;
-		        flex: 1 0 100%;
-		width: 100%;
-	}
-
-	.home .column.intro p {
-		font-size: 1.5em;
-	}
-
-	.home h1 {
-		font-size: 3em;
-	}
-}
-
-@media screen and (max-width: 480px) {
-	.application-forms li {
-		width: 100%;
-	}
-}
-
 @media only screen and (min-width: 694px) {
-	.fluid .row.side-right .column.one {
-		padding-right: 1.3125rem;
-		width: 66.66666%;
-	}
-
-	.fluid .row.side-right .column.two {
-		padding-left: .625rem;
-		padding-top: 3.5rem;
-		width: 33.33333%;
-	}
-
-	.home .halves,
-	.page-scholarships .side-left {
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-	}
-
-	.home .halves .column.two {
-		padding: 6rem 2rem;
-	}
-
-	.home .section-wrapper-has-background {
-		background-position: right center;
-	}
-
 	.topics-audiences ul {
 		display: -webkit-box;
 		display: -ms-flexbox;
