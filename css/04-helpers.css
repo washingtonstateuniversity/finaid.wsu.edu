@@ -1,14 +1,17 @@
 /* Custom section and column backgrounds */
+.column {
+	background: center;
+	background-size: cover;
+}
+
 .left-center-bg {
 	background-position: left center;
 	background-repeat: no-repeat;
-	background-size: cover;
 }
 
 .right-center-bg {
 	background-position: right center;
 	background-repeat: no-repeat;
-	background-size: cover;
 }
 
 .transparent-gray-back {
@@ -179,4 +182,16 @@
 #toc li {
 	float: left;
 	width: 200px;
+}
+
+/* Miscellaneous */
+.section-wrapper-has-background {
+	background-size: cover;
+	background-position: center center;
+}
+
+@media only screen and (min-width: 694px) {
+	.equal-height-columns {
+		display: flex;
+	}
 }

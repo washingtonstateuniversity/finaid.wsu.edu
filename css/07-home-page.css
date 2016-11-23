@@ -51,10 +51,7 @@
 	transform: translateY(0);
 }
 
-.home .halves .column.one,
-.page-scholarships .side-left .column.one {
-	background: center;
-	background-size: cover;
+.home .halves .column.one {
 	min-height: 350px;
 }
 
@@ -310,63 +307,19 @@
 	left: -.25rem;
 }
 
-/* Contact Us page form section */
-.form.section-wrapper-has-background {
-	background-size: cover;
-	background-position: center center;
-}
-
-.form.section-wrapper-has-background .halves .column.one {
-	min-height: 0;
-}
-
-.form.section-wrapper-has-background .halves .column.two {
-	padding: 3rem 2rem;
-}
-
-.form.section-wrapper-has-background .gform_wrapper {
-	background: rgba(141,149,154,0.75);
-	color: #fff;
-	margin: 0;
-	overflow-x: visible;
-	padding: 2rem;
-}
-
-.form.section-wrapper-has-background .gform_wrapper .gform_heading {
-	margin: 0;
-}
-
-.form.section-wrapper-has-background .gform_wrapper h3.gform_title {
-	color: #fff;
-	font-size: 3.5em;
-	font-weight: 700;
-	margin: 0;
-	padding-top: 0;
-	text-transform: uppercase;
-}
-
-.form.section-wrapper-has-background .gform_wrapper form {
-	margin: 0;
-	padding: 0;
-}
-
-.form.section-wrapper-has-background .chosen-drop {
-	color: #717171;
-}
-
 @media screen and (max-width: 791px) {
 	.application-forms li {
 		width: 50%;
 	}
 
-	.home .wsuwp-content-syndicate-list li {
+	.home-calendar .wsuwp-content-syndicate-list li {
 		flex: 1 0 50%;
 		width: 50%;
 	}
 }
 
 @media only screen and (max-width: 530px) {
-	.home .wsuwp-content-syndicate-list li {
+	.home-calendar .wsuwp-content-syndicate-list li {
 		flex: 1 0 100%;
 		width: 100%;
 	}
@@ -381,16 +334,7 @@
 }
 
 @media only screen and (min-width: 694px) {
-	.home .halves,
-	.page-scholarships .side-left {
-		display: flex;
-	}
-
 	.home .halves .column.two {
 		padding: 6rem 2rem;
-	}
-
-	.home .section-wrapper-has-background {
-		background-position: right center;
 	}
 }
