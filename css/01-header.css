@@ -1,0 +1,163 @@
+.main-header {
+	box-sizing: border-box;
+	color: #fff;
+	font-size: .85em;
+	letter-spacing: 2px;
+	height: 200px;
+	position: relative;
+	text-transform: uppercase;
+	width: 100%;
+}
+
+.main-header {
+	background: #981e32;
+	background: linear-gradient(to right,#981e32 0%,#c60c30 100%);
+}
+
+.tagged-blue .main-header,
+.categorized-scholarships .main-header,
+.section-scholarships .main-header {
+	background: #4f868e;
+	background: linear-gradient(to right,#4f868e 0%,#00a5bd 100%);
+}
+
+.has-featured-image .main-header {
+	background: none;
+	float: left;
+	height: 400px;
+	text-shadow: 1px 1px 5px rgba(0,0,0,0.35);
+}
+
+.main-header span,
+.main-header li {
+	float: left;
+	line-height: normal;
+	padding: 0;
+}
+
+.site-header-group {
+	float: left;
+	font-size: .65rem;
+	margin: 0 2rem;
+	overflow: hidden;
+	padding: 1rem 0;
+}
+
+.site-header-group span + span,
+.site-action-links li + li {
+	border-left: 1px solid #fff;
+	margin-left: 1em;
+	padding-left: 1em;
+}
+
+.site-header-group .sup-header {
+	font-weight: 600;
+}
+
+.site-header-group .sub-header {
+	font-weight: 400;
+}
+
+.site-action-links {
+	float: right;
+	font-size: .65rem;
+	padding: 1rem 2rem;
+}
+
+.site-action-links ul {
+	padding: 0;
+}
+
+.page-header-group {
+	bottom: 0;
+	box-sizing: border-box;
+	padding: 1rem 2rem 1.5rem;
+	position: absolute;
+	width: 100%;
+}
+
+.page-header-group .sup-header {
+	color: #dcdcdc;
+	font-size: 1.5em;
+	font-weight: 400;
+	letter-spacing: .15em;
+	text-transform: uppercase;
+}
+
+.page-header-group .sub-header {
+	clear: both;
+	display: block;
+	font-size: 2.5em;
+	font-weight: 700;
+	letter-spacing: .05em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.main-header a {
+	border-bottom: none;
+	color: white;
+}
+
+.main-header a:hover {
+	border-bottom: none;
+	background: none;
+}
+
+.featured-image {
+	z-index: -1;
+}
+
+@media screen and (max-width: 791px) {
+	.main-header {
+		height: auto;
+	}
+
+	.site-header-group {
+		border-bottom: 1px solid #fff;
+		float: none;
+	}
+
+	.main-header li {
+		float: none;
+		text-align: right;
+	}
+
+	.site-action-links li + li {
+		border-left: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	.page-header-group {
+		clear: both;
+		position: relative;
+	}
+
+	.has-featured-image .page-header-group {
+		position: absolute;
+	}
+
+	.page-header-group span {
+		float: none;
+	}
+}
+
+@media only screen and (max-width: 693px) {
+	.site-header-group span {
+		display: block;
+		float: none;
+	}
+
+	.site-header-group span + span {
+		border-left: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+}
+
+@media only screen and (max-width: 530px) {
+	.page-header-group .sub-header {
+		font-size: 8.5vw;
+	}
+}

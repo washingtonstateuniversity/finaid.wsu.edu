@@ -1,0 +1,69 @@
+#spine #glue:before {
+	border-right: solid 5px #f3f3f3;
+}
+
+body {
+	background-color: #f3f3f3;
+	color: #4e4e4e;
+}
+
+main {
+	background-color: #fff;
+}
+
+.gray-lightly-back,
+.lightly-back {
+	background-color: #f3f3f3;
+}
+
+hgroup.source {
+	display: none;
+}
+
+.pad-top .column,
+.padded-top {
+	padding-top: 3rem;
+}
+
+.pad-bottom .column,
+.padded-bottom {
+	padding-bottom: 3rem;
+}
+
+.pad-ends .column,
+.padded-ends {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+}
+
+.row > header ~ .column {
+	padding-top: 2rem;
+}
+
+.pad-bottom {
+	border-bottom: 5px solid #f3f3f3;
+}
+
+.pad-bottom:last-child {
+	border-bottom: none;
+}
+
+section.pad-top > header {
+	padding-top: 3rem;
+}
+
+section.pad-bottom > header {
+	padding-bottom: 0;
+}
+
+@media only screen and (min-width: 694px) {
+	.fluid .row.side-right .column.one {
+		padding-right: 1.3125rem;
+		width: 66.66666%;
+	}
+
+	.fluid .row.side-right .column.two {
+		padding-left: .625rem;
+		width: 33.33333%;
+	}
+}

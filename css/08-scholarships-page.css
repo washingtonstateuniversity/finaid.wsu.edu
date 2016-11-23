@@ -1,0 +1,88 @@
+/* All pages categorized with `Scholarship Guide` */
+.categorized-scholarships .cta-button {
+	border: 2px solid #00a5bd;
+	color: #00a5bd;
+}
+
+.categorized-scholarships .hentry .cta-button:hover {
+	background: #00a5bd;
+	color: #fff;
+}
+
+.categorized-scholarships h1,
+.categorized-scholarships h2,
+.categorized-scholarships h5 {
+	color: #00a5bd;
+}
+
+.white-text h1,
+.white-text h2,
+.white-text h3,
+.white-text h4,
+.white-text h5,
+.section-scholarships .hentry .white-text a {
+	color: #fff;
+}
+
+/* Scholarships landing page */
+.scholarships-landing .side-left .column.one {
+	background: center;
+	background-size: cover;
+	min-height: 350px;
+}
+
+.scholarships-landing .main-header {
+	height: auto;
+	overflow: auto;
+}
+
+.scholarships-landing .page-header-group {
+	display: none;
+}
+
+.scholarships-landing .splash {
+	text-align: center;
+}
+
+.scholarships-landing .splash p {
+	font-size: 2.5em;
+	font-weight: 300;
+	padding-bottom: .25em;
+	text-transform: uppercase;
+}
+
+.scholarships-landing .splash h1 {
+	font-size: 4.5rem;
+	text-transform: uppercase;
+}
+
+.scholarships-landing .false-header {
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-bottom: 0;
+	text-transform: uppercase;
+}
+
+.scholarships-landing h2 {
+	font-size: 3.5em;
+	font-weight: 700;
+	padding-top: 0;
+	text-transform: uppercase;
+}
+
+@media only screen and (min-width: 694px) {
+	.scholarships-landing .column.padded {
+		padding: 6rem 2rem;
+	}
+
+	.scholarships-landing .side-left {
+		display: flex;
+	}
+}
+
+@media only screen and (max-width: 693px) {
+	.scholarships-landing .splash h1 {
+		font-size: 3em;
+	}
+}

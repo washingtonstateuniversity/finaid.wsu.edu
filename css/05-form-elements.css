@@ -1,0 +1,149 @@
+.flex-form {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+main input[type],
+main input[type]:hover,
+main input[type]:focus,
+main select,
+main textarea {
+	border-radius: 0;
+	border: 1px solid #B7B7B7;
+	box-shadow: none;
+	color: #717171;
+	font-family: inherit;
+	font-size: 12px;
+	font-weight: 400;
+	letter-spacing: 1px;
+	padding: 9px;
+	text-transform: uppercase;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+main input[type],
+main textarea {
+	margin: .25rem;
+}
+
+main input[maxlength] {
+	width: 4.5rem;
+}
+
+.select-wrap,
+.ginput_container_select {
+	background: #fff;
+	display: inline-block;
+	margin: .25rem;
+	position: relative;
+}
+
+.select-wrap:before,
+.select-wrap:after,
+.ginput_container_select:before,
+.ginput_container_select:after {
+	border: solid transparent;
+	border-width: 8px 5px;
+	box-sizing: border-box;
+	content: '';
+	height: 16px;
+	position: absolute;
+	right: 8px;
+}
+
+.select-wrap:before,
+.ginput_container_select:before {
+	border-bottom-color: #B7B7B7;
+	top: 0;
+}
+
+.select-wrap:after,
+.ginput_container_select:after {
+	border-top-color: #B7B7B7;
+	bottom: 0;
+}
+
+.select-wrap select,
+.ginput_container_select select {
+	background: none;
+	cursor: pointer;
+	margin: 0;
+	padding-right: 21px;
+	position: relative;
+	z-index: 1;
+}
+
+main textarea {
+	height: 100px;
+	text-transform: none;
+}
+
+main input[type=submit] {
+	background: none;
+	border-color: #981e32;
+	color: #981e32;
+	min-width: 4.5rem;
+	padding: 9px 18px;
+	transition: color 0.4s, background .4s;
+	vertical-align: baseline;
+}
+
+main input[type=submit]:hover {
+	background: #981e32;
+	border-color: #981e32;
+	color: #fff;
+	padding: 9px 18px;
+}
+
+/* Gravity Forms */
+.gform_wrapper {
+	overflow-x: visible;
+}
+
+.gform_fields {
+	list-style: none;
+	padding: 0;
+}
+
+.gform_fields li {
+	padding: 0 0 1.75rem;
+}
+
+.gfield_description {
+	font-size: 12px;
+	font-style: italic;
+	margin-left: .25rem;
+}
+
+.gf_name_has_2:after {
+	clear: both;
+	content: "";
+	display: table;
+}
+
+.gf_name_has_2 span {
+	float: left;
+	width: 50%;
+}
+
+.gf_name_has_2 input {
+	width: calc(100% - 0.5rem);
+}
+
+.gfield_required {
+	color: #981e32;
+	margin-left: 5px;
+}
+
+.hide-label label,
+.hide-sub-labels span label {
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal;
+}
