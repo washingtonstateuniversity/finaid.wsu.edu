@@ -472,6 +472,10 @@ a#fafsa {
 	position: absolute;
 }
 
+.convert-toc-to-select #toc ul {
+	display: none;
+}
+
 @media only screen and (min-width: 694px) {
 	.equal-height-columns {
 		display: -webkit-box;
