@@ -94,6 +94,14 @@ class WSU_Student_Financial_Services_Theme {
 		if ( isset( $post->post_content ) && strpos( $post->post_content, 'dropdown' ) ) {
 			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/table-toggle.js', array( 'jquery' ), $this->script_version, true );
 		}
+
+		if ( isset( $post->post_content ) && has_shortcode( $post->post_content, 'wsuwp_toc' ) ) {
+			$body_classes = get_post_meta( $post->ID, '_wsuwp_body_class', true );
+
+			if ( false !== strpos( $body_classes, 'convert-toc-to-select' ) ) {
+				wp_enqueue_script( 'sfs-convert-toc', get_stylesheet_directory_uri() . '/js/toc-select.js', array( 'wsuwp-toc-generator', 'jquery' ), $this->script_version, true );
+			}
+		}
 	}
 
 	/**
