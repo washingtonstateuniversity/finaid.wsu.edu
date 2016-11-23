@@ -147,3 +147,7 @@ main input[type=submit]:hover {
 	width: 1px;
 	word-wrap: normal;
 }
+
+.gform_validation_container {
+	display: none;
+}

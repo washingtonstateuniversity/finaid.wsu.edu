@@ -334,8 +334,9 @@ main ul {
 }
 
 /* Custom section and column backgrounds */
+.section-wrapper-has-background,
 .column {
-	background: center;
+	background-position: center;
 	background-size: cover;
 }
 
@@ -465,71 +466,10 @@ main ul {
 	padding: .5em 0 0 1.25em;
 }
 
-/* Dropdown Menus */
-.dropbtn {
-	background-color: #4f868e;
-	border-radius: 8px;
-	color: white;
-	cursor: pointer;
-	font-size: 1rem;
-	margin-bottom: 1rem;
-	padding: 1rem;
-}
-
-.dropdown {
-	display: inline-block;
-	position: relative;
-}
-
-.dropdown-content {
-	background-color: #f9f9f9;
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-	display: none;
-	margin-top: -1rem;
-	min-width: 160px;
-	position: absolute;
-	z-index: 1;
-}
-
-.dropdown-content:active {
-	display: none;
-}
-
-.dropdown-content a {
-	box-sizing: border-box;
-	display: inline-block;
-	padding: 0.5rem 1rem;
-	width: 100%;
-}
-
-.dropdown-content a:hover {
-	background-color: #ffffff;
-}
-
-.dropdown:hover .dropdown-content {
-	display: block;
-}
-
-.dropdown:hover .dropbtn {
-	background-color: #00a5bd;
-	color: #eff0f1;
-}
-
-/* Table of Contents */
-#toc ul {
-	list-style: none;
-	width: 600px;
-}
-
-#toc li {
-	float: left;
-	width: 200px;
-}
-
 /* Miscellaneous */
-.section-wrapper-has-background {
-	background-size: cover;
-	background-position: center center;
+a#fafsa {
+	margin-top: -100px;
+	position: absolute;
 }
 
 @media only screen and (min-width: 694px) {
@@ -692,6 +632,10 @@ main input[type=submit]:hover {
 	position: absolute;
 	width: 1px;
 	word-wrap: normal;
+}
+
+.gform_validation_container {
+	display: none;
 }
 
 .site-footer {
@@ -904,28 +848,6 @@ main input[type=submit]:hover {
 	color: #fff;
 }
 
-.application-forms {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-wrap: wrap;
-	    flex-wrap: wrap;
-	list-style: none;
-	padding: 0;
-}
-
-.application-forms li {
-	box-sizing: border-box;
-	padding: 1rem;
-	width: 25%;
-}
-
-.application-forms li a {
-	box-sizing: border-box;
-	height: 100%;
-	width: 100%;
-}
-
 /* Home page events */
 .home-calendar .wsuwp-content-syndicate-wrapper {
 	overflow: hidden;
@@ -1080,10 +1002,6 @@ main input[type=submit]:hover {
 }
 
 @media screen and (max-width: 791px) {
-	.application-forms li {
-		width: 50%;
-	}
-
 	.home-calendar .wsuwp-content-syndicate-list li {
 		-webkit-box-flex: 1;
 		    -ms-flex: 1 0 50%;
