@@ -42,6 +42,9 @@ class WSU_Student_Financial_Services_Theme {
 		add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_filter( 'body_class', array( $this, 'browser_body_class' ) );
+		add_shortcode( 'sfs_cost_tables', array( $this, 'display_sfs_cost_tables' ) );
+		add_action( 'wp_ajax_nopriv_cost_tables', array( $this, 'cost_tables_ajax_callback' ) );
+		add_action( 'wp_ajax_cost_tables', array( $this, 'cost_tables_ajax_callback' ) );
 	}
 
 	/**
@@ -91,8 +94,12 @@ class WSU_Student_Financial_Services_Theme {
 			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/accordion.js', array( 'jquery' ), $this->script_version, true );
 		}
 
-		if ( isset( $post->post_content ) && strpos( $post->post_content, 'dropdown' ) ) {
-			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/table-toggle.js', array( 'jquery' ), $this->script_version, true );
+		if ( isset( $post->post_content ) && has_shortcode( $post->post_content, 'sfs_cost_tables' ) ) {
+			wp_enqueue_script( 'sfs-cost-tables', get_stylesheet_directory_uri() . '/js/cost-tables.js', array( 'jquery' ), $this->script_version, true );
+			wp_localize_script( 'sfs-cost-tables', 'cost_tables', array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce' => wp_create_nonce( 'sfs-cost-tables' ),
+			) );
 		}
 
 		if ( isset( $post->post_content ) && has_shortcode( $post->post_content, 'wsuwp_toc' ) ) {
@@ -117,6 +124,210 @@ class WSU_Student_Financial_Services_Theme {
 		}
 
 		return $classes;
+	}
+
+	/**
+	 * Display a form for viewing cost of attendance tables.
+	 *
+	 */
+	public function display_sfs_cost_tables() {
+		$latest_pullman_undergrad_table = false;
+		$sessions = array();
+		$campuses = array();
+		$careers = array();
+
+		$table_query = new WP_Query( array( 'post_type' => 'tablepress_table', 'posts_per_page' => -1 ) );
+
+		if ( $table_query->have_posts() ) {
+			while ( $table_query->have_posts() ) {
+				$table_query->the_post();
+				$title = get_the_title();
+
+				if ( preg_match( '/[0-9]{4}-[0-9]{4}/', $title, $session ) || preg_match( '/Summer [0-9]{4}/', $title, $session ) ) {
+					if ( ! in_array( $session[0], $sessions, true ) ) {
+						$sessions[] = $session[0];
+					}
+
+					$meta = json_decode( get_post_meta( get_the_ID(), '_tablepress_table_options', true ), true );
+
+					if ( '' !== $meta['extra_css_classes'] ) {
+						$table_classes = explode( ' ', $meta['extra_css_classes'] );
+
+						foreach ( $table_classes as $class ) {
+							if ( false !== strpos( $class, 'campus' ) ) {
+								$campus_name = substr( $class, 7 );
+								$campuses[ $campus_name ] = $class;
+							}
+
+							if ( false !== strpos( $class, 'path' ) ) {
+								$career_name = substr( $class, 5 );
+								$careers[ $career_name ] = $class;
+							}
+						}
+
+						// Try to find the most recent cost table for Pullman Campus Undergraduates.
+						$tablepress_model = new TablePress_Table_Model();
+						$table_options = $tablepress_model->_debug_get_tables();
+						$pullman_undergrad_classes = array( 'campus-pullman', 'path-undergrad' );
+						sort( $pullman_undergrad_classes );
+						sort( $table_classes );
+						if ( is_array( $table_options ) && isset( $table_options['table_post'] ) &&
+							 $pullman_undergrad_classes === $table_classes && false !== strpos( $title, $sessions[0] ) ) {
+							$table_ids = array_flip( $table_options['table_post'] );
+							$latest_pullman_undergrad_table = $table_ids[ get_the_ID() ];
+						}
+					}
+				}
+			}
+		}
+		wp_reset_postdata();
+
+		asort( $campuses );
+		asort( $careers );
+
+		ob_start();
+		?>
+		<form class="sfs-cost-tables flex-form">
+
+			<div>
+				<label for="cost-table-session">Year/Session</label><br />
+				<div class="select-wrap">
+					<select id="cost-table-session" name="session">
+						<option value="">- Select -</option>
+						<?php foreach ( $sessions as $index => $session ) { ?>
+						<option value="<?php echo esc_attr( $session ); ?>"<?php if ( 0 === $index ) { echo ' selected="selected"'; } ?>><?php echo esc_html( $session ); ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+
+			<div>
+				<label for="cost-table-campus">Campus</label><br />
+				<div class="select-wrap">
+					<select id="cost-table-campus" name="campus">
+						<option value="">- Select -</option>
+						<?php foreach ( $campuses as $name => $value ) { ?>
+						<option value="<?php echo esc_attr( $value ); ?>"<?php if ( 'campus-pullman' === $value ) { echo ' selected="selected"'; } ?>><?php echo esc_html( $name ); ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+
+			<div>
+				<label for="cost-table-career">Career</label><br />
+				<div class="select-wrap">
+					<select id="cost-table-career" name="career">
+						<option value="">- Select -</option>
+						<?php foreach ( $careers as $name => $value ) { ?>
+						<option value="<?php echo esc_attr( $value ); ?>"<?php if ( 'path-undergrad' === $value ) { echo ' selected="selected"'; } ?>><?php echo esc_html( $name ); ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+
+		</form>
+
+		<div class="cost-table-placeholder">
+			<?php
+			if ( $latest_pullman_undergrad_table ) {
+				tablepress_print_table( 'id=' . $latest_pullman_undergrad_table );
+			}
+			?>
+		</div>
+		<?php
+
+		$html = ob_get_contents();
+
+		ob_end_clean();
+
+		return $html;
+	}
+
+	/**
+	 * Provide a filter for searching post titles.
+	 */
+	public function title_contains( $where, &$wp_query ) {
+		global $wpdb;
+
+		if ( $search_term = $wp_query->get( 'title_contains' ) ) {
+			$search_term = $wpdb->esc_like( $search_term );
+			$where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . $search_term . '%\'';
+		}
+
+		return $where;
+	}
+
+	/**
+	 * Handle the ajax callback for the cost of attendance tables form.
+	 */
+	public function cost_tables_ajax_callback() {
+		check_ajax_referer( 'sfs-cost-tables', 'nonce' );
+
+		if ( class_exists( 'TablePress' ) ) {
+
+			$tablepress_model = new TablePress_Table_Model();
+			$table_options = $tablepress_model->_debug_get_tables();
+
+			if ( is_array( $table_options ) && isset( $table_options['table_post'] ) ) {
+				$table_ids = array_flip( $table_options['table_post'] );
+
+				$table_query_args = array(
+					'post_type' => 'tablepress_table',
+					'posts_per_page' => -1,
+					'title_contains' => sanitize_text_field( $_POST['session'] ),
+				);
+
+				add_filter( 'posts_where', array( $this, 'title_contains' ), 10, 2 );
+
+				$table_query = new WP_Query( $table_query_args );
+
+				remove_filter( 'posts_where', array( $this, 'title_contains' ), 10, 2 );
+
+				if ( $table_query->have_posts() ) {
+					while ( $table_query->have_posts() ) {
+						$table_query->the_post();
+
+						$meta = json_decode( get_post_meta( get_the_ID(), '_tablepress_table_options', true ), true );
+
+						if ( '' !== $meta['extra_css_classes'] ) {
+							$table_classes = explode( ' ', $meta['extra_css_classes'] );
+							$selected_classes = array( sanitize_text_field( $_POST['campus'] ), sanitize_text_field( $_POST['career'] ) );
+
+							sort( $table_classes );
+							sort( $selected_classes );
+
+							if ( $table_classes === $selected_classes ) {
+								$tablepress = TablePress::load_controller( 'frontend' );
+								$id = $table_ids[ get_the_ID() ];
+
+								$table = $tablepress->shortcode_table( array( 'id' => $id ) );
+
+								// We only want one table.
+								break;
+							}
+						}
+					}
+				}
+
+				wp_reset_postdata();
+
+				if ( ! $table ) {
+					switch ( $_POST['updated'] ) {
+						case 'session': $field = 'campus or career'; break;
+						case 'campus': $field = 'session or career'; break;
+						case 'career': $field = 'session or campus'; break;
+					}
+
+					$table = '<p>Please select another ' . $field . ' option</p>';
+				}
+			} else {
+				$table = '<p>Something</p>';
+			}
+
+			echo wp_json_encode( $table );
+		}
+
+		exit();
 	}
 }
 
