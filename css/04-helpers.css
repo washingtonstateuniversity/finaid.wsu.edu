@@ -124,6 +124,41 @@
 	padding: .5em 0 0 1.25em;
 }
 
+/* Loading animation */
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+.sfs-loading-indicator {
+	animation: spin 1s infinite linear;
+	border: .25rem solid rgba(113,113,113,0.5);
+	border-radius: 50%;
+	border-top-color: #981e32;
+	height: 2rem;
+	margin: 0 auto;
+	width: 2rem;
+}
+
 /* Miscellaneous */
 a#fafsa {
 	margin-top: -100px;
