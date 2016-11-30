@@ -443,10 +443,10 @@ function sfs_get_header_elements() {
 			// Fall back to the page title if the page has no categories.
 			$sfs_headers['section_title'] = get_the_title();
 		}
-	} else if ( is_singular( 'post' ) || ( is_archive() && ! is_post_type_archive( 'tribe_events' ) ) ) {
+	} elseif ( is_singular( 'post' ) || ( is_archive() && ! is_post_type_archive( 'tribe_events' ) ) ) {
 		// For posts and archive views (excluding events archives), use "Latest".
 		$sfs_headers['section_title'] = 'Latest';
-	} else if ( is_single() && ! is_singular( 'tribe_events' ) ) {
+	} elseif ( is_single() && ! is_singular( 'tribe_events' ) ) {
 		// For all other post types except events, retrieve:
 		// 1) a category name; or
 		// 2) the post type name.
@@ -483,7 +483,7 @@ function sfs_get_header_elements() {
 			$post_type = get_post_type_object( get_post_type() );
 			$sfs_headers['page_sub'] = $post_type->labels->name;
 		}
-	} else if ( is_singular( 'tribe_events' ) ) {
+	} elseif ( is_singular( 'tribe_events' ) ) {
 		// For individual events, retrieve:
 		// 1) an event category name; or
 		// 2) "Events".
@@ -493,7 +493,7 @@ function sfs_get_header_elements() {
 		} else {
 			$sfs_headers['page_sub'] = 'Events';
 		}
-	} else if ( is_post_type_archive( 'tribe_events' ) ) {
+	} elseif ( is_post_type_archive( 'tribe_events' ) ) {
 		if ( is_tax() ) {
 			// Retrieve the term title for Event taxonomy archives.
 			$sfs_headers['page_sub'] = single_term_title( '', false );
@@ -501,7 +501,7 @@ function sfs_get_header_elements() {
 			// Output "Full Calendar" for the main Events archive view.
 			$sfs_headers['page_sub'] = 'Full Calendar';
 		}
-	} else if ( is_archive() ) {
+	} elseif ( is_archive() ) {
 		// Use the Spine parent theme's sub header value for anything else.
 		$spine_main_header_values = spine_get_main_header();
 		$sfs_headers['page_sub'] = $spine_main_header_values['sub_header_default'];

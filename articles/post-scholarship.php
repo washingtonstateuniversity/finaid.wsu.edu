@@ -84,7 +84,7 @@ $org_phone = get_post_meta( get_the_ID(), 'scholarship_org_phone', true );
 			<?php
 
 			if ( $org ) {
-				echo wpautop( wp_kses_post( $org ) );
+				echo wp_kses_post( wpautop( $org ) );
 			}
 
 			?>

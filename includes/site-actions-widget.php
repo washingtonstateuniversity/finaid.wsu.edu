@@ -43,12 +43,12 @@ class Site_Actions_Widget extends WP_Widget {
 
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'action_link' ); ?>">Action Link</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'action_link' ); ?>" name="<?php echo $this->get_field_name( 'action_link' ); ?>" type="text" value="<?php echo esc_attr( $action_link ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'action_link' ) ); ?>">Action Link</label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'action_link' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'action_link' ) ); ?>" type="text" value="<?php echo esc_attr( $action_link ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'action_text' ); ?>">Action Text</label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'action_text' ); ?>" name="<?php echo $this->get_field_name( 'action_text' ); ?>" type="text" value="<?php echo esc_attr( $action_text ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'action_text' ) ); ?>">Action Text</label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'action_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'action_text' ) ); ?>" type="text" value="<?php echo esc_attr( $action_text ); ?>" />
 		</p>
 		<?php
 	}
