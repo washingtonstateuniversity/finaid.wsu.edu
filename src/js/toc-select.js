@@ -19,7 +19,7 @@
 	} );
 
 	// When a title is selected, toggle the visibility of its respective section.
-	$( "#toc" ).on( "change", "select", function( e ) {
+	$( "#toc" ).on( "change", "select", function() {
 		var id = $( this ).val(),
 			section = $( id ).closest( "section" );
 
