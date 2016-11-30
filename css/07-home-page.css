@@ -143,25 +143,6 @@
 	color: #fff;
 }
 
-.application-forms {
-	display: flex;
-	flex-wrap: wrap;
-	list-style: none;
-	padding: 0;
-}
-
-.application-forms li {
-	box-sizing: border-box;
-	padding: 1rem;
-	width: 25%;
-}
-
-.application-forms li a {
-	box-sizing: border-box;
-	height: 100%;
-	width: 100%;
-}
-
 /* Home page events */
 .home-calendar .wsuwp-content-syndicate-wrapper {
 	overflow: hidden;
@@ -308,10 +289,6 @@
 }
 
 @media screen and (max-width: 791px) {
-	.application-forms li {
-		width: 50%;
-	}
-
 	.home-calendar .wsuwp-content-syndicate-list li {
 		flex: 1 0 50%;
 		width: 50%;
