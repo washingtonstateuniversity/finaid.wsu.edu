@@ -127,124 +127,10 @@ class WSU_Student_Financial_Services_Theme {
 	}
 
 	/**
-	 * Display a form for viewing cost of attendance tables.
-	 *
-	 */
-	public function display_sfs_cost_tables() {
-		$latest_pullman_undergrad_table = false;
-		$sessions = array();
-		$campuses = array();
-		$careers = array();
-
-		$table_query = new WP_Query( array( 'post_type' => 'tablepress_table', 'posts_per_page' => -1 ) );
-
-		if ( $table_query->have_posts() ) {
-			while ( $table_query->have_posts() ) {
-				$table_query->the_post();
-				$title = get_the_title();
-
-				if ( preg_match( '/[0-9]{4}-[0-9]{4}/', $title, $session ) || preg_match( '/Summer [0-9]{4}/', $title, $session ) ) {
-					if ( ! in_array( $session[0], $sessions, true ) ) {
-						$sessions[] = $session[0];
-					}
-
-					$meta = json_decode( get_post_meta( get_the_ID(), '_tablepress_table_options', true ), true );
-
-					if ( '' !== $meta['extra_css_classes'] ) {
-						$table_classes = explode( ' ', $meta['extra_css_classes'] );
-
-						foreach ( $table_classes as $class ) {
-							if ( false !== strpos( $class, 'campus' ) ) {
-								$campus_name = substr( $class, 7 );
-								$campuses[ $campus_name ] = $class;
-							}
-
-							if ( false !== strpos( $class, 'path' ) ) {
-								$career_name = substr( $class, 5 );
-								$careers[ $career_name ] = $class;
-							}
-						}
-
-						// Try to find the most recent cost table for Pullman Campus Undergraduates.
-						$tablepress_model = new TablePress_Table_Model();
-						$table_options = $tablepress_model->_debug_get_tables();
-						$pullman_undergrad_classes = array( 'campus-pullman', 'path-undergrad' );
-						sort( $pullman_undergrad_classes );
-						sort( $table_classes );
-						if ( is_array( $table_options ) && isset( $table_options['table_post'] ) &&
-							 $pullman_undergrad_classes === $table_classes && false !== strpos( $title, $sessions[0] ) ) {
-							$table_ids = array_flip( $table_options['table_post'] );
-							$latest_pullman_undergrad_table = $table_ids[ get_the_ID() ];
-						}
-					}
-				}
-			}
-		}
-		wp_reset_postdata();
-
-		asort( $campuses );
-		asort( $careers );
-
-		ob_start();
-		?>
-		<form class="sfs-cost-tables flex-form">
-
-			<div>
-				<label for="cost-table-session">Year/Session</label><br />
-				<div class="select-wrap">
-					<select id="cost-table-session" name="session">
-						<option value="">- Select -</option>
-						<?php foreach ( $sessions as $index => $session ) { ?>
-						<option value="<?php echo esc_attr( $session ); ?>"<?php if ( 0 === $index ) { echo ' selected="selected"'; } ?>><?php echo esc_html( $session ); ?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-
-			<div>
-				<label for="cost-table-campus">Campus</label><br />
-				<div class="select-wrap">
-					<select id="cost-table-campus" name="campus">
-						<option value="">- Select -</option>
-						<?php foreach ( $campuses as $name => $value ) { ?>
-						<option value="<?php echo esc_attr( $value ); ?>"<?php if ( 'campus-pullman' === $value ) { echo ' selected="selected"'; } ?>><?php echo esc_html( $name ); ?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-
-			<div>
-				<label for="cost-table-career">Career</label><br />
-				<div class="select-wrap">
-					<select id="cost-table-career" name="career">
-						<option value="">- Select -</option>
-						<?php foreach ( $careers as $name => $value ) { ?>
-						<option value="<?php echo esc_attr( $value ); ?>"<?php if ( 'path-undergrad' === $value ) { echo ' selected="selected"'; } ?>><?php echo esc_html( $name ); ?></option>
-						<?php } ?>
-					</select>
-				</div>
-			</div>
-
-		</form>
-
-		<div class="cost-table-placeholder">
-			<?php
-			if ( $latest_pullman_undergrad_table ) {
-				tablepress_print_table( 'id=' . $latest_pullman_undergrad_table );
-			}
-			?>
-		</div>
-		<?php
-
-		$html = ob_get_contents();
-
-		ob_end_clean();
-
-		return $html;
-	}
-
-	/**
 	 * Provide a filter for searching post titles.
+	 *
+	 * @param string   $where     The original where clause of the query.
+	 * @param WP_Query &$wp_query The QP_Query instance.
 	 */
 	public function title_contains( $where, &$wp_query ) {
 		global $wpdb;
@@ -258,74 +144,263 @@ class WSU_Student_Financial_Services_Theme {
 	}
 
 	/**
+	 * Cost of attendance tables query.
+	 *
+	 * @param string $type    Whether the default form is being set up or an AJAX request is being made.
+	 * @param string $session The session being requested (table titles are searched for matches).
+	 * @param array  $classes The campus and career path being requested (table classes are searched for matches).
+	 */
+	public function cost_tables_query( $type, $session, $classes ) {
+		if ( ! class_exists( 'TablePress' ) || '' === $session ) {
+			return;
+		}
+
+		$tablepress_model = new TablePress_Table_Model();
+		$table_options = $tablepress_model->_debug_get_tables();
+
+		if ( ! is_array( $table_options ) && ! isset( $table_options['table_post'] ) ) {
+			return;
+		}
+
+		$table_ids = array_flip( $table_options['table_post'] );
+		$sessions = array();
+		$available_campuses = array();
+		$available_careers = array();
+		$all_campuses = array();
+		$all_careers = array();
+
+		$table_query_args = array(
+			'post_type' => 'tablepress_table',
+			'posts_per_page' => -1,
+		);
+
+		if ( 'ajax_request' === $type ) {
+			$table_query_args['title_contains'] = $session;
+		}
+
+		add_filter( 'posts_where', array( $this, 'title_contains' ), 10, 2 );
+
+		$table_query = new WP_Query( $table_query_args );
+
+		remove_filter( 'posts_where', array( $this, 'title_contains' ), 10, 2 );
+
+		if ( $table_query->have_posts() ) {
+			while ( $table_query->have_posts() ) {
+				$table_query->the_post();
+
+				$title = get_the_title();
+
+				// Build array of session options.
+				if ( 'default' === $type ) {
+					if ( preg_match( '/[0-9]{4}-[0-9]{4}/', $title, $session_prefix ) || preg_match( '/Summer [0-9]{4}/', $title, $session_prefix ) ) {
+						if ( ! in_array( $session_prefix[0], $sessions, true ) ) {
+							$sessions[] = $session_prefix[0];
+						}
+					}
+				}
+
+				$meta = json_decode( get_post_meta( get_the_ID(), '_tablepress_table_options', true ), true );
+
+				if ( '' !== $meta['extra_css_classes'] ) {
+					$table_classes = explode( ' ', $meta['extra_css_classes'] );
+
+					foreach ( $table_classes as $class ) {
+						if ( false !== strpos( $class, 'campus-' ) ) {
+							// Build an array of campus options offered during the default session.
+							if ( 'ajax_request' === $type || ( 'default' === $type && false !== strpos( $title, $session ) ) ) {
+								if ( ! in_array( $class, $available_campuses, true ) ) {
+									$available_campuses[] = $class;
+								}
+							} else { // Build an array of all campus options.
+								$campus_name = substr( $class, 7 );
+								$all_campuses[ $campus_name ] = $class;
+							}
+						}
+
+						if ( false !== strpos( $class, 'path-' ) ) {
+							// Build an array of career path options offered during the default session at the default campus.
+							if ( false !== strpos( $meta['extra_css_classes'], $classes[0] ) && ( 'ajax_request' === $type || ( 'default' === $type && false !== strpos( $title, $session ) ) ) ) {
+								if ( ! in_array( $class, $available_careers, true ) ) {
+									$available_careers[] = $class;
+								}
+							} else { // Build an array of all career path options
+								$career_name = substr( $class, 5 );
+								$all_careers[ $career_name ] = $class;
+							}
+						}
+					}
+
+					// Try to find a table that meets all the critera.
+					sort( $classes );
+					sort( $table_classes );
+
+					if ( $classes === $table_classes ) {
+						if ( 'default' === $type && false !== strpos( $title, $session ) ) {
+							$table_id = false;
+						} else {
+							$table_id = $table_ids[ get_the_ID() ];
+						}
+					}
+				}
+			}
+		}
+
+		$data = array(
+			'table_id' => $table_id,
+			'available_campuses' => $available_campuses,
+			'available_careers' => $available_careers,
+		);
+
+		if ( 'default' === $type ) {
+			$data['sessions'] = $sessions;
+			$data['all_campuses'] = $all_campuses;
+			$data['all_careers'] = $all_careers;
+		}
+
+		return $data;
+
+		wp_reset_postdata();
+	}
+
+	/**
+	 * Display a form for viewing cost of attendance tables.
+	 *
+	 * @param array $atts Shortcode attributes.
+	 */
+	public function display_sfs_cost_tables( $atts ) {
+		$defaults = array(
+			'default_session' => '',
+			'default_campus' => 'campus-pullman',
+			'default_career' => 'path-undergrad',
+		);
+		$atts = shortcode_atts( $defaults, $atts );
+
+		if ( ! $atts['default_session'] ) {
+			return '';
+		}
+
+		$default_session = sanitize_text_field( $atts['default_session'] );
+		$default_campus = sanitize_text_field( $atts['default_campus'] );
+		$default_career = sanitize_text_field( $atts['default_career'] );
+
+		$data = $this->cost_tables_query( 'default', $default_session, array( $default_campus, $default_career ) );
+
+		if ( ! $data ) {
+			return '';
+		}
+
+		asort( $data['all_campuses'] );
+		asort( $data['all_careers'] );
+
+		ob_start();
+		?>
+		<form class="sfs-cost-tables flex-form">
+
+			<div>
+				<label for="cost-table-session">Year/Session</label><br />
+				<div class="select-wrap">
+					<select id="cost-table-session" name="session">
+						<option value="">- Select -</option>
+						<?php foreach ( $data['sessions'] as $session ) { ?>
+						<option value="<?php echo esc_attr( $session ); ?>"<?php selected( $session, $default_session ); ?>><?php echo esc_html( $session ); ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+
+			<div>
+				<label for="cost-table-campus">Campus</label><br />
+				<div class="select-wrap">
+					<select id="cost-table-campus" name="campus">
+						<option value="">- Select -</option>
+						<?php foreach ( $data['all_campuses'] as $name => $value ) { ?>
+						<option value="<?php echo esc_attr( $value ); ?>"<?php
+						// Disable campus options not offered during the default session.
+						if ( ! in_array( $value, $data['available_campuses'], true ) ) {
+							echo ' disabled';
+						}
+						selected( $value, $default_campus );
+						?>><?php echo esc_html( $name ); ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+
+			<div>
+				<label for="cost-table-career">Career Path</label><br />
+				<div class="select-wrap">
+					<select id="cost-table-career" name="career">
+						<option value="">- Select -</option>
+						<?php foreach ( $data['all_careers'] as $name => $value ) { ?>
+						<option value="<?php echo esc_attr( $value ); ?>"<?php
+						// Disable career options not offered during the default session at the default campus.
+						if ( ! in_array( $value, $data['available_careers'], true ) ) {
+							echo ' disabled';
+						}
+						selected( $value, $default_career );
+						?>><?php echo esc_html( $name ); ?></option>
+						<?php } ?>
+					</select>
+				</div>
+			</div>
+
+		</form>
+
+		<div class="cost-table-placeholder">
+			<?php
+			if ( $data['table_id'] ) {
+				tablepress_print_table( 'id=' . $data['table_id'] );
+			}
+			?>
+		</div>
+		<?php
+
+		$html = ob_get_contents();
+
+		ob_end_clean();
+
+		return $html;
+	}
+
+	/**
 	 * Handle the ajax callback for the cost of attendance tables form.
 	 */
 	public function cost_tables_ajax_callback() {
 		check_ajax_referer( 'sfs-cost-tables', 'nonce' );
 
-		if ( class_exists( 'TablePress' ) ) {
+		$session = sanitize_text_field( $_POST['session'] );
+		$campus = sanitize_text_field( $_POST['campus'] );
+		$career = sanitize_text_field( $_POST['career'] );
 
-			$tablepress_model = new TablePress_Table_Model();
-			$table_options = $tablepress_model->_debug_get_tables();
+		$data = $this->cost_tables_query( 'ajax_request', $session, array( $campus, $career ) );
 
-			if ( is_array( $table_options ) && isset( $table_options['table_post'] ) ) {
-				$table_ids = array_flip( $table_options['table_post'] );
+		if ( $data['table_id'] ) {
+			// `tablepress_get_table()` won't work in this context because it is frontend-only.
+			$tablepress = TablePress::load_controller( 'frontend' );
+			$table = $tablepress->shortcode_table( array( 'id' => $data['table_id'] ) );
+		} else {
+			// Try to be helpful if no matching table is found.
+			$campus_name = ucfirst( substr( $campus, 7 ) );
+			$career_name = ucfirst( substr( $career, 5 ) );
+			$notice = $career_name . ' is not be offered at the ' . $campus_name . ' campus during the ' . $session . ' session.';
 
-				$table_query_args = array(
-					'post_type' => 'tablepress_table',
-					'posts_per_page' => -1,
-					'title_contains' => sanitize_text_field( $_POST['session'] ),
-				);
-
-				add_filter( 'posts_where', array( $this, 'title_contains' ), 10, 2 );
-
-				$table_query = new WP_Query( $table_query_args );
-
-				remove_filter( 'posts_where', array( $this, 'title_contains' ), 10, 2 );
-
-				if ( $table_query->have_posts() ) {
-					while ( $table_query->have_posts() ) {
-						$table_query->the_post();
-
-						$meta = json_decode( get_post_meta( get_the_ID(), '_tablepress_table_options', true ), true );
-
-						if ( '' !== $meta['extra_css_classes'] ) {
-							$table_classes = explode( ' ', $meta['extra_css_classes'] );
-							$selected_classes = array( sanitize_text_field( $_POST['campus'] ), sanitize_text_field( $_POST['career'] ) );
-
-							sort( $table_classes );
-							sort( $selected_classes );
-
-							if ( $table_classes === $selected_classes ) {
-								$tablepress = TablePress::load_controller( 'frontend' );
-								$id = $table_ids[ get_the_ID() ];
-
-								$table = $tablepress->shortcode_table( array( 'id' => $id ) );
-
-								// We only want one table.
-								break;
-							}
-						}
-					}
-				}
-
-				wp_reset_postdata();
-
-				if ( ! $table ) {
-					switch ( $_POST['updated'] ) {
-						case 'session': $field = 'campus or career'; break;
-						case 'campus': $field = 'session or career'; break;
-						case 'career': $field = 'session or campus'; break;
-					}
-
-					$table = '<p>Please select another ' . $field . ' option</p>';
-				}
-			} else {
-				$table = '<p>Something</p>';
+			switch ( $_POST['updated'] ) {
+				case 'session':
+					$table = '<p>' . $notice . ' Please select another session, or check the campus or career path drop-downs for other options offered during this session.</p>';
+					break;
+				case 'campus':
+					$table = '<p>' . $notice . ' Please check the Career Path drop-down for other options offered at ' . $campus_name . ' during this session, or select another campus.</p>';
+					break;
+				case 'career':
+					// Theoretically, no one should make it in here...
+					$table = "<p>We don't seem to have an estimate for the selected options. Please try another combination.</p>";
+					break;
 			}
-
-			echo wp_json_encode( $table );
 		}
+
+		$data['table'] = $table;
+
+		echo wp_json_encode( $data );
 
 		exit();
 	}
