@@ -85,17 +85,17 @@ class WSU_Student_Financial_Services_Theme {
 	 */
 	public function enqueue_scripts() {
 		if ( is_front_page() ) {
-			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/home.js', array( 'jquery' ), $this->script_version, true );
+			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/home.min.js', array( 'jquery' ), $this->script_version, true );
 		}
 
 		$post = get_post();
 
 		if ( isset( $post->post_content ) && strpos( $post->post_content, 'js-accordion' ) ) {
-			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/accordion.js', array( 'jquery' ), $this->script_version, true );
+			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/accordion.min.js', array( 'jquery' ), $this->script_version, true );
 		}
 
 		if ( isset( $post->post_content ) && has_shortcode( $post->post_content, 'sfs_cost_tables' ) ) {
-			wp_enqueue_script( 'sfs-cost-tables', get_stylesheet_directory_uri() . '/js/cost-tables.js', array( 'jquery' ), $this->script_version, true );
+			wp_enqueue_script( 'sfs-cost-tables', get_stylesheet_directory_uri() . '/js/cost-tables.min.js', array( 'jquery' ), $this->script_version, true );
 			wp_localize_script( 'sfs-cost-tables', 'cost_tables', array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce' => wp_create_nonce( 'sfs-cost-tables' ),
@@ -106,7 +106,7 @@ class WSU_Student_Financial_Services_Theme {
 			$body_classes = get_post_meta( $post->ID, '_wsuwp_body_class', true );
 
 			if ( false !== strpos( $body_classes, 'convert-toc-to-select' ) ) {
-				wp_enqueue_script( 'sfs-convert-toc', get_stylesheet_directory_uri() . '/js/toc-select.js', array( 'wsuwp-toc-generator', 'jquery' ), $this->script_version, true );
+				wp_enqueue_script( 'sfs-convert-toc', get_stylesheet_directory_uri() . '/js/toc-select.min.js', array( 'wsuwp-toc-generator', 'jquery' ), $this->script_version, true );
 			}
 		}
 	}
