@@ -85,17 +85,17 @@ class WSU_Student_Financial_Services_Theme {
 	 */
 	public function enqueue_scripts() {
 		if ( is_front_page() ) {
-			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/home.js', array( 'jquery' ), $this->script_version, true );
+			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/home.min.js', array( 'jquery' ), $this->script_version, true );
 		}
 
 		$post = get_post();
 
 		if ( isset( $post->post_content ) && strpos( $post->post_content, 'js-accordion' ) ) {
-			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/accordion.js', array( 'jquery' ), $this->script_version, true );
+			wp_enqueue_script( 'sfs-scripts', get_stylesheet_directory_uri() . '/js/accordion.min.js', array( 'jquery' ), $this->script_version, true );
 		}
 
 		if ( isset( $post->post_content ) && has_shortcode( $post->post_content, 'sfs_cost_tables' ) ) {
-			wp_enqueue_script( 'sfs-cost-tables', get_stylesheet_directory_uri() . '/js/cost-tables.js', array( 'jquery' ), $this->script_version, true );
+			wp_enqueue_script( 'sfs-cost-tables', get_stylesheet_directory_uri() . '/js/cost-tables.min.js', array( 'jquery' ), $this->script_version, true );
 			wp_localize_script( 'sfs-cost-tables', 'cost_tables', array(
 				'ajax_url' => admin_url( 'admin-ajax.php' ),
 				'nonce' => wp_create_nonce( 'sfs-cost-tables' ),
@@ -106,7 +106,7 @@ class WSU_Student_Financial_Services_Theme {
 			$body_classes = get_post_meta( $post->ID, '_wsuwp_body_class', true );
 
 			if ( false !== strpos( $body_classes, 'convert-toc-to-select' ) ) {
-				wp_enqueue_script( 'sfs-convert-toc', get_stylesheet_directory_uri() . '/js/toc-select.js', array( 'wsuwp-toc-generator', 'jquery' ), $this->script_version, true );
+				wp_enqueue_script( 'sfs-convert-toc', get_stylesheet_directory_uri() . '/js/toc-select.min.js', array( 'wsuwp-toc-generator', 'jquery' ), $this->script_version, true );
 			}
 		}
 	}
@@ -443,10 +443,10 @@ function sfs_get_header_elements() {
 			// Fall back to the page title if the page has no categories.
 			$sfs_headers['section_title'] = get_the_title();
 		}
-	} else if ( is_singular( 'post' ) || ( is_archive() && ! is_post_type_archive( 'tribe_events' ) ) ) {
+	} elseif ( is_singular( 'post' ) || ( is_archive() && ! is_post_type_archive( 'tribe_events' ) ) ) {
 		// For posts and archive views (excluding events archives), use "Latest".
 		$sfs_headers['section_title'] = 'Latest';
-	} else if ( is_single() && ! is_singular( 'tribe_events' ) ) {
+	} elseif ( is_single() && ! is_singular( 'tribe_events' ) ) {
 		// For all other post types except events, retrieve:
 		// 1) a category name; or
 		// 2) the post type name.
@@ -483,7 +483,7 @@ function sfs_get_header_elements() {
 			$post_type = get_post_type_object( get_post_type() );
 			$sfs_headers['page_sub'] = $post_type->labels->name;
 		}
-	} else if ( is_singular( 'tribe_events' ) ) {
+	} elseif ( is_singular( 'tribe_events' ) ) {
 		// For individual events, retrieve:
 		// 1) an event category name; or
 		// 2) "Events".
@@ -493,7 +493,7 @@ function sfs_get_header_elements() {
 		} else {
 			$sfs_headers['page_sub'] = 'Events';
 		}
-	} else if ( is_post_type_archive( 'tribe_events' ) ) {
+	} elseif ( is_post_type_archive( 'tribe_events' ) ) {
 		if ( is_tax() ) {
 			// Retrieve the term title for Event taxonomy archives.
 			$sfs_headers['page_sub'] = single_term_title( '', false );
@@ -501,7 +501,7 @@ function sfs_get_header_elements() {
 			// Output "Full Calendar" for the main Events archive view.
 			$sfs_headers['page_sub'] = 'Full Calendar';
 		}
-	} else if ( is_archive() ) {
+	} elseif ( is_archive() ) {
 		// Use the Spine parent theme's sub header value for anything else.
 		$spine_main_header_values = spine_get_main_header();
 		$sfs_headers['page_sub'] = $spine_main_header_values['sub_header_default'];

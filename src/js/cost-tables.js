@@ -40,7 +40,7 @@
 
 		// Make the AJAX request if each input has a viable value.
 		if ( "" !== $session.val() && "" !== $campus.val() && "" !== $career.val() ) {
-			$table_container.html( '<div class="sfs-loading-indicator"></div>' );
+			$table_container.html( "<div class='sfs-loading-indicator'></div>" );
 			$campus_options.prop( "disabled", true );
 			$career_options.prop( "disabled", true );
 
@@ -54,4 +54,4 @@
 			} );
 		}
 	} );
-}( jQuery, cost_tables ) );
+}( jQuery, window.cost_tables ) );
