@@ -2,18 +2,25 @@
 
 class WSU_Student_Financial_Services_Theme {
 	/**
+	 *Track the version number of the theme for script enqueues.
+	 *
+	 * @since 0.0.1
+	 *
 	 * @var string String used for busting cache on scripts.
 	 */
-	var $script_version = '0.0.7';
+	var $script_version = '0.0.8';
 
 	/**
+	 * @since 0.0.1
+	 *
 	 * @var WSU_Student_Financial_Services_Theme
 	 */
 	private static $instance;
 
 	/**
-	 * Maintain and return the one instance and initiate hooks when
-	 * called the first time.
+	 * Maintain and return the one instance and initiate hooks when called the first time.
+	 *
+	 * @since 0.0.1
 	 *
 	 * @return \WSU_Student_Financial_Services_Theme
 	 */
@@ -28,6 +35,8 @@ class WSU_Student_Financial_Services_Theme {
 
 	/**
 	 * Load "plugins" included with the theme.
+	 *
+	 * @since 0.0.1
 	 */
 	public function load_plugins() {
 		require_once( __DIR__ . '/includes/site-actions-widget.php' );
@@ -35,6 +44,8 @@ class WSU_Student_Financial_Services_Theme {
 
 	/**
 	 * Setup hooks to include.
+	 *
+	 * @since 0.0.1
 	 */
 	public function setup_hooks() {
 		add_filter( 'spine_child_theme_version', array( $this, 'theme_version' ) );
@@ -60,6 +71,8 @@ class WSU_Student_Financial_Services_Theme {
 
 	/**
 	 * Register the additional menu used in the theme footer.
+	 *
+	 * @since 0.0.1
 	 */
 	public function register_menu() {
 		register_nav_menu( 'footer', 'Footer' );
@@ -67,6 +80,8 @@ class WSU_Student_Financial_Services_Theme {
 
 	/**
 	 * Register the sidebars and custom widgets used by the theme.
+	 *
+	 * @since 0.0.1
 	 */
 	public function register_sidebars() {
 		register_widget( 'Site_Actions_Widget' );
@@ -82,6 +97,8 @@ class WSU_Student_Financial_Services_Theme {
 
 	/**
 	 * Enqueue the scripts used in the theme.
+	 *
+	 * @since 0.0.1
 	 */
 	public function enqueue_scripts() {
 		if ( is_front_page() ) {
@@ -114,7 +131,11 @@ class WSU_Student_Financial_Services_Theme {
 	/**
 	 * Apply 'gecko' as a body class on the home page for Firefox users.
 	 *
-	 * Pretty hacky, but perhaps less so than most other methods.
+	 * @since 0.0.3
+	 *
+	 * @param array $classes Original body classes.
+	 *
+	 * @return array $classes Modified body classes.
 	 */
 	public function browser_body_class( $classes ) {
 		global $is_gecko;
@@ -128,6 +149,8 @@ class WSU_Student_Financial_Services_Theme {
 
 	/**
 	 * Provide a filter for searching post titles.
+	 *
+	 * @since 0.0.8
 	 *
 	 * @param string   $where     The original where clause of the query.
 	 * @param WP_Query &$wp_query The QP_Query instance.
@@ -146,9 +169,13 @@ class WSU_Student_Financial_Services_Theme {
 	/**
 	 * Cost of attendance tables query.
 	 *
+	 * @since 0.0.8
+	 *
 	 * @param string $type    Whether the default form is being set up or an AJAX request is being made.
 	 * @param string $session The session being requested (table titles are searched for matches).
 	 * @param array  $classes The campus and career path being requested (table classes are searched for matches).
+	 *
+	 * @return array Table ID and class arrays.
 	 */
 	public function cost_tables_query( $type, $session, $classes ) {
 		if ( ! class_exists( 'TablePress' ) || '' === $session ) {
@@ -265,7 +292,11 @@ class WSU_Student_Financial_Services_Theme {
 	/**
 	 * Display a form for viewing cost of attendance tables.
 	 *
+	 * @since 0.0.8
+	 *
 	 * @param array $atts Shortcode attributes.
+	 *
+	 * @return string $html HTML output.
 	 */
 	public function display_sfs_cost_tables( $atts ) {
 		$defaults = array(
@@ -364,6 +395,8 @@ class WSU_Student_Financial_Services_Theme {
 
 	/**
 	 * Handle the ajax callback for the cost of attendance tables form.
+	 *
+	 * @since 0.0.8
 	 */
 	public function cost_tables_ajax_callback() {
 		check_ajax_referer( 'sfs-cost-tables', 'nonce' );
@@ -410,6 +443,8 @@ add_action( 'after_setup_theme', 'WSU_Student_Financial_Services_Theme' );
 /**
  * Start things up.
  *
+ * @since 0.0.1
+ *
  * @return \WSU_Student_Financial_Services_Theme
  */
 function WSU_Student_Financial_Services_Theme() {
@@ -418,6 +453,8 @@ function WSU_Student_Financial_Services_Theme() {
 
 /**
  * Determine what should be displayed in the main header area.
+ *
+ * @since 0.0.1
  *
  * @return array List of elements for output in main header.
  */

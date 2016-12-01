@@ -1,4 +1,9 @@
 <?php
+/**
+ * Template for the scholarship post type provided by the Scholarships plugin.
+ *
+ * @since 0.0.3
+ */
 $deadline = get_post_meta( get_the_ID(), 'scholarship_deadline', true );
 $amount = get_post_meta( get_the_ID(), 'scholarship_amount', true );
 $paper = get_post_meta( get_the_ID(), 'scholarship_app_paper', true );
