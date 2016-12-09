@@ -416,7 +416,7 @@ class WSU_Student_Financial_Services_Theme {
 			// Try to be helpful if no matching table is found.
 			$campus_name = ucfirst( substr( $campus, 7 ) );
 			$career_name = ucfirst( substr( $career, 5 ) );
-			$notice = $career_name . ' is not be offered at the ' . $campus_name . ' campus during the ' . $session . ' session.';
+			$notice = $career_name . ' is not offered at the ' . $campus_name . ' campus during the ' . $session . ' session.';
 
 			switch ( $_POST['updated'] ) {
 				case 'session':
