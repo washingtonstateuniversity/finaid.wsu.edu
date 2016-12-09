@@ -56,6 +56,7 @@ class WSU_Student_Financial_Services_Theme {
 		add_shortcode( 'sfs_cost_tables', array( $this, 'display_sfs_cost_tables' ) );
 		add_action( 'wp_ajax_nopriv_cost_tables', array( $this, 'cost_tables_ajax_callback' ) );
 		add_action( 'wp_ajax_cost_tables', array( $this, 'cost_tables_ajax_callback' ) );
+		add_filter( 'wsuwp_content_syndicate_json', array( $this, 'announcements_html' ), 10, 2 );
 	}
 
 	/**
@@ -436,6 +437,18 @@ class WSU_Student_Financial_Services_Theme {
 		echo wp_json_encode( $data );
 
 		exit();
+	}
+
+	/**
+	 * Provide a custom HTML template for use with syndicated content.
+	 *
+	 * @param string   $content The unfiltered content.
+	 * @param stdClass $atts    Shortcode attributes.
+	 *
+	 * @return string Modified HTML to output.
+	 */
+	public function announcements_html( $content, $atts ) {
+		return str_replace( '</a>', ' <span class="read-more">&raquo;&nbsp;Read&nbsp;More</span></a>', $content );
 	}
 }
 
