@@ -445,7 +445,7 @@ class WSU_Student_Financial_Services_Theme {
 	 * @param string   $content The unfiltered content.
 	 * @param stdClass $atts    Shortcode attributes.
 	 *
-	 * @return string The HTML to output for a person.
+	 * @return string Modified HTML to output.
 	 */
 	public function announcements_html( $content, $atts ) {
 		return str_replace( '</a>', ' <span class="read-more">&raquo;&nbsp;Read&nbsp;More</span></a>', $content );
