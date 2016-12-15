@@ -154,7 +154,7 @@ class WSU_Student_Financial_Services_Theme {
 	 * @since 0.0.8
 	 *
 	 * @param string   $where     The original where clause of the query.
-	 * @param WP_Query &$wp_query The QP_Query instance.
+	 * @param WP_Query &$wp_query The WP_Query instance.
 	 */
 	public function title_contains( $where, &$wp_query ) {
 		global $wpdb;
