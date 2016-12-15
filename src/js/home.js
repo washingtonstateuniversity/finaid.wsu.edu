@@ -1,11 +1,14 @@
+// Check for `mix-blend-mode` support and add a class to the HTML tag accordingly.
+document.addEventListener( "DOMContentLoaded", function() {
+    var supportsMixBlendMode = window.getComputedStyle( document.body ).mixBlendMode;
+    if ( "undefined" === typeof supportsMixBlendMode ) {
+        document.documentElement.classList.add( "no-mix-blend-mode" );
+    }
+}, false );
+
 ( function( $ ) {
 
 	"use strict";
-
-	// Apply "ready" class to intro column after page is loaded to trigger animations.
-	$( document ).on( "ready", function() {
-		$( ".intro" ).addClass( "ready" );
-	} );
 
 	// Add Previous and Next controls for navigating the output of the Content Syndicate shortcode.
 	$( ".home-calendar .wsuwp-content-syndicate-list" ).
