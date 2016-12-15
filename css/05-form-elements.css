@@ -17,9 +17,14 @@ main textarea {
 	font-weight: 400;
 	letter-spacing: 1px;
 	padding: 9px;
-	text-transform: uppercase;
 	-webkit-appearance: none;
 	-moz-appearance: none;
+}
+
+main input[type]:focus,
+main select:focus,
+main textarea:focus {
+	border-color: #981e32;
 }
 
 main input[type],
@@ -29,6 +34,31 @@ main textarea {
 
 main input[maxlength] {
 	width: 4.5rem;
+}
+
+main input[type=checkbox],
+main input[type=checkbox]:hover,
+main input[type=checkbox]:focus,
+main input[type=radio],
+main input[type=radio]:hover,
+main input[type=radio]:focus {
+	border: none;
+	padding: 0;
+	width: auto;
+}
+
+main input[type=checkbox],
+main input[type=checkbox]:hover,
+main input[type=checkbox]:focus {
+	-webkit-appearance: checkbox;
+	-moz-appearance: checkbox;
+}
+
+main input[type=radio],
+main input[type=radio]:hover,
+main input[type=radio]:focus {
+	-webkit-appearance: radio;
+	-moz-appearance: radio;
 }
 
 .select-wrap,
@@ -80,20 +110,38 @@ main textarea {
 }
 
 main input[type=submit] {
-	background: none;
-	border-color: #981e32;
-	color: #981e32;
+	background: #64bf17;
+	border-color: #64bf17;
+	color: #fff;
 	min-width: 4.5rem;
 	padding: 9px 18px;
-	transition: color 0.4s, background .4s;
+	transition: background .4s, border-color 0.4s;
 	vertical-align: baseline;
 }
 
-main input[type=submit]:hover {
-	background: #981e32;
-	border-color: #981e32;
+main input[type=submit]:hover,
+main input[type=submit]:focus {
+	background: #488812;
+	border-color: #488812;
 	color: #fff;
 	padding: 9px 18px;
+}
+
+main ::-webkit-input-placeholder {
+	color: #717171;
+	opacity: 1;
+}
+
+main :-moz-placeholder {
+	color: #717171;
+}
+
+main ::-moz-placeholder {
+	color: #717171;
+}
+
+main :-ms-input-placeholder {
+	color: #717171;
 }
 
 /* Gravity Forms */
