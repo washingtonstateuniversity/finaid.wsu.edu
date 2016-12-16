@@ -302,7 +302,7 @@ class WSU_Student_Financial_Services_Theme {
 	public function display_sfs_cost_tables( $atts ) {
 		$defaults = array(
 			'default_session' => '',
-			'default_campus' => 'campus-pullman',
+			'default_campus' => 'campus-Pullman',
 			'default_career' => 'path-undergrad',
 		);
 		$atts = shortcode_atts( $defaults, $atts );
