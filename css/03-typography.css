@@ -40,6 +40,15 @@ h5 {
 	padding-bottom: 20px;
 }
 
+.white-text h1,
+.white-text h2,
+.white-text h3,
+.white-text h4,
+.white-text h5,
+.white-text a {
+	color: #fff;
+}
+
 section > header > h1,
 section > header > h2,
 section > header > h3,
@@ -54,13 +63,29 @@ main section li {
 	line-height: 1.5;
 }
 
-p {
+p,
+p ~ p {
 	line-height: 1.65rem;
 	padding-bottom: 1.75rem;
 }
 
+.false-header {
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-bottom: 0;
+	text-transform: uppercase;
+}
+
 p.false-header + h2 {
 	margin-top: 0;
+}
+
+.landing h2 {
+	font-size: 3.5em;
+	font-weight: 700;
+	padding-top: 0;
+	text-transform: uppercase;
 }
 
 .intro {
@@ -84,4 +109,10 @@ main a:hover {
 
 main ul {
 	list-style-type: square;
+}
+
+@media screen and (max-width: 693px) {
+	.landing h2 {
+		font-size: 9vw;
+	}
 }

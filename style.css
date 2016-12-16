@@ -25,9 +25,7 @@
 	background: linear-gradient(to right,#981e32 0%,#c60c30 100%);
 }
 
-.tagged-blue .main-header,
-.categorized-scholarships .main-header,
-.section-scholarships .main-header {
+.tagged-blue .main-header {
 	background: #4f868e;
 	background: -webkit-linear-gradient(left,#4f868e 0%,#00a5bd 100%);
 	background: linear-gradient(to right,#4f868e 0%,#00a5bd 100%);
@@ -216,11 +214,15 @@ hgroup.source {
 	padding-top: 2rem;
 }
 
-.pad-bottom {
+section.row {
 	border-bottom: 5px solid #f3f3f3;
 }
 
-.pad-bottom:last-child {
+section.row.no-bottom-border,
+main > .page > section.row:last-child,
+main > .page > :last-child section.row,
+.main-header + section.row,
+footer > section.row {
 	border-bottom: none;
 }
 
@@ -286,6 +288,15 @@ h5 {
 	padding-bottom: 20px;
 }
 
+.white-text h1,
+.white-text h2,
+.white-text h3,
+.white-text h4,
+.white-text h5,
+.white-text a {
+	color: #fff;
+}
+
 section > header > h1,
 section > header > h2,
 section > header > h3,
@@ -300,13 +311,29 @@ main section li {
 	line-height: 1.5;
 }
 
-p {
+p,
+p ~ p {
 	line-height: 1.65rem;
 	padding-bottom: 1.75rem;
 }
 
+.false-header {
+	font-size: 1.4em;
+	font-weight: 300;
+	letter-spacing: 1px;
+	padding-bottom: 0;
+	text-transform: uppercase;
+}
+
 p.false-header + h2 {
 	margin-top: 0;
+}
+
+.landing h2 {
+	font-size: 3.5em;
+	font-weight: 700;
+	padding-top: 0;
+	text-transform: uppercase;
 }
 
 .intro {
@@ -331,6 +358,12 @@ main a:hover {
 
 main ul {
 	list-style-type: square;
+}
+
+@media screen and (max-width: 693px) {
+	.landing h2 {
+		font-size: 9vw;
+	}
 }
 
 /* Custom section and column backgrounds */
@@ -370,8 +403,16 @@ main ul {
 	background: rgba(239,240,241,0.85);
 }
 
+.transparent-crimson-back {
+	background: rgba(152,30,50,0.90);
+}
+
 .transparent-white-back {
 	background: rgba(255,255,255,.85);
+}
+
+.transparent-black-back {
+	background: rgba(0,0,0,.75);
 }
 
 /* Buttons */
@@ -395,6 +436,20 @@ main ul {
 	color: white;
 }
 
+.white-text .cta-button,
+.cta-button.white {
+	border: 1px solid #fff;
+	color: #fff;
+	-webkit-transition: background .4s, border-color .4s, color .4s;
+	transition: background .4s, border-color .4s, color .4s;
+}
+
+.white-text .cta-button:hover,
+.cta-button.white:hover {
+	background: #b5babe;
+	border-color: #b5babe;
+}
+
 .body-cta {
 	border: 1px solid #B7B7B7;
 	display: inline-block;
@@ -406,6 +461,10 @@ main ul {
 	text-transform: uppercase;
 	-webkit-transition: background .4s;
 	transition: background .4s;
+}
+
+.body-cta + .body-cta {
+	margin-bottom: .25rem;
 }
 
 .body-cta + br + .body-cta {
@@ -512,6 +571,22 @@ a#fafsa {
 	display: none;
 }
 
+.centered {
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.centered h2,
+.centered .false-header {
+	text-align: center;
+}
+
+.college {
+	font-weight: 400;
+	text-transform: none;
+	padding-bottom: .5em;
+}
+
 @media only screen and (min-width: 694px) {
 	.equal-height-columns {
 		display: -webkit-box;
@@ -542,9 +617,14 @@ main textarea {
 	font-weight: 400;
 	letter-spacing: 1px;
 	padding: 9px;
-	text-transform: uppercase;
 	-webkit-appearance: none;
 	-moz-appearance: none;
+}
+
+main input[type]:focus,
+main select:focus,
+main textarea:focus {
+	border-color: #981e32;
 }
 
 main input[type],
@@ -554,6 +634,31 @@ main textarea {
 
 main input[maxlength] {
 	width: 4.5rem;
+}
+
+main input[type=checkbox],
+main input[type=checkbox]:hover,
+main input[type=checkbox]:focus,
+main input[type=radio],
+main input[type=radio]:hover,
+main input[type=radio]:focus {
+	border: none;
+	padding: 0;
+	width: auto;
+}
+
+main input[type=checkbox],
+main input[type=checkbox]:hover,
+main input[type=checkbox]:focus {
+	-webkit-appearance: checkbox;
+	-moz-appearance: checkbox;
+}
+
+main input[type=radio],
+main input[type=radio]:hover,
+main input[type=radio]:focus {
+	-webkit-appearance: radio;
+	-moz-appearance: radio;
 }
 
 .select-wrap,
@@ -605,21 +710,39 @@ main textarea {
 }
 
 main input[type=submit] {
-	background: none;
-	border-color: #981e32;
-	color: #981e32;
+	background: #64bf17;
+	border-color: #64bf17;
+	color: #fff;
 	min-width: 4.5rem;
 	padding: 9px 18px;
-	-webkit-transition: color 0.4s, background .4s;
-	transition: color 0.4s, background .4s;
+	-webkit-transition: background .4s, border-color 0.4s;
+	transition: background .4s, border-color 0.4s;
 	vertical-align: baseline;
 }
 
-main input[type=submit]:hover {
-	background: #981e32;
-	border-color: #981e32;
+main input[type=submit]:hover,
+main input[type=submit]:focus {
+	background: #488812;
+	border-color: #488812;
 	color: #fff;
 	padding: 9px 18px;
+}
+
+main ::-webkit-input-placeholder {
+	color: #717171;
+	opacity: 1;
+}
+
+main :-moz-placeholder {
+	color: #717171;
+}
+
+main ::-moz-placeholder {
+	color: #717171;
+}
+
+main :-ms-input-placeholder {
+	color: #717171;
 }
 
 /* Gravity Forms */
@@ -723,70 +846,106 @@ main input[type=submit]:hover {
 	}
 }
 
-.home #spine #glue:before {
-	border-right: 1px solid #efefef;
+.crimson-top {
+	border-top: 5px solid #981e32;
 }
 
-.home .false-header {
-	font-size: 1.4em;
-	font-weight: 300;
+/* Video/intro section */
+section.video {
+	padding-bottom: 3rem;
+	position: relative;
+	z-index: 1;
+}
+
+.column.video {
+	position: static;
+}
+
+.column.video #wsu-video-background {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+.column.video .videoBG_wrapper #wsu-video-background:after {
+	content: "";
+	background: rgba(0,0,0,.1);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.column.video .videoBG_wrapper,
+.column.video .videoBG {
+	/* Sorry about these, they're overriding inline styles. */
+	height: 100% !important;
+	width: 100% !important;
+}
+
+.column.video .videoBG video {
+	height: 100%;
+	margin-left: 50%;
+	-webkit-transform: translateX(-50%);
+	    -ms-transform: translateX(-50%);
+	        transform: translateX(-50%);
+}
+
+@media screen and (min-width: 990px) {
+	.column.video #wsu-video-background {
+		left: 5px;
+		width: calc(100% - 5px);
+	}
+
+	.column.video #wsu-video-background #wsu-video-background {
+		left: 0;
+		width: 100%;
+	}
+}
+
+.multiply #wsu-video-background {
+	mix-blend-mode: multiply;
+}
+
+.multiply .transparent-crimson-back {
+	background: none;
+}
+
+.no-mix-blend-mode .multiply .transparent-crimson-back {
+	background: rgba(152,30,50,0.9);
+}
+
+.multiply .transparent-crimson-back:before {
+	background: #940606;
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: -2;
+}
+
+.false-header1 {
+	border-bottom: solid 2px #981e32;
+	color: #fff;
+	font-size: 1.2em;
+	font-weight: 800;
 	letter-spacing: 1px;
-	padding-bottom: 0;
+	margin-bottom: 2.5em;
+	padding-bottom: .5em;
 	text-transform: uppercase;
 }
 
-.home h2 {
-	font-size: 3.5em;
-	font-weight: 700;
-	padding-top: 0;
-	text-transform: uppercase;
-}
-
-.home .intro {
-	background-image: -webkit-linear-gradient(left,#981e32 0%,#c60c30 100%);
-	background-image: linear-gradient(to right,#981e32 0%,#c60c30 100%);
-	background-size: 100% 10px;
-	background-repeat: no-repeat;
-	padding-top: 10px;
-}
-
-.home .intro .column {
-	padding: 5rem 0;
-}
-
-.home .intro p {
-	color: #717171;
-	font-size: 1.5em;
-	font-weight: 300;
-	opacity: 0;
-	padding-bottom: 1em;
-	-webkit-transition: opacity 1.5s ease;
-	transition: opacity 1.5s ease;
-}
-
-.home .intro h1 {
-	font-size: 4.5rem;
-	opacity: 0;
-	text-transform: uppercase;
-	-webkit-transform: translateY(1.5em);
-	    -ms-transform: translateY(1.5em);
-	        transform: translateY(1.5em);
-	-webkit-transition: opacity 1.25s ease .75s, -webkit-transform 1.75s ease-in-out;
-	transition: opacity 1.25s ease .75s, -webkit-transform 1.75s ease-in-out;
-	transition: transform 1.75s ease-in-out, opacity 1.25s ease .75s;
-	transition: transform 1.75s ease-in-out, opacity 1.25s ease .75s, -webkit-transform 1.75s ease-in-out;
-}
-
-.home .intro.ready p,
-.home .intro.ready h1 {
-	opacity: 1;
-	-webkit-transform: translateY(0);
-	    -ms-transform: translateY(0);
-	        transform: translateY(0);
-}
-
-.home .halves .column.one {
-	min-height: 350px;
+.help {
+	color: #fff;
+	font-size: 4em;
+	font-weight: 800;
+	margin-bottom: 5px;
 }
 
 .five-steps {
@@ -799,17 +958,18 @@ main input[type=submit]:hover {
 	padding: 0;
 }
 
-.five-steps a {
-	border-bottom: 1px solid #d7dadb;
-	color: #717171;
+.five-steps a,
+.five-steps a:hover {
+	border-bottom: 1px solid #717171;
+	color: #fff;
 	display: block;
 	font-size: 1.1em;
-	font-weight: 600;
+	font-weight: 400;
 	margin-left: 4.5rem;
 	padding: .5em 0;
 	position: relative;
-	-webkit-transition: color .4s;
-	transition: color .4s;
+	-webkit-transition: color .4s, padding .4s;
+	transition: color .4s, padding .4s;
 }
 
 .five-steps a:before {
@@ -831,19 +991,47 @@ main input[type=submit]:hover {
 	position: absolute;
 	text-align: center;
 	top: .2em;
-	-webkit-transition: background .4s;
-	transition: background .4s;
+	-webkit-transition: background .4s, color .4s;
+	transition: background .4s, color .4s;
 	width: 2.5rem;
 }
 
-.five-steps a:hover,
-.five-steps a:hover .crimson-text {
-	background-color: transparent;
-	color: #c60c30;
+.five-steps a:hover {
+	background: none;
+	padding-left: .75em;
 }
 
 .five-steps a:hover:before {
-	background: #0b9b56;
+	background: #fff;
+	color: #981e32;
+}
+
+/* Announcements and quicklinks */
+.home .wsuwp-content-syndicate-list {
+	list-style-type: none;
+}
+
+.home .wsuwp-content-syndicate-item {
+	margin-bottom: 1em;
+}
+
+.home .wsuwp-content-syndicate-item a,
+.home-calendar .wsuwp-content-syndicate-event a {
+	text-decoration: none;
+	color: #393939;
+	border-bottom: none;
+}
+
+.home .wsuwp-content-syndicate-item a .read-more,
+.home-calendar .wsuwp-content-syndicate-event a .read-more {
+	font-size: .75em;
+	font-weight: 700;
+	color: #981e32;
+}
+
+.home .wsuwp-content-syndicate-item a:hover {
+	color: #981e32;
+	border-bottom: solid 1px #981e32;
 }
 
 .home .content-item-byline-author,
@@ -908,7 +1096,7 @@ main input[type=submit]:hover {
 	    -ms-flex: 1 0 25%;
 	        flex: 1 0 25%;
 	list-style: none;
-	padding: 1em;
+	padding: .5em 1em 0 0;
 	-webkit-transition: background .4s;
 	transition: background .4s;
 	width: 25%;
@@ -975,14 +1163,17 @@ main input[type=submit]:hover {
 	background: #981e32;
 }
 
-.home-calendar .content-item-event-title,
-.home-calendar .content-item-event-meta {
+.home-calendar .content-item-event-title {
 	display: block;
 	margin-left: 4.25rem;
 }
 
 .home-calendar .content-item-event-title a {
 	border-bottom: 0;
+}
+
+.home-calendar .content-item-event-meta {
+	display: none;
 }
 
 /* Home page event navigation */
@@ -1002,6 +1193,7 @@ main input[type=submit]:hover {
 
 .event-control:hover {
 	background: none;
+	border-bottom: none;
 }
 
 .event-control:before,
@@ -1020,6 +1212,12 @@ main input[type=submit]:hover {
 .event-control.prev:before {
 	border-right-color: #717171;
 	right: 0;
+	-webkit-transition: border-right-color .4s;
+	transition: border-right-color .4s;
+}
+
+.event-control.prev:hover:before {
+	border-right-color: #981e32;
 }
 
 .event-control.prev:after {
@@ -1034,6 +1232,12 @@ main input[type=submit]:hover {
 .event-control.next:before {
 	border-left-color: #717171;
 	left: 0;
+	-webkit-transition: border-left-color .4s;
+	transition: border-left-color .4s;
+}
+
+.event-control.next:hover:before {
+	border-left-color: #981e32;
 }
 
 .event-control.next:after {
@@ -1047,6 +1251,12 @@ main input[type=submit]:hover {
 		    -ms-flex: 1 0 50%;
 		        flex: 1 0 50%;
 		width: 50%;
+	}
+}
+
+@media only screen and (max-width: 693px) {
+	.home .halves .column.one {
+		min-height: 350px;
 	}
 }
 
@@ -1073,39 +1283,21 @@ main input[type=submit]:hover {
 	}
 }
 
-/* All pages categorized with `Scholarship Guide` */
-.categorized-scholarships .cta-button {
-	border: 2px solid #00a5bd;
-	color: #00a5bd;
+/* "« Scholarship Search Results" link on individual scholarships */
+.scholarships-back-to-results .column {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
-.categorized-scholarships .hentry .cta-button:hover {
-	background: #00a5bd;
-	color: #fff;
+.scholarships-back-to-results .column p {
+	padding: 0;
 }
 
-.categorized-scholarships h1,
-.categorized-scholarships h2,
-.categorized-scholarships h5 {
-	color: #00a5bd;
-}
-
-.white-text h1,
-.white-text h2,
-.white-text h3,
-.white-text h4,
-.white-text h5,
-.section-scholarships .hentry .white-text a {
-	color: #fff;
+.apply .cta-button {
+    margin-top: 0;
 }
 
 /* Scholarships landing page */
-.scholarships-landing .side-left .column.one {
-	background: center;
-	background-size: cover;
-	min-height: 350px;
-}
-
 .scholarships-landing .main-header {
 	height: auto;
 	overflow: auto;
@@ -1113,54 +1305,5 @@ main input[type=submit]:hover {
 
 .scholarships-landing .page-header-group {
 	display: none;
-}
-
-.scholarships-landing .splash {
-	text-align: center;
-}
-
-.scholarships-landing .splash p {
-	font-size: 2.5em;
-	font-weight: 300;
-	padding-bottom: .25em;
-	text-transform: uppercase;
-}
-
-.scholarships-landing .splash h1 {
-	font-size: 4.5rem;
-	text-transform: uppercase;
-}
-
-.scholarships-landing .false-header {
-	font-size: 1.4em;
-	font-weight: 300;
-	letter-spacing: 1px;
-	padding-bottom: 0;
-	text-transform: uppercase;
-}
-
-.scholarships-landing h2 {
-	font-size: 3.5em;
-	font-weight: 700;
-	padding-top: 0;
-	text-transform: uppercase;
-}
-
-@media only screen and (min-width: 694px) {
-	.scholarships-landing .column.padded {
-		padding: 6rem 2rem;
-	}
-
-	.scholarships-landing .side-left {
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-	}
-}
-
-@media only screen and (max-width: 693px) {
-	.scholarships-landing .splash h1 {
-		font-size: 3em;
-	}
 }
 /*# sourceMappingURL=style.css.map */

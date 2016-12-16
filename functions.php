@@ -154,7 +154,7 @@ class WSU_Student_Financial_Services_Theme {
 	 * @since 0.0.8
 	 *
 	 * @param string   $where     The original where clause of the query.
-	 * @param WP_Query &$wp_query The QP_Query instance.
+	 * @param WP_Query &$wp_query The WP_Query instance.
 	 */
 	public function title_contains( $where, &$wp_query ) {
 		global $wpdb;
@@ -302,7 +302,7 @@ class WSU_Student_Financial_Services_Theme {
 	public function display_sfs_cost_tables( $atts ) {
 		$defaults = array(
 			'default_session' => '',
-			'default_campus' => 'campus-pullman',
+			'default_campus' => 'campus-Pullman',
 			'default_career' => 'path-undergrad',
 		);
 		$atts = shortcode_atts( $defaults, $atts );
@@ -416,7 +416,7 @@ class WSU_Student_Financial_Services_Theme {
 			// Try to be helpful if no matching table is found.
 			$campus_name = ucfirst( substr( $campus, 7 ) );
 			$career_name = ucfirst( substr( $career, 5 ) );
-			$notice = $career_name . ' is not be offered at the ' . $campus_name . ' campus during the ' . $session . ' session.';
+			$notice = $career_name . ' is not offered at the ' . $campus_name . ' campus during the ' . $session . ' session.';
 
 			switch ( $_POST['updated'] ) {
 				case 'session':

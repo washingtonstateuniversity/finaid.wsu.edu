@@ -40,11 +40,15 @@ hgroup.source {
 	padding-top: 2rem;
 }
 
-.pad-bottom {
+section.row {
 	border-bottom: 5px solid #f3f3f3;
 }
 
-.pad-bottom:last-child {
+section.row.no-bottom-border,
+main > .page > section.row:last-child,
+main > .page > :last-child section.row,
+.main-header + section.row,
+footer > section.row {
 	border-bottom: none;
 }
 
