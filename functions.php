@@ -191,6 +191,7 @@ class WSU_Student_Financial_Services_Theme {
 		}
 
 		$table_ids = array_flip( $table_options['table_post'] );
+		$table_id = false;
 		$sessions = array();
 		$available_campuses = array();
 		$available_careers = array();
@@ -262,12 +263,9 @@ class WSU_Student_Financial_Services_Theme {
 					sort( $classes );
 					sort( $table_classes );
 
-					if ( $classes === $table_classes ) {
-						if ( 'default' === $type && false !== strpos( $title, $session ) ) {
-							$table_id = false;
-						} else {
-							$table_id = $table_ids[ get_the_ID() ];
-						}
+					// Make sure the `table_id` variable is only redefined once.
+					if ( $classes === $table_classes && ( 'ajax_request' === $type || ( 'default' === $type && false !== strpos( $title, $session ) ) ) ) {
+						$table_id = $table_ids[ get_the_ID() ];
 					}
 				}
 			}
