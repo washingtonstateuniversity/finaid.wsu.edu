@@ -40,6 +40,7 @@ class WSU_Student_Financial_Services_Theme {
 	 */
 	public function load_plugins() {
 		require_once( __DIR__ . '/includes/site-actions-widget.php' );
+		require_once( __DIR__ . '/includes/give-link-widget.php' );
 	}
 
 	/**
@@ -86,11 +87,20 @@ class WSU_Student_Financial_Services_Theme {
 	 */
 	public function register_sidebars() {
 		register_widget( 'Site_Actions_Widget' );
+		register_widget( 'Give_Link_Widget' );
 
-		$footer_args = array(
+		$header_args = array(
 			'name' => 'Actions',
 			'id' => 'site-actions',
 			'description' => 'Displays the action links on the top of every page.',
+		);
+
+		register_sidebar( $header_args );
+
+		$footer_args = array(
+			'name' => 'Give Link',
+			'id' => 'give-link',
+			'description' => 'Displays the "give" link in the site footer.',
 		);
 
 		register_sidebar( $footer_args );

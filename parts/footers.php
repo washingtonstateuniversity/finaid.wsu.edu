@@ -15,6 +15,7 @@ $footer_menu_args = array(
 );
 ?>
 <footer class="single row gutter padded-ends pad-ends site-footer">
+	<?php dynamic_sidebar( 'give-link' ); ?>
 	<div class="column one">
 		<?php wp_nav_menu( $footer_menu_args ); ?>
 	</div>
