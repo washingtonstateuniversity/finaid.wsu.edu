@@ -8,7 +8,7 @@ class WSU_Student_Financial_Services_Theme {
 	 *
 	 * @var string String used for busting cache on scripts.
 	 */
-	var $script_version = '0.0.11';
+	var $script_version = '0.0.12';
 
 	/**
 	 * @since 0.0.1
@@ -84,6 +84,7 @@ class WSU_Student_Financial_Services_Theme {
 	 * Register the sidebars and custom widgets used by the theme.
 	 *
 	 * @since 0.0.1
+	 * @since 0.0.12 Added Give Link widget.
 	 */
 	public function register_sidebars() {
 		register_widget( 'Site_Actions_Widget' );
