@@ -1337,4 +1337,29 @@ section.video {
 .scholarships-landing .page-header-group {
 	display: none;
 }
+
+/* Scholarships sharing tools */
+.back-to-results {
+	float: left;
+}
+
+.social-share-bar {
+	float: right;
+	margin-top: 0;
+	position: relative;
+}
+
+.social-share-bar a,
+.social-share-bar a:hover {
+	background: none;
+	border-bottom: none;
+}
+
+@media only screen and (max-width: 530px) {
+	.social-share-bar {
+		clear: both;
+		float: left;
+		margin-top: 1em;
+	}
+}
 /*# sourceMappingURL=style.css.map */

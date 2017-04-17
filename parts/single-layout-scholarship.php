@@ -13,9 +13,11 @@ if ( $search_page_url ) { ?>
 <section class="row single gutter scholarships-back-to-results">
 
 	<div class="column one">
-		<p>
+		<p class="back-to-results">
 			<a href="<?php echo esc_url( $search_page_url ); ?>">« Scholarship Search Results</a>
 		</p>
+
+		<?php get_template_part( 'parts/share-tools' ); ?>
 	</div>
 
 </section>
