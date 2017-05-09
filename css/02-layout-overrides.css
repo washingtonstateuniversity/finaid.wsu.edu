@@ -61,6 +61,7 @@ section.pad-bottom > header {
 }
 
 @media only screen and (min-width: 694px) {
+
 	.fluid .row.side-right .column.one {
 		padding-right: 1.3125rem;
 		width: 66.66666%;

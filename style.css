@@ -1,7 +1,7 @@
 /*
  Theme Name:     WSU Student Financial Services
  Theme URI:      https://web.wsu.edu
- Description:    A Washington State University Spine child theme for Student Financial Services
+ Description:    A WSU child theme for Student Financial Services
  Author:         WSU University Communications
  Author URI:     https://web.wsu.edu
  Template:       spine
@@ -21,21 +21,21 @@
 
 .main-header {
 	background: #981e32;
-	background: -webkit-linear-gradient(left,#981e32 0%,#c60c30 100%);
-	background: linear-gradient(to right,#981e32 0%,#c60c30 100%);
+	background: -webkit-linear-gradient(left, #981e32 0%, #c60c30 100%);
+	background: linear-gradient(to right, #981e32 0%, #c60c30 100%);
 }
 
 .tagged-blue .main-header {
 	background: #4f868e;
-	background: -webkit-linear-gradient(left,#4f868e 0%,#00a5bd 100%);
-	background: linear-gradient(to right,#4f868e 0%,#00a5bd 100%);
+	background: -webkit-linear-gradient(left, #4f868e 0%, #00a5bd 100%);
+	background: linear-gradient(to right, #4f868e 0%, #00a5bd 100%);
 }
 
 .has-featured-image .main-header {
 	background: none;
 	float: left;
 	height: 400px;
-	text-shadow: 1px 1px 5px rgba(0,0,0,0.35);
+	text-shadow: 1px 1px 5px rgba(0, 0, 0, .35);
 }
 
 .main-header span,
@@ -106,7 +106,7 @@
 
 .main-header a {
 	border-bottom: none;
-	color: white;
+	color: #fff;
 }
 
 .main-header a:hover {
@@ -119,6 +119,7 @@
 }
 
 @media screen and (max-width: 791px) {
+
 	.main-header {
 		height: auto;
 	}
@@ -154,6 +155,7 @@
 }
 
 @media only screen and (max-width: 693px) {
+
 	.site-header-group span {
 		display: block;
 		float: none;
@@ -167,6 +169,7 @@
 }
 
 @media only screen and (max-width: 530px) {
+
 	.page-header-group .sub-header {
 		font-size: 8.5vw;
 	}
@@ -235,6 +238,7 @@ section.pad-bottom > header {
 }
 
 @media only screen and (min-width: 694px) {
+
 	.fluid .row.side-right .column.one {
 		padding-right: 1.3125rem;
 		width: 66.66666%;
@@ -343,7 +347,7 @@ p.false-header + h2 {
 }
 
 main a {
-	border-bottom: 1px solid #B7B7B7;
+	border-bottom: 1px solid #b7b7b7;
 	text-decoration: none;
 	-webkit-transition: all .4s ease;
 	transition: all .4s ease;
@@ -361,6 +365,7 @@ main ul {
 }
 
 @media screen and (max-width: 693px) {
+
 	.landing h2 {
 		font-size: 9vw;
 	}
@@ -384,35 +389,35 @@ main ul {
 }
 
 .transparent-gray-back {
-	background: rgba(113,113,113,0.75);
+	background: rgba(113, 113, 113, .75);
 }
 
 .transparent-gray-light-back {
-	background: rgba(141,149,154,0.75);
+	background: rgba(141, 149, 154, .75);
 }
 
 .transparent-gray-lighter-back {
-	background: rgba(181,186,190,0.75);
+	background: rgba(181, 186, 190, .75);
 }
 
 .transparent-gray-lightly-back {
-	background: rgba(215,218,219,0.75);
+	background: rgba(215, 218, 219, .75);
 }
 
 .transparent-gray-lightest-back {
-	background: rgba(239,240,241,0.85);
+	background: rgba(239, 240, 241, .85);
 }
 
 .transparent-crimson-back {
-	background: rgba(152,30,50,0.90);
+	background: rgba(152, 30, 50, .9);
 }
 
 .transparent-white-back {
-	background: rgba(255,255,255,.85);
+	background: rgba(255, 255, 255, .85);
 }
 
 .transparent-black-back {
-	background: rgba(0,0,0,.75);
+	background: rgba(0, 0, 0, .75);
 }
 
 /* Buttons */
@@ -433,7 +438,7 @@ main ul {
 
 .cta-button:hover {
 	background: #981e32;
-	color: white;
+	color: #fff;
 }
 
 .white-text .cta-button,
@@ -451,7 +456,7 @@ main ul {
 }
 
 .body-cta {
-	border: 1px solid #B7B7B7;
+	border: 1px solid #b7b7b7;
 	display: inline-block;
 	font-size: .9em;
 	font-weight: 700;
@@ -473,7 +478,7 @@ main ul {
 
 .body-cta:hover {
 	background-color: #efefef;
-	border-bottom: solid 1px #B7B7B7;
+	border-bottom: solid 1px #b7b7b7;
 }
 
 .white-text .body-cta {
@@ -504,8 +509,8 @@ main ul {
 }
 
 .js-accordion h3:after {
-	content: '+';
-	font-weight: normal;
+	content: "+";
+	font-weight: 400;
 	position: absolute;
 	right: 1.5rem;
 	top: 1rem;
@@ -527,6 +532,7 @@ main ul {
 
 /* Loading animation */
 @-webkit-keyframes spin {
+
 	0% {
 		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
@@ -539,6 +545,7 @@ main ul {
 }
 
 @keyframes spin {
+
 	0% {
 		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
@@ -553,7 +560,7 @@ main ul {
 .sfs-loading-indicator {
 	-webkit-animation: spin 1s infinite linear;
 	        animation: spin 1s infinite linear;
-	border: .25rem solid rgba(113,113,113,0.5);
+	border: .25rem solid rgba(113, 113, 113, .5);
 	border-radius: 50%;
 	border-top-color: #981e32;
 	height: 2rem;
@@ -588,6 +595,7 @@ a#fafsa {
 }
 
 @media only screen and (min-width: 694px) {
+
 	.equal-height-columns {
 		display: -webkit-box;
 		display: -ms-flexbox;
@@ -609,7 +617,7 @@ main input[type]:focus,
 main select,
 main textarea {
 	border-radius: 0;
-	border: 1px solid #B7B7B7;
+	border: 1px solid #b7b7b7;
 	box-shadow: none;
 	color: #717171;
 	font-family: inherit;
@@ -636,27 +644,27 @@ main input[maxlength] {
 	width: 4.5rem;
 }
 
-main input[type=checkbox],
-main input[type=checkbox]:hover,
-main input[type=checkbox]:focus,
-main input[type=radio],
-main input[type=radio]:hover,
-main input[type=radio]:focus {
+main input[type="checkbox"],
+main input[type="checkbox"]:hover,
+main input[type="checkbox"]:focus,
+main input[type="radio"],
+main input[type="radio"]:hover,
+main input[type="radio"]:focus {
 	border: none;
 	padding: 0;
 	width: auto;
 }
 
-main input[type=checkbox],
-main input[type=checkbox]:hover,
-main input[type=checkbox]:focus {
+main input[type="checkbox"],
+main input[type="checkbox"]:hover,
+main input[type="checkbox"]:focus {
 	-webkit-appearance: checkbox;
 	-moz-appearance: checkbox;
 }
 
-main input[type=radio],
-main input[type=radio]:hover,
-main input[type=radio]:focus {
+main input[type="radio"],
+main input[type="radio"]:hover,
+main input[type="radio"]:focus {
 	-webkit-appearance: radio;
 	-moz-appearance: radio;
 }
@@ -676,7 +684,7 @@ main input[type=radio]:focus {
 	border: solid transparent;
 	border-width: 8px 5px;
 	box-sizing: border-box;
-	content: '';
+	content: "";
 	height: 16px;
 	position: absolute;
 	right: 8px;
@@ -684,13 +692,13 @@ main input[type=radio]:focus {
 
 .select-wrap:before,
 .ginput_container_select:before {
-	border-bottom-color: #B7B7B7;
+	border-bottom-color: #b7b7b7;
 	top: 0;
 }
 
 .select-wrap:after,
 .ginput_container_select:after {
-	border-top-color: #B7B7B7;
+	border-top-color: #b7b7b7;
 	bottom: 0;
 }
 
@@ -709,19 +717,19 @@ main textarea {
 	text-transform: none;
 }
 
-main input[type=submit] {
+main input[type="submit"] {
 	background: #64bf17;
 	border-color: #64bf17;
 	color: #fff;
 	min-width: 4.5rem;
 	padding: 9px 18px;
-	-webkit-transition: background .4s, border-color 0.4s;
-	transition: background .4s, border-color 0.4s;
+	-webkit-transition: background .4s, border-color .4s;
+	transition: background .4s, border-color .4s;
 	vertical-align: baseline;
 }
 
-main input[type=submit]:hover,
-main input[type=submit]:focus {
+main input[type="submit"]:hover,
+main input[type="submit"]:focus {
 	background: #488812;
 	border-color: #488812;
 	color: #fff;
@@ -777,7 +785,7 @@ main :-ms-input-placeholder {
 }
 
 .gf_name_has_2 input {
-	width: calc(100% - 0.5rem);
+	width: calc(100% - .5rem);
 }
 
 .gfield_required {
@@ -846,7 +854,7 @@ main :-ms-input-placeholder {
 .site-footer-menu > li {
 	box-sizing: border-box;
 	float: left;
-	padding: 0 0.5rem;
+	padding: 0 .5rem;
 	width: 25%;
 }
 
@@ -864,14 +872,15 @@ main :-ms-input-placeholder {
 }
 
 .site-footer-menu ul li {
-	padding: 0 0 0.6rem 0;
+	padding: 0 0 .6rem;
 }
 
 #binder .site-footer .two p {
-	color: #9C9C9C;
+	color: #9c9c9c;
 }
 
 @media screen and (max-width: 791px) {
+
 	.site-footer {
 		display: none;
 	}
@@ -903,7 +912,7 @@ section.video {
 
 .column.video .videoBG_wrapper #wsu-video-background:after {
 	content: "";
-	background: rgba(0,0,0,.1);
+	background: rgba(0, 0, 0, .1);
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -913,6 +922,7 @@ section.video {
 
 .column.video .videoBG_wrapper,
 .column.video .videoBG {
+
 	/* Sorry about these, they're overriding inline styles. */
 	height: 100% !important;
 	width: 100% !important;
@@ -927,6 +937,7 @@ section.video {
 }
 
 @media screen and (min-width: 990px) {
+
 	.column.video #wsu-video-background {
 		left: 5px;
 		width: calc(100% - 5px);
@@ -947,12 +958,12 @@ section.video {
 }
 
 .no-mix-blend-mode .multiply .transparent-crimson-back {
-	background: rgba(152,30,50,0.9);
+	background: rgba(152, 30, 50, .9);
 }
 
 .multiply .transparent-crimson-back:before {
 	background: #940606;
-	content: '';
+	content: "";
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -985,7 +996,7 @@ section.video {
 	padding: 0 0 2.5rem;
 }
 
-.five-steps li  {
+.five-steps li {
 	padding: 0;
 }
 
@@ -1165,7 +1176,7 @@ section.video {
 
 .home-calendar .content-item-event-date:before,
 .home-calendar .content-item-event-date:after {
-	content: '';
+	content: "";
 	left: 0;
 	position: absolute;
 	-webkit-transition: background .4s;
@@ -1231,7 +1242,7 @@ section.video {
 .event-control:after {
 	border: 1.5rem solid transparent;
 	box-sizing: border-box;
-	content: '';
+	content: "";
 	position: absolute;
 	top: 0;
 }
@@ -1277,6 +1288,7 @@ section.video {
 }
 
 @media screen and (max-width: 791px) {
+
 	.home-calendar .wsuwp-content-syndicate-list li {
 		-webkit-box-flex: 1;
 		    -ms-flex: 1 0 50%;
@@ -1286,12 +1298,14 @@ section.video {
 }
 
 @media only screen and (max-width: 693px) {
+
 	.home .halves .column.one {
 		min-height: 350px;
 	}
 }
 
 @media only screen and (max-width: 530px) {
+
 	.home-calendar .wsuwp-content-syndicate-list li {
 		-webkit-box-flex: 1;
 		    -ms-flex: 1 0 100%;
@@ -1309,6 +1323,7 @@ section.video {
 }
 
 @media only screen and (min-width: 694px) {
+
 	.home .halves .column.two {
 		padding: 6rem 2rem;
 	}
@@ -1325,7 +1340,7 @@ section.video {
 }
 
 .apply .cta-button {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 /* Scholarships landing page */
@@ -1356,6 +1371,7 @@ section.video {
 }
 
 @media only screen and (max-width: 530px) {
+
 	.social-share-bar {
 		clear: both;
 		float: left;

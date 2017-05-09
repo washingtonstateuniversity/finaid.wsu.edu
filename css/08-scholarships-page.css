@@ -9,7 +9,7 @@
 }
 
 .apply .cta-button {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 /* Scholarships landing page */
@@ -40,6 +40,7 @@
 }
 
 @media only screen and (max-width: 530px) {
+
 	.social-share-bar {
 		clear: both;
 		float: left;
