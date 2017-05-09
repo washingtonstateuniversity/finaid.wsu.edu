@@ -2,7 +2,7 @@
 
 class WSU_Student_Financial_Services_Theme {
 	/**
-	 *Track the version number of the theme for script enqueues.
+	 * Track the version number of the theme for script enqueues.
 	 *
 	 * @since 0.0.1
 	 *
