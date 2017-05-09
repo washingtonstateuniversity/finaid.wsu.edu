@@ -16,35 +16,35 @@
 }
 
 .transparent-gray-back {
-	background: rgba(113,113,113,0.75);
+	background: rgba(113, 113, 113, .75);
 }
 
 .transparent-gray-light-back {
-	background: rgba(141,149,154,0.75);
+	background: rgba(141, 149, 154, .75);
 }
 
 .transparent-gray-lighter-back {
-	background: rgba(181,186,190,0.75);
+	background: rgba(181, 186, 190, .75);
 }
 
 .transparent-gray-lightly-back {
-	background: rgba(215,218,219,0.75);
+	background: rgba(215, 218, 219, .75);
 }
 
 .transparent-gray-lightest-back {
-	background: rgba(239,240,241,0.85);
+	background: rgba(239, 240, 241, .85);
 }
 
 .transparent-crimson-back {
-	background: rgba(152,30,50,0.90);
+	background: rgba(152, 30, 50, .9);
 }
 
 .transparent-white-back {
-	background: rgba(255,255,255,.85);
+	background: rgba(255, 255, 255, .85);
 }
 
 .transparent-black-back {
-	background: rgba(0,0,0,.75);
+	background: rgba(0, 0, 0, .75);
 }
 
 /* Buttons */
@@ -64,7 +64,7 @@
 
 .cta-button:hover {
 	background: #981e32;
-	color: white;
+	color: #fff;
 }
 
 .white-text .cta-button,
@@ -81,7 +81,7 @@
 }
 
 .body-cta {
-	border: 1px solid #B7B7B7;
+	border: 1px solid #b7b7b7;
 	display: inline-block;
 	font-size: .9em;
 	font-weight: 700;
@@ -102,7 +102,7 @@
 
 .body-cta:hover {
 	background-color: #efefef;
-	border-bottom: solid 1px #B7B7B7;
+	border-bottom: solid 1px #b7b7b7;
 }
 
 .white-text .body-cta {
@@ -133,8 +133,8 @@
 }
 
 .js-accordion h3:after {
-	content: '+';
-	font-weight: normal;
+	content: "+";
+	font-weight: 400;
 	position: absolute;
 	right: 1.5rem;
 	top: 1rem;
@@ -151,6 +151,7 @@
 
 /* Loading animation */
 @-webkit-keyframes spin {
+
 	0% {
 		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
@@ -163,6 +164,7 @@
 }
 
 @keyframes spin {
+
 	0% {
 		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
@@ -176,7 +178,7 @@
 
 .sfs-loading-indicator {
 	animation: spin 1s infinite linear;
-	border: .25rem solid rgba(113,113,113,0.5);
+	border: .25rem solid rgba(113, 113, 113, .5);
 	border-radius: 50%;
 	border-top-color: #981e32;
 	height: 2rem;
@@ -211,6 +213,7 @@ a#fafsa {
 }
 
 @media only screen and (min-width: 694px) {
+
 	.equal-height-columns {
 		display: flex;
 	}

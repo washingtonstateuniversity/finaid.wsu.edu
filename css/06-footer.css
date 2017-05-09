@@ -42,7 +42,7 @@
 .site-footer-menu > li {
 	box-sizing: border-box;
 	float: left;
-	padding: 0 0.5rem;
+	padding: 0 .5rem;
 	width: 25%;
 }
 
@@ -60,14 +60,15 @@
 }
 
 .site-footer-menu ul li {
-	padding: 0 0 0.6rem 0;
+	padding: 0 0 .6rem;
 }
 
 #binder .site-footer .two p {
-	color: #9C9C9C;
+	color: #9c9c9c;
 }
 
 @media screen and (max-width: 791px) {
+
 	.site-footer {
 		display: none;
 	}

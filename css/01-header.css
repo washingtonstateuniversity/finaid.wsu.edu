@@ -11,19 +11,19 @@
 
 .main-header {
 	background: #981e32;
-	background: linear-gradient(to right,#981e32 0%,#c60c30 100%);
+	background: linear-gradient(to right, #981e32 0%, #c60c30 100%);
 }
 
 .tagged-blue .main-header {
 	background: #4f868e;
-	background: linear-gradient(to right,#4f868e 0%,#00a5bd 100%);
+	background: linear-gradient(to right, #4f868e 0%, #00a5bd 100%);
 }
 
 .has-featured-image .main-header {
 	background: none;
 	float: left;
 	height: 400px;
-	text-shadow: 1px 1px 5px rgba(0,0,0,0.35);
+	text-shadow: 1px 1px 5px rgba(0, 0, 0, .35);
 }
 
 .main-header span,
@@ -94,7 +94,7 @@
 
 .main-header a {
 	border-bottom: none;
-	color: white;
+	color: #fff;
 }
 
 .main-header a:hover {
@@ -107,6 +107,7 @@
 }
 
 @media screen and (max-width: 791px) {
+
 	.main-header {
 		height: auto;
 	}
@@ -142,6 +143,7 @@
 }
 
 @media only screen and (max-width: 693px) {
+
 	.site-header-group span {
 		display: block;
 		float: none;
@@ -155,6 +157,7 @@
 }
 
 @media only screen and (max-width: 530px) {
+
 	.page-header-group .sub-header {
 		font-size: 8.5vw;
 	}
