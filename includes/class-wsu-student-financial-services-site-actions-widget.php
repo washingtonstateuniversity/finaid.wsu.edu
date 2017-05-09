@@ -1,12 +1,18 @@
 <?php
 
-class Site_Actions_Widget extends WP_Widget {
+class WSU_Student_Financial_Services_Site_Actions_Widget extends WP_Widget {
 
 	/**
 	 * Register the widget officially through the parent class.
 	 */
 	public function __construct() {
-		parent::__construct( 'site_actions_widget', 'Site Action', array( 'description' => 'A link to be displayed at the top of every page' ) );
+		parent::__construct(
+			'site_actions_widget',
+			'Site Action',
+			array(
+				'description' => 'A link to be displayed at the top of every page',
+			)
+		);
 	}
 
 	/**
@@ -44,11 +50,19 @@ class Site_Actions_Widget extends WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'action_link' ) ); ?>">Action Link</label>
-			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'action_link' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'action_link' ) ); ?>" type="text" value="<?php echo esc_attr( $action_link ); ?>" />
+			<input type="text"
+				   class="widefat"
+				   id="<?php echo esc_attr( $this->get_field_id( 'action_link' ) ); ?>"
+				   name="<?php echo esc_attr( $this->get_field_name( 'action_link' ) ); ?>"
+				   value="<?php echo esc_attr( $action_link ); ?>" />
 		</p>
 		<p>
 			<label for="<?php echo esc_attr( $this->get_field_id( 'action_text' ) ); ?>">Action Text</label>
-			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'action_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'action_text' ) ); ?>" type="text" value="<?php echo esc_attr( $action_text ); ?>" />
+			<input type="text"
+				   class="widefat"
+				   id="<?php echo esc_attr( $this->get_field_id( 'action_text' ) ); ?>"
+				   name="<?php echo esc_attr( $this->get_field_name( 'action_text' ) ); ?>"
+				   value="<?php echo esc_attr( $action_text ); ?>" />
 		</p>
 		<?php
 	}
