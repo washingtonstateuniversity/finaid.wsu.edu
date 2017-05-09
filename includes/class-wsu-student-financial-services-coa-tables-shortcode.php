@@ -279,11 +279,11 @@ class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 	}
 
 	/**
-	 * Cost of attendance tables query.
+	 * Attempt to find a table matching the given critera.
 	 *
 	 * @since 0.0.8
+	 * @since 0.1.0 Used exclusively for AJAX requests.
 	 *
-	 * @param string $type    Whether the default form is being set up or an AJAX request is being made.
 	 * @param string $session The session being requested (table titles are searched for matches).
 	 * @param array  $classes The campus and career path being requested (table classes are searched for matches).
 	 *
@@ -303,20 +303,14 @@ class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 
 		$table_ids = array_flip( $table_options['table_post'] );
 		$table_id = false;
-		$sessions = array();
 		$available_campuses = array();
 		$available_careers = array();
-		$all_campuses = array();
-		$all_careers = array();
 
 		$table_query_args = array(
 			'post_type' => 'tablepress_table',
 			'posts_per_page' => -1,
+			'title_contains' => sanitize_text_field( $session ),
 		);
-
-		if ( 'ajax_request' === $type ) {
-			$table_query_args['title_contains'] = $session;
-		}
 
 		add_filter( 'posts_where', array( $this, 'title_contains' ), 10, 2 );
 
@@ -328,56 +322,33 @@ class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 			while ( $table_query->have_posts() ) {
 				$table_query->the_post();
 
-				$title = get_the_title();
+				$meta = json_decode( get_post_meta( get_the_ID(), '_tablepress_table_options', true ), true );
 
-				// Build array of session options.
-				if ( 'default' === $type ) {
-					if ( preg_match( '/[0-9]{4}-[0-9]{4}/', $title, $session_prefix ) || preg_match( '/Summer [0-9]{4}/', $title, $session_prefix ) ) {
-						if ( ! in_array( $session_prefix[0], $sessions, true ) ) {
-							$sessions[] = $session_prefix[0];
-						}
+				if ( '' === $meta['extra_css_classes'] ) {
+					continue;
+				}
+
+				$table_classes = explode( ' ', $meta['extra_css_classes'] );
+
+				foreach ( $table_classes as $class ) {
+					// Build an array of campus options offered during the given session.
+					if ( false !== strpos( $class, 'campus-' ) && ! in_array( $class, $available_campuses, true ) ) {
+						$available_campuses[] = $class;
+					}
+
+					// Build an array of career path options offered during the given session at the given campus.
+					if ( false !== strpos( $class, 'path-' ) && ! in_array( $class, $available_careers, true ) && in_array( $classes[0], $table_classes, true ) ) {
+						$available_careers[] = $class;
 					}
 				}
 
-				$meta = json_decode( get_post_meta( get_the_ID(), '_tablepress_table_options', true ), true );
+				// Try to find a table that meets all the critera.
+				sort( $classes );
+				sort( $table_classes );
 
-				if ( '' !== $meta['extra_css_classes'] ) {
-					$table_classes = explode( ' ', $meta['extra_css_classes'] );
-
-					foreach ( $table_classes as $class ) {
-						if ( false !== strpos( $class, 'campus-' ) ) {
-							// Build an array of campus options offered during the default session.
-							if ( 'ajax_request' === $type || ( 'default' === $type && false !== strpos( $title, $session ) ) ) {
-								if ( ! in_array( $class, $available_campuses, true ) ) {
-									$available_campuses[] = $class;
-								}
-							} else { // Build an array of all campus options.
-								$campus_name = substr( $class, 7 );
-								$all_campuses[ $campus_name ] = $class;
-							}
-						}
-
-						if ( false !== strpos( $class, 'path-' ) ) {
-							// Build an array of career path options offered during the default session at the default campus.
-							if ( false !== strpos( $meta['extra_css_classes'], $classes[0] ) && ( 'ajax_request' === $type || ( 'default' === $type && false !== strpos( $title, $session ) ) ) ) {
-								if ( ! in_array( $class, $available_careers, true ) ) {
-									$available_careers[] = $class;
-								}
-							} else { // Build an array of all career path options
-								$career_name = substr( $class, 5 );
-								$all_careers[ $career_name ] = $class;
-							}
-						}
-					}
-
-					// Try to find a table that meets all the critera.
-					sort( $classes );
-					sort( $table_classes );
-
-					// Make sure the `table_id` variable is only redefined once.
-					if ( $classes === $table_classes && ( 'ajax_request' === $type || ( 'default' === $type && false !== strpos( $title, $session ) ) ) ) {
-						$table_id = $table_ids[ get_the_ID() ];
-					}
+				// Make sure the `table_id` variable is only redefined once.
+				if ( $classes === $table_classes ) {
+					$table_id = $table_ids[ get_the_ID() ];
 				}
 			}
 
@@ -389,12 +360,6 @@ class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 			'available_campuses' => $available_campuses,
 			'available_careers' => $available_careers,
 		);
-
-		if ( 'default' === $type ) {
-			$data['sessions'] = $sessions;
-			$data['all_campuses'] = $all_campuses;
-			$data['all_careers'] = $all_careers;
-		}
 
 		return $data;
 	}
