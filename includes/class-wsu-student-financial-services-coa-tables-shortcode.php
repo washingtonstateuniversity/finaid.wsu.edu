@@ -121,11 +121,7 @@ class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 				}
 
 				// Try to find a table that meets all the critera.
-				sort( $classes );
-				sort( $table_classes );
-
-				// Make sure the `table_id` variable is only redefined once.
-				if ( false !== $session_in_title && $classes === $table_classes ) {
+				if ( false !== $session_in_title && empty( array_diff( $classes, $table_classes ) ) ) {
 					$table_id = $table_ids[ get_the_ID() ];
 				}
 			}
@@ -343,11 +339,7 @@ class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 				}
 
 				// Try to find a table that meets all the critera.
-				sort( $classes );
-				sort( $table_classes );
-
-				// Make sure the `table_id` variable is only redefined once.
-				if ( $classes === $table_classes ) {
+				if ( empty( array_diff( $classes, $table_classes ) ) ) {
 					$table_id = $table_ids[ get_the_ID() ];
 				}
 			}
