@@ -3,8 +3,9 @@
 require_once( dirname( __FILE__ ) . '/includes/class-wsu-student-financial-services-theme.php' );
 require_once( dirname( __FILE__ ) . '/includes/class-wsu-student-financial-services-site-actions-widget.php' );
 require_once( dirname( __FILE__ ) . '/includes/class-wsu-student-financial-services-give-link-widget.php' );
+require_once( dirname( __FILE__ ) . '/includes/class-wsu-student-financial-services-coa-tables-shortcode.php' );
 
-
+add_action( 'after_setup_theme', 'WSU_Student_Financial_Services_Theme' );
 /**
  * Starts the main class controlling the theme.
  *
@@ -12,8 +13,19 @@ require_once( dirname( __FILE__ ) . '/includes/class-wsu-student-financial-servi
  *
  * @return \WSU_Student_Financial_Services_Theme
  */
-add_action( 'after_setup_theme', function() {
+function WSU_Student_Financial_Services_Theme() {
 	return WSU_Student_Financial_Services_Theme::get_instance();
+}
+
+/**
+ * Starts the Cost of Attendance table lookup functionality.
+ *
+ * @since 0.1.0
+ *
+ * @return \WSU_Student_Financial_Services_COA_Tables_Shortcode
+ */
+add_action( 'after_setup_theme', function() {
+	return WSU_Student_Financial_Services_COA_Tables_Shortcode::get_instance();
 } );
 
 /**
