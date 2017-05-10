@@ -39,6 +39,7 @@
 	padding: 0;
 }
 
+.site-footer .one > ul > li,
 .site-footer-menu > li {
 	box-sizing: border-box;
 	float: left;
@@ -46,6 +47,7 @@
 	width: 25%;
 }
 
+.site-footer .one > ul > li > a,
 .site-footer-menu > li > a {
 	border-bottom: none;
 	color: #393939;
@@ -59,12 +61,9 @@
 	text-transform: uppercase;
 }
 
+.site-footer .one ul li,
 .site-footer-menu ul li {
 	padding: 0 0 .6rem;
-}
-
-#binder .site-footer .two p {
-	color: #9c9c9c;
 }
 
 @media screen and (max-width: 791px) {
