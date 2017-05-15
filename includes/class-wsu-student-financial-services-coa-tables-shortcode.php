@@ -2,7 +2,7 @@
 
 class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 	/**
-	 * @since 0.1.0
+	 * @since 0.0.14
 	 *
 	 * @var WSU_Student_Financial_Services_COA_Tables_Shortcode
 	 */
@@ -11,7 +11,7 @@ class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 	/**
 	 * Maintain and return the one instance and initiate hooks when called the first time.
 	 *
-	 * @since 0.1.0
+	 * @since 0.0.14
 	 *
 	 * @return \WSU_Student_Financial_Services_COA_Tables_Shortcode
 	 */
@@ -26,7 +26,7 @@ class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 	/**
 	 * Setup hooks to include.
 	 *
-	 * @since 0.0.1
+	 * @since 0.0.14
 	 */
 	public function setup_hooks() {
 		add_shortcode( 'sfs_cost_tables', array( $this, 'display_sfs_cost_tables' ) );
@@ -37,7 +37,7 @@ class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 	/**
 	 * Set up the options for the cost of attendance table lookup form.
 	 *
-	 * @since 0.1.0
+	 * @since 0.0.14
 	 *
 	 * @param string $session The session being requested (table titles are searched for matches).
 	 * @param array  $classes The campus and career path being requested (table classes are searched for matches).
@@ -278,7 +278,7 @@ class WSU_Student_Financial_Services_COA_Tables_Shortcode {
 	 * Attempt to find a table matching the given critera.
 	 *
 	 * @since 0.0.8
-	 * @since 0.1.0 Used exclusively for AJAX requests.
+	 * @since 0.0.14 Used exclusively for AJAX requests.
 	 *
 	 * @param string $session The session being requested (table titles are searched for matches).
 	 * @param array  $classes The campus and career path being requested (table classes are searched for matches).
