@@ -106,6 +106,22 @@
 	z-index: -1;
 }
 
+.home .main-header {
+	background: none;
+	height: auto;
+	float: left;
+	z-index: 2;
+}
+
+.home .site-header-group,
+.home .page-header-group {
+	display: none;
+}
+
+.home .video {
+	clear: none;
+}
+
 @media screen and (max-width: 791px) {
 
 	.main-header {
