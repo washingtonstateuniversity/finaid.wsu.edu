@@ -1,5 +1,5 @@
 <?php
-if ( true === spine_get_option( 'main_header_show' ) && ! is_front_page() ) :
+if ( true === spine_get_option( 'main_header_show' ) ) :
 
 	$header_elements = sfs_get_header_elements();
 
