@@ -26,7 +26,7 @@ class WSU_Student_Financial_Services_Theme {
 	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new WSU_Student_Financial_Services_Theme;
+			self::$instance = new WSU_Student_Financial_Services_Theme();
 			self::$instance->setup_hooks();
 		}
 		return self::$instance;

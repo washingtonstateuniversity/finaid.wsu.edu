@@ -21,13 +21,11 @@
 
 .main-header {
 	background: #981e32;
-	background: -webkit-linear-gradient(left, #981e32 0%, #c60c30 100%);
 	background: linear-gradient(to right, #981e32 0%, #c60c30 100%);
 }
 
 .tagged-blue .main-header {
 	background: #4f868e;
-	background: -webkit-linear-gradient(left, #4f868e 0%, #00a5bd 100%);
 	background: linear-gradient(to right, #4f868e 0%, #00a5bd 100%);
 }
 
@@ -365,7 +363,6 @@ p.false-header + h2 {
 main a {
 	border-bottom: 1px solid #b7b7b7;
 	text-decoration: none;
-	-webkit-transition: all .4s ease;
 	transition: all .4s ease;
 }
 
@@ -448,7 +445,6 @@ main ul {
 	margin-top: 1em;
 	padding: .5em 2em;
 	text-transform: uppercase;
-	-webkit-transition: background .4s, color .4s;
 	transition: background .4s, color .4s;
 }
 
@@ -461,7 +457,6 @@ main ul {
 .cta-button.white {
 	border: 1px solid #fff;
 	color: #fff;
-	-webkit-transition: background .4s, border-color .4s, color .4s;
 	transition: background .4s, border-color .4s, color .4s;
 }
 
@@ -480,7 +475,6 @@ main ul {
 	margin: .5rem 0 2rem;
 	padding: .25em 1em;
 	text-transform: uppercase;
-	-webkit-transition: background .4s;
 	transition: background .4s;
 }
 
@@ -530,7 +524,6 @@ main ul {
 	position: absolute;
 	right: 1.5rem;
 	top: 1rem;
-	-webkit-transition: -webkit-transform .4s;
 	transition: -webkit-transform .4s;
 	transition: transform .4s;
 	transition: transform .4s, -webkit-transform .4s;
@@ -739,7 +732,6 @@ main input[type="submit"] {
 	color: #fff;
 	min-width: 4.5rem;
 	padding: 9px 18px;
-	-webkit-transition: background .4s, border-color .4s;
 	transition: background .4s, border-color .4s;
 	vertical-align: baseline;
 }
@@ -826,7 +818,6 @@ main :-ms-input-placeholder {
 }
 
 .site-footer {
-	background: -webkit-linear-gradient(left, #f3f3f3 0%, #efefef 100%);
 	background: linear-gradient(to right, #f3f3f3 0%, #efefef 100%);
 	margin-top: 2rem;
 	position: relative;
@@ -1025,7 +1016,6 @@ section.video {
 	margin-left: 4.5rem;
 	padding: .5em 0;
 	position: relative;
-	-webkit-transition: color .4s, padding .4s;
 	transition: color .4s, padding .4s;
 }
 
@@ -1048,7 +1038,6 @@ section.video {
 	position: absolute;
 	text-align: center;
 	top: .2em;
-	-webkit-transition: background .4s, color .4s;
 	transition: background .4s, color .4s;
 	width: 2.5rem;
 }
@@ -1123,7 +1112,6 @@ section.video {
 	padding: 14px;
 	text-align: center;
 	text-transform: uppercase;
-	-webkit-transition: background .4s, color .4s;
 	transition: background .4s, color .4s;
 	width: 100%;
 }
@@ -1154,7 +1142,6 @@ section.video {
 	        flex: 1 0 25%;
 	list-style: none;
 	padding: .5em 1em 0 0;
-	-webkit-transition: background .4s;
 	transition: background .4s;
 	width: 25%;
 }
@@ -1194,7 +1181,6 @@ section.video {
 	content: "";
 	left: 0;
 	position: absolute;
-	-webkit-transition: background .4s;
 	transition: background .4s;
 	width: 100%;
 	z-index: -1;
@@ -1269,7 +1255,6 @@ section.video {
 .event-control.prev:before {
 	border-right-color: #717171;
 	right: 0;
-	-webkit-transition: border-right-color .4s;
 	transition: border-right-color .4s;
 }
 
@@ -1289,7 +1274,6 @@ section.video {
 .event-control.next:before {
 	border-left-color: #717171;
 	left: 0;
-	-webkit-transition: border-left-color .4s;
 	transition: border-left-color .4s;
 }
 
