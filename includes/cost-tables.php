@@ -45,12 +45,14 @@ function taxonomies() {
 
 add_action( 'init', 'WSU\Financial_Aid\Cost_Tables\register_post_type' );
 add_filter( 'pll_get_post_types', 'WSU\Financial_Aid\Cost_Tables\add_to_pll', 10, 2 );
-add_action( 'init', 'WSU\Financial_Aid\Cost_Tables\register_taxonomies' );
-add_filter( 'wsuwp_taxonomy_metabox_post_types', 'WSU\Financial_Aid\Cost_Tables\taxonomy_meta_box' );
 add_action( 'add_meta_boxes_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables\add_meta_boxes' );
 add_action( 'admin_enqueue_scripts', 'WSU\Financial_Aid\Cost_Tables\admin_enqueue_scripts' );
 add_action( 'save_post_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables\save_post', 10, 2 );
 add_filter( 'wp_insert_post_data', 'WSU\Financial_Aid\Cost_Tables\insert_post_data', 11, 2 );
+
+add_action( 'init', 'WSU\Financial_Aid\Cost_Tables\register_taxonomies' );
+add_filter( 'wsuwp_taxonomy_metabox_post_types', 'WSU\Financial_Aid\Cost_Tables\taxonomy_meta_box' );
+
 add_shortcode( 'sfs_cost_tables', 'WSU\Financial_Aid\Cost_Tables\display_sfs_cost_tables' );
 add_action( 'wp_ajax_nopriv_cost_tables', 'WSU\Financial_Aid\Cost_Tables\ajax_callback' );
 add_action( 'wp_ajax_cost_tables', 'WSU\Financial_Aid\Cost_Tables\ajax_callback' );
@@ -99,53 +101,6 @@ function register_post_type() {
  */
 function add_to_pll( $post_types ) {
 	$post_types[ post_type_slug() ] = post_type_slug();
-
-	return $post_types;
-}
-
-/**
- * Registers taxonomies attached to the Cost Tables post type.
- *
- * @since 0.1.0
- */
-function register_taxonomies() {
-	foreach ( taxonomies() as $taxonomy ) {
-		$args = array(
-			'labels' => array(
-				'name' => $taxonomy['plural'],
-				'singular_name' => $taxonomy['singular'],
-				'all_items' => 'All ' . $taxonomy['plural'],
-				'edit_item' => 'Edit ' . $taxonomy['singular'],
-				'view_item' => 'View ' . $taxonomy['singular'],
-				'update_item' => 'Update ' . $taxonomy['singular'],
-				'add_new_item' => 'Add New ' . $taxonomy['singular'],
-				'new_item_name' => 'New ' . $taxonomy['singular'] . ' Name',
-				'search_items' => 'Search ' . $taxonomy['plural'],
-				'popular_items' => 'Popular ' . $taxonomy['plural'],
-				'separate_items_with_commas' => 'Separate ' . $taxonomy['plural'] . ' with commas',
-				'add_or_remove_items' => 'Add or remove ' . $taxonomy['plural'],
-				'choose_from_most_used' => 'Choose from the most used ' . $taxonomy['plural'],
-				'not_found' => 'No ' . $taxonomy['plural'] . ' found',
-			),
-			'description' => $taxonomy['description'],
-			'public' => true,
-			'hierarchical' => false,
-			'show_admin_column' => true,
-		);
-
-		register_taxonomy( $taxonomy['slug'], post_type_slug(), $args );
-	}
-}
-
-/**
- * Displays a meta box with the Select2 interface provided by the University Taxonomy plugin.
- *
- * @since 0.1.0
- *
- * @param array $post_types Post types and their associated taxonomies.
- */
-function taxonomy_meta_box( $post_types ) {
-	$post_types[ post_type_slug() ] = array_column( taxonomies(), 'slug' );
 
 	return $post_types;
 }
@@ -301,6 +256,53 @@ function insert_post_data( $data, $postarr ) {
 	}
 
 	return $data;
+}
+
+/**
+ * Registers taxonomies attached to the Cost Tables post type.
+ *
+ * @since 0.1.0
+ */
+function register_taxonomies() {
+	foreach ( taxonomies() as $taxonomy ) {
+		$args = array(
+			'labels' => array(
+				'name' => $taxonomy['plural'],
+				'singular_name' => $taxonomy['singular'],
+				'all_items' => 'All ' . $taxonomy['plural'],
+				'edit_item' => 'Edit ' . $taxonomy['singular'],
+				'view_item' => 'View ' . $taxonomy['singular'],
+				'update_item' => 'Update ' . $taxonomy['singular'],
+				'add_new_item' => 'Add New ' . $taxonomy['singular'],
+				'new_item_name' => 'New ' . $taxonomy['singular'] . ' Name',
+				'search_items' => 'Search ' . $taxonomy['plural'],
+				'popular_items' => 'Popular ' . $taxonomy['plural'],
+				'separate_items_with_commas' => 'Separate ' . $taxonomy['plural'] . ' with commas',
+				'add_or_remove_items' => 'Add or remove ' . $taxonomy['plural'],
+				'choose_from_most_used' => 'Choose from the most used ' . $taxonomy['plural'],
+				'not_found' => 'No ' . $taxonomy['plural'] . ' found',
+			),
+			'description' => $taxonomy['description'],
+			'public' => true,
+			'hierarchical' => false,
+			'show_admin_column' => true,
+		);
+
+		register_taxonomy( $taxonomy['slug'], post_type_slug(), $args );
+	}
+}
+
+/**
+ * Displays a meta box with the Select2 interface provided by the University Taxonomy plugin.
+ *
+ * @since 0.1.0
+ *
+ * @param array $post_types Post types and their associated taxonomies.
+ */
+function taxonomy_meta_box( $post_types ) {
+	$post_types[ post_type_slug() ] = array_column( taxonomies(), 'slug' );
+
+	return $post_types;
 }
 
 /**
