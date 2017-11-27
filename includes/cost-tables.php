@@ -330,7 +330,7 @@ function cost_table_query( $language, $session, $campus, $career ) {
 	// Find all tables for the given language and session.
 	$query_args = array(
 		'post_type' => post_type_slug(),
-		'posts_per_page' => -1,
+		'posts_per_page' => 60,
 		'tax_query' => array(
 			'relation' => 'AND',
 			array(
@@ -344,9 +344,14 @@ function cost_table_query( $language, $session, $campus, $career ) {
 				'terms' => $session,
 			),
 		),
+		'no_found_rows' => true,
 	);
 
+	add_filter( 'posts_groupby', '__return_false' );
+
 	$query = new \WP_Query( $query_args );
+
+	remove_filter( 'posts_groupby', '__return_false' );
 
 	if ( $query->have_posts() ) {
 		while ( $query->have_posts() ) {
