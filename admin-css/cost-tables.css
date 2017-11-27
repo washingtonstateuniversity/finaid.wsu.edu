@@ -1,0 +1,16 @@
+#postdivrich {
+	display: none;
+}
+
+#cost-table-meta table {
+	table-layout: fixed;
+	width: 100%;
+}
+
+#cost-table-meta td input {
+	width: 100%;
+}
+
+#cost-table-meta .hide {
+	display: none;
+}
