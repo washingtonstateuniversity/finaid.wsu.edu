@@ -32,6 +32,7 @@
 			data = {
 				action: "cost_tables",
 				nonce: cost_tables.nonce,
+				language: cost_tables.language,
 				session: $session.val(),
 				campus: $campus.val(),
 				career: $career.val(),
@@ -47,8 +48,8 @@
 			$.post( cost_tables.ajax_url, data, function( response ) {
 				var response_data = $.parseJSON( response );
 
-				update_options( $campus_options, response_data.available_campuses );
-				update_options( $career_options, response_data.available_careers );
+				update_options( $campus_options, response_data.campuses );
+				update_options( $career_options, response_data.careers );
 
 				$table_container.html( response_data.table );
 			} );

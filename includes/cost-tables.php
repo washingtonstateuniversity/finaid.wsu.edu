@@ -51,6 +51,9 @@ add_action( 'add_meta_boxes_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables
 add_action( 'admin_enqueue_scripts', 'WSU\Financial_Aid\Cost_Tables\admin_enqueue_scripts' );
 add_action( 'save_post_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables\save_post', 10, 2 );
 add_filter( 'wp_insert_post_data', 'WSU\Financial_Aid\Cost_Tables\insert_post_data', 11, 2 );
+add_shortcode( 'sfs_cost_tables', 'WSU\Financial_Aid\Cost_Tables\display_sfs_cost_tables' );
+add_action( 'wp_ajax_nopriv_cost_tables', 'WSU\Financial_Aid\Cost_Tables\ajax_callback' );
+add_action( 'wp_ajax_cost_tables', 'WSU\Financial_Aid\Cost_Tables\ajax_callback' );
 
 /**
  * Registers a post type for tracking cost of attendance data.
@@ -298,4 +301,277 @@ function insert_post_data( $data, $postarr ) {
 	}
 
 	return $data;
+}
+
+/**
+ * Retrieves a cost table and the associated options.
+ *
+ * @since 0.1.0
+ *
+ * @param string $language The current page language, provided as a term slug.
+ * @param string $session  The provided session slug.
+ * @param string $campus   The provided campus slug.
+ * @param string $career   The provided career slug.
+ *
+ * @return array
+ */
+function cost_table_query( $language, $session, $campus, $career ) {
+	if ( ! $language || ! $session || ! $campus || ! $career ) {
+		return;
+	}
+
+	// Set up the array of data to fill in and return.
+	$data = array(
+		'table' => false,
+		'campuses' => array(),
+		'careers' => array(),
+	);
+
+	// Find all tables for the given language and session.
+	$query_args = array(
+		'post_type' => post_type_slug(),
+		'posts_per_page' => -1,
+		'tax_query' => array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'language',
+				'field' => 'slug',
+				'terms' => $language,
+			),
+			array(
+				'taxonomy' => 'session',
+				'field' => 'slug',
+				'terms' => $session,
+			),
+		),
+	);
+
+	$query = new \WP_Query( $query_args );
+
+	if ( $query->have_posts() ) {
+		while ( $query->have_posts() ) {
+			$query->the_post();
+
+			// Build the array of campus options offered during the given session.
+			$campuses = get_the_terms( get_the_ID(), 'campus' );
+
+			if ( $campuses && ! is_wp_error( $campuses ) ) {
+				foreach ( $campuses as $term ) {
+					if ( ! in_array( $term->slug, $data['campuses'], true ) ) {
+						$data['campuses'][] = $term->slug;
+					}
+				}
+			}
+
+			// Narrow results down to tables for the given campus.
+			if ( ! has_term( $campus, 'campus', get_the_ID() ) ) {
+				continue;
+			}
+
+			// Build the array of career path options offered during the given session at the given campus.
+			$careers = get_the_terms( get_the_ID(), 'career-path' );
+
+			if ( $careers && ! is_wp_error( $careers ) ) {
+				foreach ( $careers as $term ) {
+					if ( ! in_array( $term->slug, $data['campuses'], true ) ) {
+						$data['careers'][] = $term->slug;
+					}
+				}
+			}
+
+			// Attempt to find a table that meets all the given critera.
+			if ( has_term( $career, 'career-path', get_the_ID() ) ) {
+				$data['table'] = get_the_content();
+			}
+		}
+		wp_reset_postdata();
+	}
+
+	return $data;
+}
+
+/**
+ * Display a form for viewing cost of attendance tables.
+ *
+ * @since 0.1.0
+ *
+ * @param array $atts Shortcode attributes.
+ *
+ * @return string $html HTML output.
+ */
+function display_sfs_cost_tables( $atts ) {
+	$defaults = array(
+		'default_session' => '',
+		'default_campus' => 'pullman',
+		'default_career' => 'undergraduate',
+		'language_code' => '',
+		'session_label' => 'Year/Session',
+		'campus_label' => 'Campus',
+		'career_label' => 'Career Path',
+	);
+
+	$atts = shortcode_atts( $defaults, $atts );
+
+	// Bail if no default session was provided - we can't find an initial table without it.
+	if ( ! $atts['default_session'] ) {
+		return '';
+	}
+
+	// Could probably cache this indefinitely unless an attribute is changed.
+
+	$default_session = sanitize_text_field( $atts['default_session'] );
+	$default_campus = sanitize_text_field( $atts['default_campus'] );
+	$default_career = sanitize_text_field( $atts['default_career'] );
+
+	if ( '' === $atts['language_code'] ) {
+		$language_terms = get_the_terms( get_the_ID(), 'language' );
+		if ( $language_terms ) {
+			$language = $language_terms[0]->slug;
+		} else {
+			$language = 'en';
+		}
+	} else {
+		$language = sanitize_text_field( $atts['language_code'] );
+	}
+
+	$session_terms = get_terms( 'session' );
+	$campus_terms = get_terms( 'campus' );
+	$career_terms = get_terms( 'career-path' );
+
+	$data = cost_table_query( $language, $default_session, $default_campus, $default_career );
+
+	// Bail if no terms were found or no data was returned.
+	if ( ! $session_terms || ! $campus_terms || ! $career_terms || ! $data ) {
+		return '';
+	}
+
+	wp_enqueue_script( 'sfs-cost-tables', get_stylesheet_directory_uri() . '/src/js/cost-tables.js', array( 'jquery' ), \WSU_Student_Financial_Services_Theme()->theme_version(), true );
+
+	wp_localize_script( 'sfs-cost-tables', 'cost_tables', array(
+		'ajax_url' => admin_url( 'admin-ajax.php' ),
+		'nonce' => wp_create_nonce( 'sfs-cost-tables' ),
+		'language' => $language,
+	) );
+
+	ob_start();
+	?>
+	<form class="sfs-cost-tables flex-form">
+
+		<div>
+			<label for="cost-table-session"><?php echo esc_html( $atts['session_label'] ); ?></label><br />
+			<div class="select-wrap">
+				<select id="cost-table-session" name="session">
+					<?php foreach ( $session_terms as $term ) { ?>
+					<option value="<?php echo esc_attr( $term->slug ); ?>"<?php
+
+					// Define the display name for the term.
+					$name = ( 'en' === $language ) ? $term->name : $term;
+
+					selected( $term->slug, $default_session );
+					?>><?php echo esc_html( $name ); ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+
+		<div>
+			<label for="cost-table-campus"><?php echo esc_html( $atts['campus_label'] ); ?></label><br />
+			<div class="select-wrap">
+				<select id="cost-table-campus" name="campus">
+					<?php foreach ( $campus_terms as $term ) { ?>
+					<option value="<?php echo esc_attr( $term->slug ); ?>"<?php
+
+					// Disable campus options not offered during the default session.
+					if ( ! in_array( $term->slug, $data['campuses'], true ) ) {
+						echo ' disabled';
+					}
+
+					// Define the display name for the term.
+					$name = ( 'en' === $language ) ? $term->name : $term;
+
+					selected( $term->slug, $default_campus );
+					?>><?php echo esc_html( $name ); ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+
+		<div>
+			<label for="cost-table-career"><?php echo esc_html( $atts['career_label'] ); ?></label><br />
+			<div class="select-wrap">
+				<select id="cost-table-career" name="career">
+					<?php foreach ( $career_terms as $term ) { ?>
+					<option value="<?php echo esc_attr( $term->slug ); ?>"<?php
+
+					// Disable career options not offered during the default session at the default campus.
+					if ( ! in_array( $term->slug, $data['careers'], true ) ) {
+						echo ' disabled';
+					}
+
+					// Define the display name for the term.
+					$name = ( 'en' === $language ) ? $term->name : $term;
+
+					selected( $term->slug, $default_career );
+					?>><?php echo esc_html( $name ); ?></option>
+					<?php } ?>
+				</select>
+			</div>
+		</div>
+
+	</form>
+
+	<div class="cost-table-placeholder">
+		<?php echo wp_kses_post( $data['table'] ); ?>
+	</div>
+
+	<?php
+
+	$html = ob_get_clean();
+
+	return $html;
+}
+
+/**
+ * Handle the ajax callback for the cost of attendance tables form.
+ *
+ * @since 0.1.0
+ */
+function ajax_callback() {
+	check_ajax_referer( 'sfs-cost-tables', 'nonce' );
+
+	$language = sanitize_text_field( $_POST['language'] );
+	$session = sanitize_text_field( $_POST['session'] );
+	$campus = sanitize_text_field( $_POST['campus'] );
+	$career = sanitize_text_field( $_POST['career'] );
+
+	$data = cost_table_query( $language, $session, $campus, $career );
+
+	if ( ! $data['table'] ) {
+		// Try to be helpful if no matching table is found.
+		$campus_term = get_term_by( 'slug', $campus, 'campus' );
+		$campus_name = ( 'en' === $language ) ? $campus_term->name : $campus_term;
+		$career_term = get_term_by( 'slug', $career, 'career-path' );
+		$career_name = ( 'en' === $language ) ? $career_term->name : $career_term;
+		$session_term = get_term_by( 'slug', $session, 'session' );
+		$session_name = ( 'en' === $language ) ? $session_term->name : $session_term;
+
+		$notice = $career_name . ' is not offered at the ' . $campus_name . ' campus during the ' . $session_name . ' session.';
+
+		switch ( $_POST['updated'] ) {
+			case 'session':
+				$data['table'] = '<p>' . $notice . ' Please select another session, or check the <em>Campus</em> or <em>Career Path</em> drop-downs for other options offered during this session.</p>';
+				break;
+			case 'campus':
+				$data['table'] = '<p>' . $notice . ' Please check the <em>Career Path</em> drop-down for other options offered at ' . $campus_name . ' during this session, or select another campus.</p>';
+				break;
+			case 'career':
+				// Theoretically, no one should make it in here...
+				$data['table'] = "<p>We don't seem to have an estimate for the selected options. Please try another combination.</p>";
+				break;
+		}
+	}
+
+	echo wp_json_encode( $data );
+
+	exit();
 }
