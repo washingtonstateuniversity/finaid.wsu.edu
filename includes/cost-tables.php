@@ -51,6 +51,15 @@ add_action( 'save_post_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables\save
 add_filter( 'wp_insert_post_data', 'WSU\Financial_Aid\Cost_Tables\insert_post_data', 11, 2 );
 
 add_action( 'init', 'WSU\Financial_Aid\Cost_Tables\register_taxonomies' );
+add_action( 'init', 'WSU\Financial_Aid\Cost_Tables\register_meta', 25 );
+foreach ( taxonomies() as $taxonomy ) {
+	if ( 'campus' === $taxonomy['slug'] ) {
+		continue;
+	}
+
+	add_action( "{$taxonomy['slug']}_edit_form_fields", 'WSU\Financial_Aid\Cost_Tables\edit_term_meta_fields', 10 );
+	add_action( "edit_{$taxonomy['slug']}", 'WSU\Financial_Aid\Cost_Tables\save_term_fields' );
+}
 add_filter( 'wsuwp_taxonomy_metabox_post_types', 'WSU\Financial_Aid\Cost_Tables\taxonomy_meta_box' );
 
 add_shortcode( 'sfs_cost_tables', 'WSU\Financial_Aid\Cost_Tables\display_sfs_cost_tables' );
@@ -289,6 +298,104 @@ function register_taxonomies() {
 		);
 
 		register_taxonomy( $taxonomy['slug'], post_type_slug(), $args );
+	}
+}
+
+/**
+ * Registers taxonomies attached to the Cost Tables post type.
+ *
+ * @since 0.1.0
+ */
+function term_meta_keys() {
+	if ( function_exists( 'pll_languages_list' ) ) {
+		$meta_keys = array();
+		$languages = pll_languages_list();
+
+		foreach ( $languages as $language ) {
+			if ( 'en' === $language ) {
+				continue;
+			}
+
+			$term = get_term_by( 'slug', $language, 'language' );
+
+			$meta_keys[ "_$language-name" ] = array(
+				'description' => $term->name . ' Name',
+				'type' => 'string',
+				'sanitize_callback' => 'sanitize_text_field',
+				'single' => true,
+			);
+		}
+
+		return $meta_keys;
+	}
+
+	return array();
+}
+
+/**
+ * Registers the meta keys used with terms for capturing language names.
+ *
+ * @since 0.1.0
+ */
+function register_meta() {
+	if ( ! empty( term_meta_keys() ) ) {
+		foreach ( term_meta_keys() as $key => $args ) {
+			\register_meta( 'term', $key, $args );
+		}
+	}
+}
+
+/**
+ * Captures language meta assigned to a term.
+ *
+ * @since 0.1.0
+ *
+ * @param WP_Term $term
+ */
+function edit_term_meta_fields( $term ) {
+	$term_meta = get_registered_metadata( 'term', $term->term_id );
+
+	foreach ( term_meta_keys() as $key => $meta ) {
+		?>
+		<tr class="form-field">
+			<th scope="row">
+				<label for="<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $meta['description'] ); ?></label>
+			</th>
+			<td>
+				<input type="text"
+					   name="<?php echo esc_attr( $key ); ?>"
+					   id="<?php echo esc_attr( $key ); ?>"
+					   value="<?php if ( isset( $term_meta[ $key ][0] ) ) { echo esc_attr( $term_meta[ $key ][0] ); } ?>" />
+			</td>
+		</tr>
+		<?php
+	}
+}
+
+/**
+ * Saves the additional form fields when a term is updated.
+ *
+ * @since 0.1.0
+ *
+ * @param int $term_id The ID of the term being edited.
+ */
+function save_term_fields( $term_id ) {
+	global $wp_list_table;
+
+	if ( 'editedtag' !== $wp_list_table->current_action() ) {
+		return;
+	}
+
+	// Reuse the default nonce that is checked in `edit-tags.php`.
+	check_admin_referer( 'update-tag_' . $term_id );
+
+	$keys = get_registered_meta_keys( 'term' );
+
+	foreach ( term_meta_keys() as $key => $meta ) {
+		if ( isset( $_POST[ $key ] ) && isset( $keys[ $key ] ) && isset( $keys[ $key ]['sanitize_callback'] ) ) {
+			// Each piece of meta is registered with sanitization.
+			update_term_meta( $term_id, $key, $_POST[ $key ] );
+		}
 	}
 }
 
