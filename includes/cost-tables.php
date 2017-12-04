@@ -48,7 +48,6 @@ add_filter( 'pll_get_post_types', 'WSU\Financial_Aid\Cost_Tables\add_to_pll', 10
 add_action( 'add_meta_boxes_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables\add_meta_boxes' );
 add_action( 'admin_enqueue_scripts', 'WSU\Financial_Aid\Cost_Tables\admin_enqueue_scripts' );
 add_action( 'save_post_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables\save_post', 10, 2 );
-add_filter( 'wp_insert_post_data', 'WSU\Financial_Aid\Cost_Tables\insert_post_data', 11, 2 );
 
 add_action( 'init', 'WSU\Financial_Aid\Cost_Tables\register_taxonomies' );
 add_action( 'init', 'WSU\Financial_Aid\Cost_Tables\register_meta', 25 );
@@ -92,7 +91,6 @@ function register_post_type() {
 		'menu_icon' => 'dashicons-clipboard',
 		'supports' => array(
 			'title',
-			'editor',
 		),
 	);
 
@@ -217,9 +215,10 @@ function save_post( $post_id, $post ) {
 		return;
 	}
 
-	if ( isset( $_POST['_cost_table_data'] ) && '' !== $_POST['_cost_table_data'] ) {
-		$sanitized_data = array();
+	$sanitized_data = array();
+	$rendered_table = '';
 
+	if ( isset( $_POST['_cost_table_data'] ) && '' !== $_POST['_cost_table_data'] ) {
 		foreach ( $_POST['_cost_table_data'] as $row => $cells ) {
 			foreach ( $cells as $index => $cell ) {
 				$sanitized_data[ $row ][] = wp_kses_post( $cell );
@@ -230,41 +229,36 @@ function save_post( $post_id, $post ) {
 	} else {
 		delete_post_meta( $post_id, '_cost_table_data' );
 	}
-}
 
-/**
- * Removes post content before saving a person on a secondary site.
- *
- * @since 0.1.0
- *
- * @param array $data    Slashed post data.
- * @param array $postarr Sanitized, but otherwise unmodified post data.
- *
- * @return array
- */
-function insert_post_data( $data, $postarr ) {
-	if ( post_type_slug() === $data['post_type'] ) {
-		$cost_data = get_post_meta( $postarr['ID'], '_cost_table_data', true );
+	// Render a table from the sanitized data and save as the post content.
+	if ( ! empty( $sanitized_data ) ) {
+		$rendered_table = '<table>';
 
-		if ( $cost_data ) {
-			$built_table = '<table>';
-			foreach ( $cost_data as $row => $cells ) {
-				$built_table .= '<tr>';
-				foreach ( $cells as $index => $cell ) {
-					$built_table .= ( 0 === $row ) ? '<th>' : '<td>';
-					$built_table .= wp_kses_post( $cell );
-					$built_table .= ( 0 === $row ) ? '</th>' : '</td>';
-				}
-				$built_table .= '</tr>';
+		foreach ( $sanitized_data as $row => $cells ) {
+			$rendered_table .= '<tr>';
+
+			foreach ( $cells as $index => $cell ) {
+				$rendered_table .= ( 0 === $row ) ? '<th>' : '<td>';
+				$rendered_table .= $cell;
+				$rendered_table .= ( 0 === $row ) ? '</th>' : '</td>';
 			}
-			$built_table .= '</table>';
-			$data['post_content'] = $built_table;
-		} else {
-			$data['post_content'] = '';
+
+			$rendered_table .= '</tr>';
 		}
+
+		$rendered_table .= '</table>';
 	}
 
-	return $data;
+	// Unhook this function to prevent an infinite loop.
+	remove_action( 'save_post_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables\save_post', 10 );
+
+	wp_update_post( array(
+		'ID' => $post_id,
+		'post_content' => $rendered_table,
+	) );
+
+	// Rehook this function.
+	add_action( 'save_post_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables\save_post', 10 );
 }
 
 /**
