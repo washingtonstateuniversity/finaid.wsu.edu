@@ -579,7 +579,14 @@ function display_sfs_cost_tables( $atts ) {
 					<option value="<?php echo esc_attr( $term->slug ); ?>"<?php
 
 					// Define the display name for the term.
-					$name = ( 'en' === $language ) ? $term->name : $term;
+					$name = $term->name;
+
+					if ( 'en' !== $language ) {
+						$translated_name = get_term_meta( $term->term_id, "_$language-name", true );
+						if ( $translated_name ) {
+							$name = $translated_name;
+						}
+					}
 
 					selected( $term->slug, $default_session );
 					?>><?php echo esc_html( $name ); ?></option>
@@ -600,11 +607,8 @@ function display_sfs_cost_tables( $atts ) {
 						echo ' disabled';
 					}
 
-					// Define the display name for the term.
-					$name = ( 'en' === $language ) ? $term->name : $term;
-
 					selected( $term->slug, $default_campus );
-					?>><?php echo esc_html( $name ); ?></option>
+					?>><?php echo esc_html( $term->name ); ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -623,7 +627,14 @@ function display_sfs_cost_tables( $atts ) {
 					}
 
 					// Define the display name for the term.
-					$name = ( 'en' === $language ) ? $term->name : $term;
+					$name = $term->name;
+
+					if ( 'en' !== $language ) {
+						$translated_name = get_term_meta( $term->term_id, "_$language-name", true );
+						if ( $translated_name ) {
+							$name = $translated_name;
+						}
+					}
 
 					selected( $term->slug, $default_career );
 					?>><?php echo esc_html( $name ); ?></option>
@@ -662,12 +673,25 @@ function ajax_callback() {
 
 	if ( ! $data['table'] ) {
 		// Try to be helpful if no matching table is found.
-		$campus_term = get_term_by( 'slug', $campus, 'campus' );
-		$campus_name = ( 'en' === $language ) ? $campus_term->name : $campus_term;
-		$career_term = get_term_by( 'slug', $career, 'career-path' );
-		$career_name = ( 'en' === $language ) ? $career_term->name : $career_term;
 		$session_term = get_term_by( 'slug', $session, 'session' );
-		$session_name = ( 'en' === $language ) ? $session_term->name : $session_term;
+		$campus_term = get_term_by( 'slug', $campus, 'campus' );
+		$career_term = get_term_by( 'slug', $career, 'career-path' );
+		$session_name = $session_term->name;
+		$campus_name = $campus_term->name;
+		$career_name = $career_term->name;
+
+		if ( 'en' !== $language ) {
+			$translated_session = get_term_meta( $session_term->term_id, "_$language-name", true );
+			$translated_career = get_term_meta( $career_term->term_id, "_$language-name", true );
+
+			if ( $translated_session ) {
+				$session_name = $translated_session;
+			}
+
+			if ( $translated_career ) {
+				$career_name = $translated_career;
+			}
+		}
 
 		$notice = $career_name . ' is not offered at the ' . $campus_name . ' campus during the ' . $session_name . ' session.';
 
