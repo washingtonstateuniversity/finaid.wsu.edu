@@ -4,12 +4,13 @@
 
 	var $table = $( "#cost-table-meta table" ),
 		$add_column = $( "#cost-table-meta .add-column" ),
-		$add_row = $( "#cost-table-meta .add-row" );
+		$add_row = $( "#cost-table-meta .add-row" ),
+		total_columns = 6;
 
 	/**
-	 * Hide the "Add Column" button if there are already five columns.
+	 * Hide the "Add Column" button if there are already six columns.
 	 */
-	if ( 5 <= $table.find( "tr:first td" ).length ) {
+	if ( total_columns <= $table.find( "tr:first td" ).length ) {
 		$add_column.prop( "disabled", true );
 	}
 
@@ -20,10 +21,10 @@
 	 * removes the value from the input,
 	 * and appends the cell to the row.
 	 *
-	 * It also hides the "Add Column" button once there are five total columns.
+	 * This also disables the "Add Column" button once there are six total columns.
 	 */
 	$add_column.on( "click", function() {
-		if ( 5 > $table.find( "tr:first td" ).length ) {
+		if ( total_columns > $table.find( "tr:first td" ).length ) {
 			$table.find( "tr" ).each( function() {
 				$( this ).find( "td" ).last().clone()
 				.find( "input" ).val( "" ).end()
@@ -31,7 +32,7 @@
 			} );
 		}
 
-		if ( 5 <= $table.find( "tr:first td" ).length ) {
+		if ( total_columns <= $table.find( "tr:first td" ).length ) {
 			$add_column.prop( "disabled", true );
 		}
 	} );
