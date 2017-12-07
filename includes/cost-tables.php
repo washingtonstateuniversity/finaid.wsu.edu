@@ -141,26 +141,53 @@ function display_cost_meta_box( $post ) {
 	$data = get_post_meta( $post->ID, '_cost_table_data', true );
 	?>
 
+	<table>
+
 	<?php if ( $data ) { ?>
 
-	<table>
 		<?php foreach ( $data as $row => $cells ) { ?>
+
+		<?php // Output a row of buttons for deleting columns.
+		if ( 0 === $row ) { ?>
 		<tr>
+			<td></td>
+			<?php foreach ( $cells as $index => $cell ) { ?>
+			<td>
+				<button type="button" class="coa-meta-delete delete-column">Delete Column</button>
+			</td>
+			<?php } ?>
+		</tr>
+		<?php } ?>
+
+		<tr>
+			<?php // Output a column of buttons for deleting rows. ?>
+			<td>
+				<button type="button" class="coa-meta-delete delete-row"">Delete Row</button>
+			</td>
+
 			<?php foreach ( $cells as $index => $cell ) { ?>
 			<td>
 				<input type="text" name="_cost_table_data[<?php echo esc_attr( $row ); ?>][]" autocomplete="off" value="<?php echo esc_attr( $cell ); ?>" />
 			</td>
 			<?php } ?>
 		</tr>
+
 		<?php } ?>
-	</table>
 
 	<?php } else { ?>
 
-	<table>
+		<tr>
+			<td></td>
+			<td>
+				<button type="button" class="coa-meta-delete delete-column">Delete Column</button>
+			</td>
+			<td>
+				<button type="button" class="coa-meta-delete delete-column">Delete Column</button>
+			</td>
+		</tr>
 		<tr>
 			<td>
-				<input type="text" name="_cost_table_data[0][]" autocomplete="off" value="" />
+				<button type="button" class="coa-meta-delete delete-row">Delete Row</button>
 			</td>
 			<td>
 				<input type="text" name="_cost_table_data[0][]" autocomplete="off" value="" />
@@ -169,12 +196,13 @@ function display_cost_meta_box( $post ) {
 				<input type="text" name="_cost_table_data[0][]" autocomplete="off" value="" />
 			</td>
 		</tr>
-	</table>
 
 	<?php } ?>
 
-	<button type="button" class="add-row">+ Add row</button>
-	<button type="button" class="add-column">+ Add column</button>
+	</table>
+
+	<button type="button" class="coa-meta-add add-row"><span>+</span> Add row</button>
+	<button type="button" class="coa-meta-add add-column"><span>+</span> Add column</button>
 	<?php
 }
 
