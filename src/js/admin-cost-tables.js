@@ -8,7 +8,7 @@
 		total_columns = 6;
 
 	/**
-	 * Hide the "Add Column" button if there are already six columns.
+	 * Hide the "Add Column" button if there are already the allowed maximum.
 	 */
 	if ( total_columns <= $table.find( "tr:first td" ).length ) {
 		$add_column.prop( "disabled", true );
@@ -21,7 +21,7 @@
 	 * removes the value from the input,
 	 * and appends the cell to the row.
 	 *
-	 * This also disables the "Add Column" button once there are six total columns.
+	 * This also disables the "Add Column" button once the allowed maximum is reached.
 	 */
 	$add_column.on( "click", function() {
 		if ( total_columns > $table.find( "tr:first td" ).length ) {
@@ -48,11 +48,58 @@
 		$table.find( "tr" ).last().clone()
 			.find( "input[type='text']" ).val( "" ).end()
 			.find( "input[type='text']" ).attr( "name", function( i, value ) {
-				var $index = value.match( /\d+/ ),
-					$new_index = parseInt( $index ) + 1;
-				return value.replace( /\d+/, $new_index );
+				var new_index = parseInt( value.match( /\d+/ ) ) + 1;
+				return value.replace( /\d+/, new_index );
 			} ).end()
 			.appendTo( $table );
+	} );
+
+	/**
+	 * Delete a row or column from the table.
+	 */
+	$table.on( "click", ".coa-meta-delete", function() {
+		var $button = $( this );
+
+		// Delete a row.
+		if ( $button.hasClass( "delete-row" ) ) {
+			var $row = $button.closest( "tr" );
+
+			// Don't allow the first row to be deleted.
+			if ( 0 === $row.index() ) {
+				return;
+			}
+
+			// Delete the row.
+			$row.remove();
+
+			// Reindex remaining rows.
+			$table.find( "tr" ).each( function() {
+				var $current_row = $( this ),
+					index = $current_row.index() - 1;
+
+				$current_row.find( "input[type='text']" ).attr( "name", function( i, value ) {
+					return value.replace( /\d+/, index );
+				} ).end();
+			} );
+		}
+
+		// Delete a column.
+		if ( $button.hasClass( "delete-column" ) ) {
+			var $column = $button.closest( "td" ).index();
+
+			// Don't allow the first column to be deleted.
+			if ( 0 === $column ) {
+				return;
+			}
+
+			// Delete the column.
+			$table.find( "tr" ).each( function() {
+				$( this ).find( "td" ).eq( $column ).remove();
+			} );
+
+			// Reenable the add column button.
+			$add_column.prop( "disabled", false );
+		}
 	} );
 
 }( jQuery ) );
