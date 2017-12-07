@@ -553,8 +553,6 @@ function display_sfs_cost_tables( $atts ) {
 		return '';
 	}
 
-	// Could probably cache this indefinitely unless an attribute is changed.
-
 	$default_session = sanitize_text_field( $atts['default_session'] );
 	$default_campus = sanitize_text_field( $atts['default_campus'] );
 	$default_career = sanitize_text_field( $atts['default_career'] );
@@ -570,17 +568,6 @@ function display_sfs_cost_tables( $atts ) {
 		$language = sanitize_text_field( $atts['language_code'] );
 	}
 
-	$session_terms = get_terms( 'session' );
-	$campus_terms = get_terms( 'campus' );
-	$career_terms = get_terms( 'career-path' );
-
-	$data = cost_table_query( $language, $default_session, $default_campus, $default_career );
-
-	// Bail if no terms were found or no data was returned.
-	if ( ! $session_terms || ! $campus_terms || ! $career_terms || ! $data ) {
-		return '';
-	}
-
 	wp_enqueue_script( 'sfs-cost-tables', get_stylesheet_directory_uri() . '/js/cost-tables.min.js', array( 'jquery' ), \WSU_Student_Financial_Services_Theme()->theme_version(), true );
 
 	wp_localize_script( 'sfs-cost-tables', 'cost_tables', array(
@@ -588,6 +575,23 @@ function display_sfs_cost_tables( $atts ) {
 		'nonce' => wp_create_nonce( 'sfs-cost-tables' ),
 		'language' => $language,
 	) );
+
+	$cache_key = md5( get_the_modified_date( 'Y-m-d H:i:s', get_the_ID() ) . $language );
+	$cached_content = wp_cache_get( $cache_key, 'wsu_coa_tables' );
+
+	if ( $cached_content ) {
+		return $cached_content;
+	}
+
+	$session_terms = get_terms( 'session' );
+	$campus_terms = get_terms( 'campus' );
+	$career_terms = get_terms( 'career-path' );
+	$data = cost_table_query( $language, $default_session, $default_campus, $default_career );
+
+	// Bail if no terms were found or no data was returned.
+	if ( ! $session_terms || ! $campus_terms || ! $career_terms || ! $data ) {
+		return '';
+	}
 
 	ob_start();
 	?>
@@ -674,6 +678,8 @@ function display_sfs_cost_tables( $atts ) {
 	<?php
 
 	$html = ob_get_clean();
+
+	wp_cache_set( $cache_key, $html, 'wsu_coa_tables' );
 
 	return $html;
 }
