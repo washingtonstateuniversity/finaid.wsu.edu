@@ -3,7 +3,7 @@ module.exports = function( grunt ) {
 		pkg: grunt.file.readJSON( "package.json" ),
 
 		stylelint: {
-			src: [ "css/*.css" ]
+			src: [ "css/*.css", "admin-css/*.css" ]
 		},
 
 		concat: {

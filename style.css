@@ -1377,4 +1377,27 @@ section.video {
 		margin-top: 1em;
 	}
 }
+
+.cost-table-placeholder th {
+	background-color: #203639;
+	color: #fff;
+	vertical-align: middle;
+}
+
+.cost-table-placeholder th,
+.cost-table-placeholder td {
+	padding: 8px;
+}
+
+.cost-table-placeholder td {
+	border-bottom: 1px solid #ddd;
+}
+
+.cost-table-placeholder tr:nth-of-type(even) td {
+	background: #f3f3f3;
+}
+
+.cost-table-placeholder td:empty {
+	height: 22px;
+}
 /*# sourceMappingURL=style.css.map */
