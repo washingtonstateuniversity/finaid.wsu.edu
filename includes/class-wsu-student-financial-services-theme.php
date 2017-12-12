@@ -8,7 +8,7 @@ class WSU_Student_Financial_Services_Theme {
 	 *
 	 * @var string String used for busting cache on scripts.
 	 */
-	public $script_version = '0.1.0';
+	public $script_version = '0.1.1';
 
 	/**
 	 * @since 0.0.1
