@@ -506,7 +506,7 @@ function cost_table_query( $language, $session, $campus, $career ) {
 
 		// Attempt to find a table that meets all the given critera.
 		if ( has_term( $career, 'career-path', $post->ID ) ) {
-			$data['table'] = $post->post_content;
+			$data['table'] = wp_kses_post( $post->post_content );
 		}
 	}
 
