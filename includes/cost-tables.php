@@ -459,68 +459,55 @@ function cost_table_query( $language, $session, $campus, $career ) {
 	);
 
 	// Find all tables for the given language and session.
-	$query_args = array(
+	$posts = get_posts( array(
 		'post_type' => post_type_slug(),
 		'posts_per_page' => 60,
+		'lang' => $language,
 		'tax_query' => array(
-			'relation' => 'AND',
-			array(
-				'taxonomy' => 'language',
-				'field' => 'slug',
-				'terms' => $language,
-			),
 			array(
 				'taxonomy' => 'session',
 				'field' => 'slug',
 				'terms' => $session,
 			),
 		),
-		'no_found_rows' => true,
-	);
+	) );
 
-	add_filter( 'posts_groupby', '__return_false' );
+	if ( ! $posts ) {
+		return $data;
+	}
 
-	$query = new \WP_Query( $query_args );
+	foreach ( $posts as $post ) {
+		// Build the array of campus options offered during the given session.
+		$campuses = get_the_terms( $post->ID, 'campus' );
 
-	remove_filter( 'posts_groupby', '__return_false' );
-
-	if ( $query->have_posts() ) {
-		while ( $query->have_posts() ) {
-			$query->the_post();
-
-			// Build the array of campus options offered during the given session.
-			$campuses = get_the_terms( get_the_ID(), 'campus' );
-
-			if ( $campuses && ! is_wp_error( $campuses ) ) {
-				foreach ( $campuses as $term ) {
-					if ( ! in_array( $term->slug, $data['campuses'], true ) ) {
-						$data['campuses'][] = $term->slug;
-					}
+		if ( $campuses && ! is_wp_error( $campuses ) ) {
+			foreach ( $campuses as $term ) {
+				if ( ! in_array( $term->slug, $data['campuses'], true ) ) {
+					$data['campuses'][] = $term->slug;
 				}
-			}
-
-			// Narrow results down to tables for the given campus.
-			if ( ! has_term( $campus, 'campus', get_the_ID() ) ) {
-				continue;
-			}
-
-			// Build the array of career path options offered during the given session at the given campus.
-			$careers = get_the_terms( get_the_ID(), 'career-path' );
-
-			if ( $careers && ! is_wp_error( $careers ) ) {
-				foreach ( $careers as $term ) {
-					if ( ! in_array( $term->slug, $data['campuses'], true ) ) {
-						$data['careers'][] = $term->slug;
-					}
-				}
-			}
-
-			// Attempt to find a table that meets all the given critera.
-			if ( has_term( $career, 'career-path', get_the_ID() ) ) {
-				$data['table'] = get_the_content();
 			}
 		}
-		wp_reset_postdata();
+
+		// Narrow results down to tables for the given campus.
+		if ( ! has_term( $campus, 'campus', $post->ID ) ) {
+			continue;
+		}
+
+		// Build the array of career path options offered during the given session at the given campus.
+		$careers = get_the_terms( $post->ID, 'career-path' );
+
+		if ( $careers && ! is_wp_error( $careers ) ) {
+			foreach ( $careers as $term ) {
+				if ( ! in_array( $term->slug, $data['campuses'], true ) ) {
+					$data['careers'][] = $term->slug;
+				}
+			}
+		}
+
+		// Attempt to find a table that meets all the given critera.
+		if ( has_term( $career, 'career-path', $post->ID ) ) {
+			$data['table'] = $post->post_content;
+		}
 	}
 
 	return $data;
