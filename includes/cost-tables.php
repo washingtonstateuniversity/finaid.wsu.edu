@@ -65,6 +65,8 @@ add_shortcode( 'sfs_cost_tables', 'WSU\Financial_Aid\Cost_Tables\display_sfs_cos
 add_action( 'wp_ajax_nopriv_cost_tables', 'WSU\Financial_Aid\Cost_Tables\ajax_callback' );
 add_action( 'wp_ajax_cost_tables', 'WSU\Financial_Aid\Cost_Tables\ajax_callback' );
 
+add_shortcode( 'sfs_cost_table', 'WSU\Financial_Aid\Cost_Tables\display_sfs_cost_table' );
+
 /**
  * Registers a post type for tracking cost of attendance data.
  *
@@ -727,4 +729,39 @@ function ajax_callback() {
 	echo wp_json_encode( $data );
 
 	exit();
+}
+
+/**
+ * Display a cost of attendance table.
+ *
+ * @since 0.1.2
+ *
+ * @param array $atts Shortcode attributes.
+ *
+ * @return string $html HTML output.
+ */
+function display_sfs_cost_table( $atts ) {
+	$defaults = array(
+		'id' => '',
+	);
+
+	$atts = shortcode_atts( $defaults, $atts );
+
+	// Bail if no id is provided.
+	if ( ! $atts['id'] ) {
+		return '';
+	}
+
+	$table = get_post( absint( $atts['id'] ) );
+
+	// Bail if no table is found.
+	if ( ! $table || 'cost-table' !== $table->post_type ) {
+		return '';
+	}
+
+	$html = '<div class="cost-table-placeholder">';
+	$html .= wp_kses_post( $table->post_content );
+	$html .= '</div>';
+
+	return $html;
 }
