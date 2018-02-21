@@ -46,6 +46,7 @@ function taxonomies() {
 add_action( 'init', 'WSU\Financial_Aid\Cost_Tables\register_post_type' );
 add_filter( 'pll_get_post_types', 'WSU\Financial_Aid\Cost_Tables\add_to_pll', 10, 2 );
 add_action( 'add_meta_boxes_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables\add_meta_boxes' );
+add_action( 'edit_form_after_title', 'WSU\Financial_Aid\Cost_Tables\edit_form_after_title' );
 add_action( 'admin_enqueue_scripts', 'WSU\Financial_Aid\Cost_Tables\admin_enqueue_scripts' );
 add_action( 'save_post_' . post_type_slug(), 'WSU\Financial_Aid\Cost_Tables\save_post', 10, 2 );
 
@@ -205,6 +206,27 @@ function display_cost_meta_box( $post ) {
 
 	<button type="button" class="coa-meta-add add-row"><span>+</span> Add row</button>
 	<button type="button" class="coa-meta-add add-column"><span>+</span> Add column</button>
+	<?php
+}
+
+/**
+ * Adds a note with a shortcode for embedding the table.
+ *
+ * @since 0.1.2
+ *
+ * @param WP_Post $post Post object.
+ */
+function edit_form_after_title( $post ) {
+	if ( post_type_slug() !== $post->post_type ) {
+		return;
+	}
+
+	if ( 'publish' !== $post->post_status ) {
+		return;
+	}
+
+	?>
+	<p><em>Use</em> [sfs_cost_table id="<?php echo esc_html( $post->ID ); ?>"] <em>to embed this table in a page or post.</em></p>
 	<?php
 }
 
