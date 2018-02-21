@@ -760,6 +760,7 @@ function display_sfs_cost_table( $atts ) {
 	}
 
 	$html = '<div class="cost-table-placeholder">';
+	$html .= '<header>' . esc_html( $table->post_title ) . '</header>';
 	$html .= wp_kses_post( $table->post_content );
 	$html .= '</div>';
 
