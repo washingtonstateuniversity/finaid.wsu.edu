@@ -43,6 +43,7 @@ class WSU_Student_Financial_Services_Theme {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_filter( 'body_class', array( $this, 'browser_body_class' ) );
 		add_filter( 'wsuwp_content_syndicate_json', array( $this, 'announcements_html' ), 10, 2 );
+		add_filter( 'nav_menu_css_class', array( $this, 'menu_classes' ), 12, 3 );
 	}
 
 	/**
@@ -119,5 +120,38 @@ class WSU_Student_Financial_Services_Theme {
 	 */
 	public function announcements_html( $content, $atts ) {
 		return str_replace( '</a>', ' <span class="read-more">&raquo;&nbsp;Read&nbsp;More</span></a>', $content );
+	}
+
+	/**
+	 * Filter menu item classes for event category pages.
+	 *
+	 * @param array    $classes Current list of nav menu classes.
+	 * @param WP_Post  $item    Post object representing the menu item.
+	 * @param stdClass $args    Arguments used to create the menu.
+	 *
+	 * @return array
+	 */
+	public function menu_classes( $classes, $item, $args ) {
+		// Bail if this isn't the site menu.
+		if ( 'site' !== $args->menu ) {
+			return $classes;
+		}
+
+		// Bail if this isn't an Events Category page.
+		if ( ! is_tax( 'tribe_events_cat' ) ) {
+			return $classes;
+		}
+
+		// Run applicable URLs through `trailingslashit` just to be safe.
+		$current_url = trailingslashit( get_term_link( get_query_var( 'term' ), 'tribe_events_cat' ) );
+		$menu_item_url = trailingslashit( $item->url );
+
+		if ( $current_url === $menu_item_url ) {
+			$classes[] = 'active';
+		} else {
+			$classes = array();
+		}
+
+		return $classes;
 	}
 }
