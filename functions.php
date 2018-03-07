@@ -5,7 +5,6 @@ require_once 'includes/class-wsu-student-financial-services-site-actions-widget.
 require_once 'includes/class-wsu-student-financial-services-give-link-widget.php';
 require_once 'includes/cost-tables.php';
 require_once 'includes/content-syndicate.php';
-require_once 'includes/polylang.php';
 
 add_action( 'after_setup_theme', 'WSU_Student_Financial_Services_Theme' );
 /**
