@@ -524,15 +524,12 @@ main ul {
 	position: absolute;
 	right: 1.5rem;
 	top: 1rem;
-	transition: -webkit-transform .4s;
 	transition: transform .4s;
-	transition: transform .4s, -webkit-transform .4s;
 }
 
 .js-accordion h3[aria-expanded="true"]:after {
-	-webkit-transform: rotate(45deg);
-	    -ms-transform: rotate(45deg);
-	        transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	    transform: rotate(45deg);
 }
 
 .js-accordion h3 + div {
@@ -540,35 +537,20 @@ main ul {
 }
 
 /* Loading animation */
-@-webkit-keyframes spin {
-
-	0% {
-		-webkit-transform: rotate(0deg);
-		transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(360deg);
-		transform: rotate(360deg);
-	}
-}
 
 @keyframes spin {
 
 	0% {
-		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
 	}
 
 	100% {
-		-webkit-transform: rotate(360deg);
 		transform: rotate(360deg);
 	}
 }
 
 .sfs-loading-indicator {
-	-webkit-animation: spin 1s infinite linear;
-	        animation: spin 1s infinite linear;
+	animation: spin 1s infinite linear;
 	border: .25rem solid rgba(113, 113, 113, .5);
 	border-radius: 50%;
 	border-top-color: #981e32;
@@ -606,14 +588,12 @@ a#fafsa {
 @media only screen and (min-width: 694px) {
 
 	.equal-height-columns {
-		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
 	}
 }
 
 .flex-form {
-	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	-ms-flex-wrap: wrap;
@@ -937,9 +917,8 @@ section.video {
 .column.video .videoBG video {
 	height: 100%;
 	margin-left: 50%;
-	-webkit-transform: translateX(-50%);
-	    -ms-transform: translateX(-50%);
-	        transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	    transform: translateX(-50%);
 }
 
 @media screen and (min-width: 990px) {
@@ -1020,20 +999,17 @@ section.video {
 }
 
 .five-steps a:before {
-	-webkit-box-align: center;
-	    -ms-flex-align: center;
-	        align-items: center;
+	-ms-flex-align: center;
+	    align-items: center;
 	background: #b5babe;
 	color: #fff;
 	content: counter(count-it);
 	counter-increment: count-it;
-	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	height: calc(100% - .2em);
-	-webkit-box-pack: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
+	-ms-flex-pack: center;
+	    justify-content: center;
 	left: -4.5rem;
 	position: absolute;
 	text-align: center;
@@ -1086,7 +1062,6 @@ section.video {
 }
 
 .home main .quicklinks {
-	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 }
@@ -1128,7 +1103,6 @@ section.video {
 }
 
 .home-calendar .wsuwp-content-syndicate-list {
-	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	padding: 0;
@@ -1137,9 +1111,8 @@ section.video {
 
 .home-calendar .wsuwp-content-syndicate-event {
 	box-sizing: border-box;
-	-webkit-box-flex: 1;
-	    -ms-flex: 1 0 25%;
-	        flex: 1 0 25%;
+	-ms-flex: 1 0 25%;
+	    flex: 1 0 25%;
 	list-style: none;
 	padding: .5em 1em 0 0;
 	transition: background .4s;
@@ -1228,9 +1201,8 @@ section.video {
 	position: absolute;
 	text-indent: -5rem;
 	top: 50%;
-	-webkit-transform: translateY(-50%);
-	    -ms-transform: translateY(-50%);
-	        transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	    transform: translateY(-50%);
 	width: 2rem;
 }
 
@@ -1289,9 +1261,8 @@ section.video {
 @media screen and (max-width: 791px) {
 
 	.home-calendar .wsuwp-content-syndicate-list li {
-		-webkit-box-flex: 1;
-		    -ms-flex: 1 0 50%;
-		        flex: 1 0 50%;
+		-ms-flex: 1 0 50%;
+		    flex: 1 0 50%;
 		width: 50%;
 	}
 }
@@ -1306,9 +1277,8 @@ section.video {
 @media only screen and (max-width: 530px) {
 
 	.home-calendar .wsuwp-content-syndicate-list li {
-		-webkit-box-flex: 1;
-		    -ms-flex: 1 0 100%;
-		        flex: 1 0 100%;
+		-ms-flex: 1 0 100%;
+		    flex: 1 0 100%;
 		width: 100%;
 	}
 
