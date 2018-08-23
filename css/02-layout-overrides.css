@@ -71,4 +71,14 @@ section.pad-bottom > header {
 		padding-left: .625rem;
 		width: 33.33333%;
 	}
+
+	.reverse.side-left.gutter .column.two:not(.gutterless) {
+		padding-left: 2rem;
+		padding-right: 1rem;
+	}
+
+	.reverse.side-left.gutter .column.one:not(.gutterless) {
+		padding-left: 1rem;
+		padding-right: 2rem;
+	}
 }

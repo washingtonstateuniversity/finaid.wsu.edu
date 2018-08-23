@@ -150,17 +150,17 @@ function display_cost_meta_box( $post ) {
 
 		<?php foreach ( $data as $row => $cells ) { ?>
 
-		<?php // Output a row of buttons for deleting columns.
-		if ( 0 === $row ) { ?>
-		<tr>
-			<td></td>
-			<?php foreach ( $cells as $index => $cell ) { ?>
-			<td>
-				<button type="button" class="coa-meta-delete delete-column">Delete Column</button>
-			</td>
+			<?php // Output a row of buttons for deleting columns.
+			if ( 0 === $row ) { ?>
+			<tr>
+				<td></td>
+					<?php foreach ( $cells as $index => $cell ) { ?>
+					<td>
+						<button type="button" class="coa-meta-delete delete-column">Delete Column</button>
+					</td>
+					<?php } ?>
+			</tr>
 			<?php } ?>
-		</tr>
-		<?php } ?>
 
 		<tr>
 			<?php // Output a column of buttons for deleting rows. ?>
@@ -242,8 +242,8 @@ function admin_enqueue_scripts( $hook ) {
 		return;
 	}
 
-	wp_enqueue_style( 'cost-tables', get_stylesheet_directory_uri() . '/admin-css/cost-tables.css', array(), null );
-	wp_enqueue_script( 'cost-tables', get_stylesheet_directory_uri() . '/js/admin-cost-tables.min.js', array( 'jquery' ), null, true );
+	wp_enqueue_style( 'cost-tables', get_stylesheet_directory_uri() . '/admin-css/cost-tables.css', array(), null ); // @codingStandardsIgnoreLine
+	wp_enqueue_script( 'cost-tables', get_stylesheet_directory_uri() . '/js/admin-cost-tables.min.js', array( 'jquery' ), null, true ); // @codingStandardsIgnoreLine
 }
 
 /**

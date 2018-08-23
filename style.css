@@ -5,7 +5,7 @@
  Author:         WSU University Communications
  Author URI:     https://web.wsu.edu
  Template:       spine
- Version:        0.1.3
+ Version:        0.1.4
 */
 
 .main-header {
@@ -261,6 +261,16 @@ section.pad-bottom > header {
 	.fluid .row.side-right .column.two {
 		padding-left: .625rem;
 		width: 33.33333%;
+	}
+
+	.reverse.side-left.gutter .column.two:not(.gutterless) {
+		padding-left: 2rem;
+		padding-right: 1rem;
+	}
+
+	.reverse.side-left.gutter .column.one:not(.gutterless) {
+		padding-left: 1rem;
+		padding-right: 2rem;
 	}
 }
 
@@ -524,15 +534,12 @@ main ul {
 	position: absolute;
 	right: 1.5rem;
 	top: 1rem;
-	transition: -webkit-transform .4s;
 	transition: transform .4s;
-	transition: transform .4s, -webkit-transform .4s;
 }
 
 .js-accordion h3[aria-expanded="true"]:after {
-	-webkit-transform: rotate(45deg);
-	    -ms-transform: rotate(45deg);
-	        transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	    transform: rotate(45deg);
 }
 
 .js-accordion h3 + div {
@@ -540,35 +547,20 @@ main ul {
 }
 
 /* Loading animation */
-@-webkit-keyframes spin {
-
-	0% {
-		-webkit-transform: rotate(0deg);
-		transform: rotate(0deg);
-	}
-
-	100% {
-		-webkit-transform: rotate(360deg);
-		transform: rotate(360deg);
-	}
-}
 
 @keyframes spin {
 
 	0% {
-		-webkit-transform: rotate(0deg);
 		transform: rotate(0deg);
 	}
 
 	100% {
-		-webkit-transform: rotate(360deg);
 		transform: rotate(360deg);
 	}
 }
 
 .sfs-loading-indicator {
-	-webkit-animation: spin 1s infinite linear;
-	        animation: spin 1s infinite linear;
+	animation: spin 1s infinite linear;
 	border: .25rem solid rgba(113, 113, 113, .5);
 	border-radius: 50%;
 	border-top-color: #981e32;
@@ -606,14 +598,12 @@ a#fafsa {
 @media only screen and (min-width: 694px) {
 
 	.equal-height-columns {
-		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
 	}
 }
 
 .flex-form {
-	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	-ms-flex-wrap: wrap;
@@ -817,6 +807,10 @@ main :-ms-input-placeholder {
 	display: none;
 }
 
+main select::-ms-expand {
+	display: none;
+}
+
 .site-footer {
 	background: linear-gradient(to right, #f3f3f3 0%, #efefef 100%);
 	margin-top: 2rem;
@@ -907,56 +901,32 @@ section.video {
 	position: static;
 }
 
-.column.video #wsu-video-background {
+.video-container {
 	height: 100%;
 	left: 0;
+	mix-blend-mode: multiply;
+	overflow: hidden;
 	position: absolute;
 	top: 0;
 	width: 100%;
 	z-index: -1;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: center;
+	    justify-content: center;
 }
 
-.column.video .videoBG_wrapper #wsu-video-background:after {
-	content: "";
+.video-container video {
+	min-height: 100%;
+	width: auto;
+}
+
+.video-container:after {
 	background: rgba(0, 0, 0, .1);
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-}
-
-.column.video .videoBG_wrapper,
-.column.video .videoBG {
-
-	/* Sorry about these, they're overriding inline styles. */
-	height: 100% !important;
-	width: 100% !important;
-}
-
-.column.video .videoBG video {
+	content: "";
 	height: 100%;
-	margin-left: 50%;
-	-webkit-transform: translateX(-50%);
-	    -ms-transform: translateX(-50%);
-	        transform: translateX(-50%);
-}
-
-@media screen and (min-width: 990px) {
-
-	.column.video #wsu-video-background {
-		left: 5px;
-		width: calc(100% - 5px);
-	}
-
-	.column.video #wsu-video-background #wsu-video-background {
-		left: 0;
-		width: 100%;
-	}
-}
-
-.multiply #wsu-video-background {
-	mix-blend-mode: multiply;
+	position: absolute;
+	width: 100%;
 }
 
 .multiply .transparent-crimson-back {
@@ -1020,20 +990,17 @@ section.video {
 }
 
 .five-steps a:before {
-	-webkit-box-align: center;
-	    -ms-flex-align: center;
-	        align-items: center;
+	-ms-flex-align: center;
+	    align-items: center;
 	background: #b5babe;
 	color: #fff;
 	content: counter(count-it);
 	counter-increment: count-it;
-	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	height: calc(100% - .2em);
-	-webkit-box-pack: center;
-	    -ms-flex-pack: center;
-	        justify-content: center;
+	-ms-flex-pack: center;
+	    justify-content: center;
 	left: -4.5rem;
 	position: absolute;
 	text-align: center;
@@ -1086,7 +1053,6 @@ section.video {
 }
 
 .home main .quicklinks {
-	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 }
@@ -1128,7 +1094,6 @@ section.video {
 }
 
 .home-calendar .wsuwp-content-syndicate-list {
-	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	padding: 0;
@@ -1137,9 +1102,8 @@ section.video {
 
 .home-calendar .wsuwp-content-syndicate-event {
 	box-sizing: border-box;
-	-webkit-box-flex: 1;
-	    -ms-flex: 1 0 25%;
-	        flex: 1 0 25%;
+	-ms-flex: 1 0 25%;
+	    flex: 1 0 25%;
 	list-style: none;
 	padding: .5em 1em 0 0;
 	transition: background .4s;
@@ -1228,9 +1192,8 @@ section.video {
 	position: absolute;
 	text-indent: -5rem;
 	top: 50%;
-	-webkit-transform: translateY(-50%);
-	    -ms-transform: translateY(-50%);
-	        transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	    transform: translateY(-50%);
 	width: 2rem;
 }
 
@@ -1286,12 +1249,97 @@ section.video {
 	left: -.25rem;
 }
 
+.social-media-channels {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: justify;
+	    justify-content: space-between;
+	list-style: none;
+}
+
+.social-media-channels li {
+	padding: 0;
+}
+
+.social-media-channels a {
+	border: none;
+	box-sizing: border-box;
+	display: block;
+	font-size: 1.8em;
+	height: 33px;
+	line-height: 33px;
+	position: relative;
+	text-indent: -99164px;
+	width: 33px;
+}
+
+.social-media-channels a:hover {
+	background: none;
+	border: none;
+}
+
+.social-media-channels a:before {
+	font-family: Spine-Icons;
+	height: 33px;
+	left: 0;
+	position: absolute;
+	text-align: center;
+	text-indent: 0;
+	top: 0;
+	width: 33px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.social-media-channels .facebook a:before {
+	color: #3b5998;
+	content: "F";
+}
+
+.social-media-channels .twitter a:before {
+	color: #55acee;
+	content: "T";
+}
+
+.social-media-channels .youtube a:before {
+	color: #cc181e;
+	content: "Y";
+}
+
+.social-media-channels .instagram a:before {
+	color: #517fa5;
+	content: "I";
+}
+
+.social-media-channels li a:hover:before {
+	color: #981e32;
+}
+
+.home .site-action-links > ul > li {
+	display: none;
+}
+
+.home .site-action-links .widget_polylang {
+	border-left: none;
+	display: block;
+}
+
+html[lang="es-ES"] .help {
+	font-size: 3.5em;
+}
+
+@media only screen and (max-width: 1090px) {
+
+	html[lang="es-ES"] .help {
+		font-size: 4.5vw;
+	}
+}
+
 @media screen and (max-width: 791px) {
 
 	.home-calendar .wsuwp-content-syndicate-list li {
-		-webkit-box-flex: 1;
-		    -ms-flex: 1 0 50%;
-		        flex: 1 0 50%;
+		-ms-flex: 1 0 50%;
+		    flex: 1 0 50%;
 		width: 50%;
 	}
 }
@@ -1300,15 +1348,20 @@ section.video {
 
 	.home .halves .column.one {
 		min-height: 350px;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	html[lang="es-ES"] .help {
+		font-size: 2.5em;
 	}
 }
 
 @media only screen and (max-width: 530px) {
 
 	.home-calendar .wsuwp-content-syndicate-list li {
-		-webkit-box-flex: 1;
-		    -ms-flex: 1 0 100%;
-		        flex: 1 0 100%;
+		-ms-flex: 1 0 100%;
+		    flex: 1 0 100%;
 		width: 100%;
 	}
 
@@ -1352,6 +1405,11 @@ section.video {
 	display: none;
 }
 
+/* Scholarships search form */
+.wsuwp-scholarships-filters .donor label span {
+	font-weight: 300;
+}
+
 /* Scholarships sharing tools */
 .back-to-results {
 	float: left;
@@ -1376,6 +1434,10 @@ section.video {
 		float: left;
 		margin-top: 1em;
 	}
+}
+
+.cost-table-placeholder {
+	margin-bottom: 2rem;
 }
 
 .cost-table-placeholder th {
