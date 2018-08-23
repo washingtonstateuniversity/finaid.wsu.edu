@@ -887,55 +887,32 @@ section.video {
 	position: static;
 }
 
-.column.video #wsu-video-background {
+.video-container {
 	height: 100%;
 	left: 0;
+	mix-blend-mode: multiply;
+	overflow: hidden;
 	position: absolute;
 	top: 0;
 	width: 100%;
 	z-index: -1;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: center;
+	    justify-content: center;
 }
 
-.column.video .videoBG_wrapper #wsu-video-background:after {
-	content: "";
+.video-container video {
+	min-height: 100%;
+	width: auto;
+}
+
+.video-container:after {
 	background: rgba(0, 0, 0, .1);
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-}
-
-.column.video .videoBG_wrapper,
-.column.video .videoBG {
-
-	/* Sorry about these, they're overriding inline styles. */
-	height: 100% !important;
-	width: 100% !important;
-}
-
-.column.video .videoBG video {
+	content: "";
 	height: 100%;
-	margin-left: 50%;
-	-ms-transform: translateX(-50%);
-	    transform: translateX(-50%);
-}
-
-@media screen and (min-width: 990px) {
-
-	.column.video #wsu-video-background {
-		left: 5px;
-		width: calc(100% - 5px);
-	}
-
-	.column.video #wsu-video-background #wsu-video-background {
-		left: 0;
-		width: 100%;
-	}
-}
-
-.multiply #wsu-video-background {
-	mix-blend-mode: multiply;
+	position: absolute;
+	width: 100%;
 }
 
 .multiply .transparent-crimson-back {
