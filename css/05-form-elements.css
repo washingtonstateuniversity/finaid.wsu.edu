@@ -199,3 +199,7 @@ main :-ms-input-placeholder {
 .gform_validation_container {
 	display: none;
 }
+
+main select::-ms-expand {
+	display: none;
+}

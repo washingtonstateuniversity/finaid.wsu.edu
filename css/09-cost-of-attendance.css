@@ -1,3 +1,7 @@
+.cost-table-placeholder {
+	margin-bottom: 2rem;
+}
+
 .cost-table-placeholder th {
 	background-color: #203639;
 	color: #fff;

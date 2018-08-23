@@ -22,6 +22,11 @@
 	display: none;
 }
 
+/* Scholarships search form */
+.wsuwp-scholarships-filters .donor label span {
+	font-weight: 300;
+}
+
 /* Scholarships sharing tools */
 .back-to-results {
 	float: left;
