@@ -82,3 +82,17 @@ section.pad-bottom > header {
 		padding-right: 2rem;
 	}
 }
+
+#spine .spine-actions-tabs>li>a {
+	display: block;
+    position: relative;
+    width: 100%;
+    height: 2.2em;
+    font-weight: 400;
+    font-size: 1.2em;
+    line-height: 1em;
+    text-shadow: none;
+    padding: 0.8em 0 0.8em 0;
+    display: block;
+}
+
